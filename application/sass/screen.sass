@@ -1,0 +1,56 @@
+/*
+  Welcome to Compass.
+  In this file you should write your main styles. (or centralize your imports)
+  Import this file using the following HTML or equivalent:
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import compass/reset
+@import compass/css3
+
+$red: #dd2121
+
+=border-image($url, $num, $mode)
+    -webkit-border-image: url($url) $num $mode
+    -moz-border-image: url($url) $num $mode
+    border-image: url($url) $num $mode
+=img-like($name)
+    background: url("/img/#{$name}.png") center center no-repeat
+    width: image-width("#{$name}.png")
+    height: image-height("#{$name}.png")
+
+html, body
+    min-width: 100%
+    min-height: 100%
+
+body
+    background: white url(/img/grid.png)
+    font-size: 1em
+
+.container
+    width: 940px
+    margin: 0 auto
+
+.logo
+    position: relative
+    +img-like("logo")
+    margin: 0 auto
+    .main &
+        top: -30px
+
+.main
+    border: 5px
+    +border-image("/img/border-main.png", 10 10, stretch)
+
+    .buttons
+        text-align: center
+        margin: 1em 0
+
+        .big-button
+            +inline-block
+            font-size: 1.5em
+            padding: 1.5em 1em
+            width: 7em
+            text-align: center 
+            +border-radius(5px)
+            +background-image(linear-gradient(top, $red, darken($red, 10%)))
+
