@@ -11,7 +11,7 @@ class Users {
 	{
 		Schema::create('users', function($table) {
 			$table->increments('id');
-			
+
 		});
 	}
 
