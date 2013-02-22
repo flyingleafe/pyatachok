@@ -130,7 +130,7 @@ Asset::add('screen', 'css/screen.css');
 
 Route::controller('home');
 
-// Route for Jobs_Controller
+//Route for Jobs_Controller
 Route::controller('jobs');
 
 // Route for Workers_Controller
