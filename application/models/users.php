@@ -1,12 +1,12 @@
 <?php
 
-class Users extends Eloquent {
+class User extends Eloquent {
 
 	public static $timestamps = true;
 
 	public function tasks()
 	{
-		return $this->has_and_belongs_to_many('Task');
+		return $this->has_and_belongs_to_many('Jobtype');
 	}
 
 	public function feedbacks()
