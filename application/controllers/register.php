@@ -5,10 +5,10 @@ class Register_Controller extends Base_Controller {
     public $restful = true;
 
     public static $rules = array(
-         'phone'  => 'required|max:10|min:10',
-         //'name'  => 'required|max:50',
-         //'surname'  => 'required|max:50',
-         //'email' => 'required|email|unique:users',
+         'phone'  => 'required|max:10|min:10|unique:users',
+         'name'  => 'max:50',
+         'surname'  => 'max:50',
+         'email' => 'email|unique:users',
          'password' => 'required|max:64|min:6|confirmed',
         );
 
@@ -46,10 +46,6 @@ class Register_Controller extends Base_Controller {
         User::create(array(
             'phone'=>Input::get('phone'),
             'password'=>Input::get('password'),
-            'password'=>Input::get('password'),
-            //'email'=>Input::get('email'),
-            //'name'=>Input::get('name'),
-            //'surname'=>Input::get('surname'),
 
         ));
 
