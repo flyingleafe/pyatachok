@@ -5,10 +5,10 @@ class Register_Controller extends Base_Controller {
     public $restful = true;
 
     public static $rules = array(
-         'username'  => 'required|max:32',
-         'name'  => 'required|max:50',
-         'surname'  => 'required|max:50',
-         'email' => 'required|email|unique:users',
+         'phone'  => 'required|max:10|min:10',
+         //'name'  => 'required|max:50',
+         //'surname'  => 'required|max:50',
+         //'email' => 'required|email|unique:users',
          'password' => 'required|max:64|min:6|confirmed',
         );
 
@@ -43,17 +43,18 @@ class Register_Controller extends Base_Controller {
             return Redirect::to('register')->with_errors($validation)->with_input();
 
         }
-        Users::create(array(
-            'username'=>Input::get('username'),
-            'email'=>Input::get('email'),
-            'name'=>Input::get('name'),
-            'surname'=>Input::get('surname'),
+        User::create(array(
+            'phone'=>Input::get('phone'),
             'password'=>Input::get('password'),
+            'password'=>Input::get('password'),
+            //'email'=>Input::get('email'),
+            //'name'=>Input::get('name'),
+            //'surname'=>Input::get('surname'),
+
         ));
 
         return Redirect::to('/');
                 //->with('message' , 'Вы успешно зарегестрированы!');
-
 
     }
 }
