@@ -16,11 +16,16 @@ class Register_Controller extends Base_Controller {
         $this->filter('before', 'csrf')->on('post');
     }
 
-
+    /**
+     * Валидация данных
+     * fLf: делай такие комменты, это делает код более красивым и информативным.
+     * К тому же для будущих поколений нужна будет авто-документация.
+     * @param  Array $data Правила валидации
+     * @return Velidator       объект валидации
+     */
     public static function validate($data){
         return Validator::make($data, static::$rules);
     }
-
 
 	public function get_index()
 	{
