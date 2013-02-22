@@ -5,31 +5,29 @@ class Register_Controller extends Base_Controller {
     public $restful = true;
 
     public static $register_rules = array(
-         'phone'  => 'required|max:10|min:10|unique:users',
-
-         'email' => 'email|unique:users',
-         'password' => 'required|max:64|min:6|confirmed',
+        'phone' => 'required|unique:users|match:/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',
+        'password' => 'required|max:64|min:6|confirmed',
         );
 
 
     public static $profile_rules = array(
          'name_and_surname'  => 'required|max:200',
-         'email' => 'required|email|unique:users',
+         //'email' => 'email|unique:users',
     );
 
     public static $phone_rules = array(
          'code'  => 'required|code_valid',
     );
 
-
-
-    public function __construct()
-    {
-
+    public function __construct() {
         $this->filter('before', 'csrf')->on('post');
     }
 
-
+     /**
+     * Валидация данных
+     * @param  Array $data Правила валидации
+     * @return Validator       объект валидации
+     */
     public static function validate($data, $rules){
         return  Validator::make($data, $rules);
         
@@ -43,7 +41,7 @@ class Register_Controller extends Base_Controller {
 
 		// code here..
         if(Auth::guest()) {
-            return View::make('register.index');
+            return View::make('register.auth');
         }
 
         $status = (int) Auth::user()->status;
@@ -63,11 +61,13 @@ class Register_Controller extends Base_Controller {
                  return Redirect::to('register/profile');
 
         }
-        //return View::make('register.loggedin');
 	}
 
+     public function get_create(){
+        return View::make('register.create');
+     }
+    
     public function post_create(){
-        
 
         $validation = self::validate(Input::All(), static::$register_rules);
 
@@ -93,14 +93,17 @@ class Register_Controller extends Base_Controller {
 
     /*Проверка кода подтверждения*/
     public function post_phone(){
-        
           $code = Input::get('code');
            if($code !=1235){
                 $errors = new Laravel\Messages();
                 $errors->add('valid_code', 'Неверный код подтверждения!');
-                return Redirect::to('register/phone')->with_errors()->with_input();
+                return Redirect::to('register/phone')->with_errors($errors);
            }
-
+           else {
+                 Auth::user()->status = 1;
+                 Auth::user()->save();
+                 return Redirect::to('register/profile');
+           }
     }
 
 
@@ -108,35 +111,57 @@ class Register_Controller extends Base_Controller {
       if (Auth::check()) {
         return View::make('register.profile');
       }
-        else return Redirect::to('home/auth');
+        else return Redirect::to('register/auth');
     }
     
     public function post_profile(){
        $validation = self::validate(Input::All(), static::$profile_rules);
 
+       if($validation->fails()){
+            return Redirect::to('register')->with_errors($validation)->with_input();
+       }
+       
+       else {
+            Auth::user()->name_and_surname = Input::get('name_and_surname');
+            Auth::user()->status= 2;
+            Auth::user()->save();
+            return Redirect::to('/');
+       }
+        
     }
 
-
+    /*Авторизация*/
     public function get_auth(){
-        return View::make('register.auth');
+        if (!Auth::check()){
+            return View::make('register.auth');
+        }
+        else{
+            return Redirect::to('register/index');
+        }
     }
 
     public function post_auth(){
         $phone = Input::get('phone');
         $password = Input::get('password');
 
-        $user = DB::table('users')->where('phone', '=', $phone)->first();
+        $user = User::where('phone', '=', $phone)->first();
         $hashed_value = $user->password;
 
         if (Hash::check($password, $hashed_value)){
-             Auth::login($user);
-             return Redirect::to('/');
+
+            Auth::login($user);
+            return Redirect::to('/');
         }
         else {
              $errors = new Laravel\Messages();
              $errors->add('auth', 'Неверное имя пользователя или пароль!');
              return Redirect::to('register/auth')->with_errors($errors);
         }
+    }
+
+    public function get_logout(){
+        Auth::logout();
+        return Redirect::to('/');
     }
 
 }

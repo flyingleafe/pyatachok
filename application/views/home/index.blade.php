@@ -1,12 +1,22 @@
 @layout('master')
 
 @section('content')
+     
 	<header>
 		<nav class="top">
 			<ul class="menu">
 				<li>Раз</li>
-				<li>Два</li>
-				<li>Три</li>
+				<li>
+                    @if(Auth::check())
+                    <a href="{{URL::to('register/auth') }}"> {{Auth::user()->phone}}</a>
+                    @else  <a href="{{URL::to('register/auth') }}">Войти</a>
+                    @endif
+                </li>
+				<li>
+                    @if(Auth::check())
+                    <a href="{{URL::to('register/logout') }}">Выйти</a>
+                    @endif
+                </li>
 			</ul>
 		</nav>
 	</header>

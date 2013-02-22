@@ -22,7 +22,10 @@
                {{ Form::password('password')    }}
         </div>
 
+    
         {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
 
     {{ Form::close() }}
+
+        <a href="{{ URL::to('register/create'); }}">Зарегистрироваться</a>
 @endsection

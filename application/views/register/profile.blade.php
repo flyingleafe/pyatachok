@@ -9,23 +9,23 @@
     <h1>Личные данные</h1>
 
     @if($errors->has())
-        {{ $errors->first('email',    '<p>:message</p>') }}
-        {{ $errors->first('name_and_surname',    '<p>:message</p>') }}
+
+        {{ $errors->first('name_and_surname', '<p>:message</p>') }}
 
     @endif
 
 
-    {{ Form::open('register/create', 'POST', array('class' => 'b-user-register__form')) }}
+    {{ Form::open('register/profile', 'POST', array('class' => 'b-user-register__form')) }}
 
 
-    <div class="b-one__fieldset">
+    <!--div class="b-one__fieldset">
         {{ Form::label('email', 'Электронная почта:')   }}
         {{ Form::text('email', '')  }}
-    </div>
+    </div-->
 
     <div class="b-one__fieldset">
            {{ Form::label('name_and_surname', 'Фамилия и Имя:') }}
-           {{ Form::text('surname', '');}}
+           {{ Form::text('name_and_surname', Auth::user()->name_and_surname);}}
     </div>
 
 
