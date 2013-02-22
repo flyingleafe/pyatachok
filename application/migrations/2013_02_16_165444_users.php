@@ -16,7 +16,7 @@ class Users {
 			$table->string('password');
 			$table->string('name');
 			$table->text('about');
-			$table->integer('status')->default(false);
+			$table->integer('status')->default(0);
 			$table->boolean('is_worker')->default(true);
 			$table->string('avatar_url');
 		});
