@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+class Add_Name_And_Surname_To_Users_Table {
 
 	/**
 	 * Make changes to the database.
@@ -9,9 +9,10 @@ class Users {
 	 */
 	public function up()
 	{
-		Schema::create('users', function($table) {
-			$table->increments('id');
-		}
+		Schema::table('users', function($table) {
+            $table->string('name', 64);
+            $table->string('surname', 64);
+		});
 	}
 
 	/**
@@ -21,7 +22,7 @@ class Users {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		//
 	}
 
 }

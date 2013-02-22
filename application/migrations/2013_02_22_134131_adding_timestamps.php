@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+class Adding_Timestamps {
 
 	/**
 	 * Make changes to the database.
@@ -9,9 +9,10 @@ class Users {
 	 */
 	public function up()
 	{
-		Schema::create('users', function($table) {
-			$table->increments('id');
-		}
+		Schema::table('users', function($table) {
+            $table->timestamp('updated_at', 64);
+            $table->timestamp('created_at', 64);
+		});
 	}
 
 	/**
@@ -21,7 +22,7 @@ class Users {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		//
 	}
 
 }
