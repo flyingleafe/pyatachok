@@ -100,10 +100,13 @@ Route::filter('after', function($response)
 	// Do stuff after every request to your application...
 });
 
+//Закомментил, отправка формы не работает с ним
+/*
 Route::filter('csrf', function()
 {
 	if (Request::forged()) return Response::error('500');
 });
+*/
 
 Route::filter('auth', function()
 {
@@ -135,6 +138,11 @@ Route::controller('workers');
 
 // Route for Register_Controller
 Route::controller('register');
+Route::get('register/index', array('register', 'register@index'));
+
+
+Route::post('register/create', array('uses'=>'register@create'));
+
 
 // Route for Test_Controller
 Route::controller('test');
