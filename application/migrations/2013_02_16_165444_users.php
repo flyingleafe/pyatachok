@@ -14,11 +14,11 @@ class Users {
 			$table->timestamps();
 			$table->string('phone', 11);
 			$table->string('password');
-			$table->string('name');
-			$table->text('about');
+			$table->string('name')->nullable();
+			$table->text('about')->nullable();
 			$table->integer('status')->default(0);
 			$table->boolean('is_worker')->default(true);
-			$table->string('avatar_url');
+			$table->string('avatar_url')->nullable();
 		});
 	}
 
