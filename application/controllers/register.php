@@ -7,7 +7,7 @@ class Register_Controller extends Base_Controller {
     public static $rules = array(
         // fLf: регэксп несовершенен, нужно немного доработать\
         // unique будет работать не так немного, как хочется - все равно придется преобразовывать номер к стандартному виду
-        'phone' => 'required|unique:users|match:/^(\+7|8)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',       
+        'phone' => 'required|unique:users|match:/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',
         'password' => 'required|max:64|min:6|confirmed',
     );
 
@@ -47,11 +47,8 @@ class Register_Controller extends Base_Controller {
             return Redirect::to('register')->with_errors($validation)->with_input();
 
         }
-        Users::create(array(
-            'username'=>Input::get('username'),
-            'email'=>Input::get('email'),
-            'name'=>Input::get('name'),
-            'surname'=>Input::get('surname'),
+        User::create(array(
+            'phone'=>Input::get('phone'),
             'password'=>Input::get('password'),
         ));
 
