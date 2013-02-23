@@ -7,7 +7,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 17, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -29,68 +29,104 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
-/* line 21, ../../application/sass/screen.sass */
+/* line 1, ../../application/sass/_b-form.sass */
+.b-auth__form {
+  float: left;
+}
+
+/* line 3, ../../application/sass/_b-form.sass */
+.b-register__form {
+  float: right;
+}
+
+/* line 6, ../../application/sass/_b-form.sass */
+.b-form {
+  width: 440px;
+  padding-right: 20px;
+}
+/* line 9, ../../application/sass/_b-form.sass */
+.b-form .form__error {
+  color: #cc4f26;
+  line-height: 16px;
+}
+/* line 12, ../../application/sass/_b-form.sass */
+.b-form h1 {
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+/* line 15, ../../application/sass/_b-form.sass */
+.b-form .b-one__fieldset {
+  padding-bottom: 10px;
+}
+/* line 17, ../../application/sass/_b-form.sass */
+.b-form .b-one__fieldset label {
+  width: 120px;
+  display: block;
+  float: left;
+}
+
+/* line 22, ../../application/sass/screen.sass */
 html, body {
   min-width: 100%;
   min-height: 100%;
 }
 
-/* line 25, ../../application/sass/screen.sass */
+/* line 26, ../../application/sass/screen.sass */
 body {
   background: white url(/img/grid.png);
   font-size: 1em;
 }
 
-/* line 29, ../../application/sass/screen.sass */
+/* line 30, ../../application/sass/screen.sass */
 .container {
   width: 940px;
   margin: 0 auto;
 }
 
-/* line 33, ../../application/sass/screen.sass */
+/* line 34, ../../application/sass/screen.sass */
 .logo {
   position: relative;
   background: url("/img/logo.png") center center no-repeat;
@@ -98,24 +134,24 @@ body {
   height: 109px;
   margin: 0 auto;
 }
-/* line 37, ../../application/sass/screen.sass */
+/* line 38, ../../application/sass/screen.sass */
 .main .logo {
   top: -30px;
 }
 
-/* line 40, ../../application/sass/screen.sass */
+/* line 41, ../../application/sass/screen.sass */
 .main {
   border: 5px;
   -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
   -moz-border-image: url("/img/border-main.png") 10 10 stretch;
   border-image: url("/img/border-main.png") 10 10 stretch;
 }
-/* line 44, ../../application/sass/screen.sass */
+/* line 45, ../../application/sass/screen.sass */
 .main .buttons {
   text-align: center;
   margin: 1em 0;
 }
-/* line 48, ../../application/sass/screen.sass */
+/* line 49, ../../application/sass/screen.sass */
 .main .buttons .big-button {
   display: -moz-inline-stack;
   display: inline-block;

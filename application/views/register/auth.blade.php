@@ -1,31 +1,71 @@
 @layout('master')
 
 @section('content')
+
+    <div class="b-form b-auth__form">
         <h1>Авторизация</h1>
 
-    @if($errors->has())
-        {{ $errors->first('auth', '<p>:message</p>') }}
-
-    @endif
 
 
-    {{ Form::open('register/auth', 'POST', array('class' => 'b-user-auth__form')) }}
+        @if(isset($auth_errors) AND $auth_errors->has())
+        {{ $auth_errors->first('auth', '<p class="form__error">:message</p>') }}
+        {{ $auth_errors->first('phone', '<p class="form__error">:message</p>') }}
+        {{ $auth_errors->first('password', '<p class="form__error">:message</p>') }}
+        @endif
+
+
+        {{ Form::open('register/auth', 'POST', array('class' => '')) }}
+
+
+            <div class="b-one__fieldset">
+                   {{ Form::label('phone', 'Имя пользователя:') }}
+                   {{ Form::text('phone', '');}}
+            </div>
+
+            <div class="b-one__fieldset">
+                   {{ Form::label('password', 'Пароль'); }}
+                   {{ Form::password('password')    }}
+            </div>
+
+
+            {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
+
+        {{ Form::close() }}
+    </div>
+
+    <div class="b-form b-register__form">
+        <h1>Регистрация пользователей</h1>
+
+        @if(isset($register_errors) && $register_errors->has())
+        {{ $register_errors->first('phone', '<p class="form__error">:message</p>') }}
+        {{ $register_errors->first('password', '<p class="form__error">:message</p>') }}
+        {{ $register_errors->first('password_confirmation', '<p class="form__error">:message</p>') }}
+        @endif
+
+
+        {{ Form::open('register/create', 'POST', array('class' => '')) }}
+
+        <div class="b-one__fieldset">
+            {{ Form::label('phone', 'Телефон:') }}
+            {{ Form::text('phone', '')    }}
+        </div>
+
 
 
         <div class="b-one__fieldset">
-               {{ Form::label('phone', 'Имя пользователя:') }}
-               {{ Form::text('phone', '');}}
+            {{ Form::label('password', 'Пароль: '); }}
+            {{ Form::password('password')    }}
         </div>
 
         <div class="b-one__fieldset">
-               {{ Form::label('password', 'Пароль'); }}
-               {{ Form::password('password')    }}
+            {{ Form::label('confirmed', 'Подтверждение пароля') }}
+            {{ Form::password('password_confirmation')   }}
         </div>
 
-    
+
         {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
 
-    {{ Form::close() }}
+        {{ Form::close();}}
+    </div>
 
-        <a href="{{ URL::to('register/create'); }}">Зарегистрироваться</a>
 @endsection

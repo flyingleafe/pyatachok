@@ -3,24 +3,36 @@
 class Register_Controller extends Base_Controller {
 
     public $restful = true;
+    public static  $phone_regexp =  '/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/';
 
-    public static $register_rules = array(
-        'phone' => 'required|unique:users|match:/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',
-        'password' => 'required|max:64|min:6|confirmed',
-        );
+    /*Правила валидации*/
+    private static $register_rules;
+    private static $auth_rules;
+    private static $profile_rules;
+    private static $phone_rules;
 
-
-    public static $profile_rules = array(
-         'name_and_surname'  => 'required|max:200',
-         //'email' => 'email|unique:users',
-    );
-
-    public static $phone_rules = array(
-         'code'  => 'required|code_valid',
-    );
+    private static $numbers = 10;
 
     public function __construct() {
         $this->filter('before', 'csrf')->on('post');
+
+        self::$register_rules = array(
+            'phone' => 'required|unique:users|match:'.self::$phone_regexp,
+            'password' => 'required|max:64|min:6|confirmed',
+            'password_confirmation' => 'required',
+        );
+
+        self::$auth_rules = array(
+            'phone' => 'required|match:/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',
+            'password' => 'required',
+        );
+        self::$profile_rules = array(
+            'name_and_surname'  => 'required|max:200',
+        );
+        self::$phone_rules = array(
+            'code'  => 'required|code_valid',
+        );
+
     }
 
      /**
@@ -34,8 +46,7 @@ class Register_Controller extends Base_Controller {
     }
 
 
-	public function get_index()
-	{
+	public function get_index()	{
 
         $input = Input::all();
 
@@ -55,7 +66,7 @@ class Register_Controller extends Base_Controller {
                  return Redirect::to('register/profile');
                  break;
             case 2:
-                 return Redirect::to('/');
+                 return $this->get_info();
                  break;
             default:
                  return Redirect::to('register/profile');
@@ -66,46 +77,32 @@ class Register_Controller extends Base_Controller {
      public function get_create(){
         return View::make('register.create');
      }
-    
+
+    /*Регистрация*/
     public function post_create(){
 
         $validation = self::validate(Input::All(), static::$register_rules);
 
         if($validation->fails()){
-            return Redirect::to('register')->with_errors($validation)->with_input();
-
+            return View::make('register.auth', array('register_errors' => $validation->errors));
         }
+
         $user = User::create(array(
-            'phone'=>Input::get('phone'),
+            'phone'=>$this->trim_phone(Input::get('phone')),
             'password'=> Hash::make(Input::get('password')),
         ));
 
         Auth::login($user);
 
-        return Redirect::to('register/profile');
-                //->with('message' , 'Вы успешно зарегестрированы!');
+        return Redirect::to('register')->with('message' , 'Вы успешно зарегестрированы!');
 
     }
-
-    public function get_phone(){
-       return View::make('register.phone');
+    private  function get_info(){
+        if (Auth::check()) {
+            return View::make('register.info');
+        }
+        else return Redirect::to('register/auth');
     }
-
-    /*Проверка кода подтверждения*/
-    public function post_phone(){
-          $code = Input::get('code');
-           if($code !=1235){
-                $errors = new Laravel\Messages();
-                $errors->add('valid_code', 'Неверный код подтверждения!');
-                return Redirect::to('register/phone')->with_errors($errors);
-           }
-           else {
-                 Auth::user()->status = 1;
-                 Auth::user()->save();
-                 return Redirect::to('register/profile');
-           }
-    }
-
 
     public function get_profile(){
       if (Auth::check()) {
@@ -123,7 +120,7 @@ class Register_Controller extends Base_Controller {
        
        else {
             Auth::user()->name_and_surname = Input::get('name_and_surname');
-            Auth::user()->status= 2;
+            Auth::user()->status = 2;
             Auth::user()->save();
             return Redirect::to('/');
        }
@@ -144,11 +141,19 @@ class Register_Controller extends Base_Controller {
         $phone = Input::get('phone');
         $password = Input::get('password');
 
-        $user = User::where('phone', '=', $phone)->first();
+        $validation = self::validate(Input::All(), static::$auth_rules);
+
+        if($validation->fails()){
+
+            return View::make('register.auth', array('auth_errors' => $validation->errors));
+        }
+
+        $trimmed_phone =  $this->trim_phone($phone);
+
+        $user = User::where('phone', '=', $trimmed_phone)->first();
         $hashed_value = $user->password;
 
         if (Hash::check($password, $hashed_value)){
-
             Auth::login($user);
             return Redirect::to('/');
         }
@@ -159,9 +164,33 @@ class Register_Controller extends Base_Controller {
         }
     }
 
+    public function get_phone(){
+        return View::make('register.phone');
+    }
+
+    /*Проверка кода подтверждения*/
+    public function post_phone(){
+        $code = Input::get('code');
+        if($code !=1235){
+            $errors = new Laravel\Messages();
+            $errors->add('valid_code', 'Неверный код подтверждения!');
+            return Redirect::to('register/phone')->with_errors($errors);
+        }
+        else {
+            Auth::user()->status = 1;
+            Auth::user()->save();
+            return Redirect::to('register/profile');
+        }
+    }
+
     public function get_logout(){
         Auth::logout();
         return Redirect::to('/');
+    }
+
+    /*Возвращает 10 цифр телефона*/
+    private function trim_phone($phone){
+        return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers,self::$numbers );
     }
 
 }
