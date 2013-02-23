@@ -129,6 +129,7 @@ Asset::add('screen', 'css/screen.css');
 */
 
 Route::controller('home');
+Route::get('home/auth', array('uses'=>'home@auth'));
 
 //Route for Jobs_Controller
 Route::controller('jobs');
@@ -138,10 +139,8 @@ Route::controller('workers');
 
 // Route for Register_Controller
 Route::controller('register');
-Route::get('register/index', array('register', 'register@index'));
 
 
-Route::post('register/create', array('uses'=>'register@create'));
 
 
 // Route for Test_Controller
