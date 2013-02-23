@@ -9,15 +9,18 @@ class Jobtype {
 	 */
 		public function up()
 	{
-		Schema::create('Jobtypes', function($table) {
+		Schema::create('jobtypes', function($table) {
 			$table->increments('id');
 			$table->string('name', 255);
 		});
 
         Schema::create('user_jobtype', function($table) {
-			$table->increments('jobtype_id');
+        	// fLf: Андрей, здесь был косяк: ID работы не может быть инкрементом, он же задает отношение к
+        	// элементу в таблице работ. Еще добавил поле cost - помнишь, о нем говорили?
+        	$table->increments('id');
+			$table->integer('jobtype_id');
 			$table->integer('user_id');
-
+			$table->integer('cost');
 		});
 
 	}
@@ -29,7 +32,7 @@ class Jobtype {
 	 */
 	public function down()
 	{
-		Schema::drop('Jobtypes');
+		Schema::drop('jobtypes');
 		Schema::drop('user_jobtype');
 	}
 
