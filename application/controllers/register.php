@@ -20,6 +20,7 @@ class Register_Controller extends Base_Controller {
             'phone' => 'required|unique:users|match:'.self::$phone_regexp,
             'password' => 'required|max:64|min:6|confirmed',
             'password_confirmation' => 'required',
+            'is_worker'=>'required'
         );
 
         self::$auth_rules = array(
@@ -90,6 +91,7 @@ class Register_Controller extends Base_Controller {
         $user = User::create(array(
             'phone'=>$this->trim_phone(Input::get('phone')),
             'password'=> Hash::make(Input::get('password')),
+            'is_worker'=> Input::get('is_worker'),
         ));
 
         Auth::login($user);

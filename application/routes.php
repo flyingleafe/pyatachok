@@ -128,6 +128,8 @@ Asset::add('screen', 'css/screen.css');
 |------------------------------------
 */
 
+Route::controller('admin');
+
 Route::controller('home');
 Route::get('home/auth', array('uses'=>'home@auth'));
 

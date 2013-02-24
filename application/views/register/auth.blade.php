@@ -62,6 +62,11 @@
             {{ Form::password('password_confirmation')   }}
         </div>
 
+        <div class="b-one__fieldset">
+            {{ Form::label('is_worker', 'Тип аккаунта:') }}
+            {{ Form::select('is_worker', array('1' => 'Работник', '0' => 'Работодатель'));}}
+        </div>
+
 
         {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
 
