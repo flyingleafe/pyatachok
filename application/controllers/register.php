@@ -53,24 +53,24 @@ class Register_Controller extends Base_Controller {
 
 		// code here..
         if(Auth::guest()) {
-            return View::make('register.auth');
+            return View::make('register.index');
         }
 
         $status = (int) Auth::user()->status;
+
         //В зависимости от статуса пользователя покажем ему нужную страничку
         switch($status){
             case 0:
-                return Redirect::to('register/phone');
+                return View::make('register.phone');
                 break;
-
             case 1:
-                 return Redirect::to('register/profile');
+                 return View::make('register.profile');
                  break;
             case 2:
-                 return $this->get_info();
+                 return Redirect::to('profile/index');
                  break;
             default:
-                 return Redirect::to('register/profile');
+                return View::make('register.profile');
 
         }
 	}
@@ -85,7 +85,7 @@ class Register_Controller extends Base_Controller {
         $validation = self::validate(Input::All(), static::$register_rules);
 
         if($validation->fails()){
-            return View::make('register.auth', array('register_errors' => $validation->errors));
+            return View::make('register.index', array('register_errors' => $validation->errors));
         }
 
         $user = User::create(array(
@@ -99,20 +99,8 @@ class Register_Controller extends Base_Controller {
         return Redirect::to('register')->with('message' , 'Вы успешно зарегестрированы!');
 
     }
-    private  function get_info(){
-        if (Auth::check()) {
-            return View::make('register.info');
-        }
-        else return Redirect::to('register/auth');
-    }
 
-    public function get_profile(){
-      if (Auth::check()) {
-        return View::make('register.profile');
-      }
-        else return Redirect::to('register/auth');
-    }
-    
+
     public function post_profile(){
        $validation = self::validate(Input::All(), static::$profile_rules);
 
@@ -129,15 +117,6 @@ class Register_Controller extends Base_Controller {
         
     }
 
-    /*Авторизация*/
-    public function get_auth(){
-        if (!Auth::check()){
-            return View::make('register.auth');
-        }
-        else{
-            return Redirect::to('register/index');
-        }
-    }
 
     public function post_auth(){
         $phone = Input::get('phone');
@@ -147,7 +126,7 @@ class Register_Controller extends Base_Controller {
 
         if($validation->fails()){
 
-            return View::make('register.auth', array('auth_errors' => $validation->errors));
+            return View::make('register.index', array('auth_errors' => $validation->errors));
         }
 
         $trimmed_phone =  $this->trim_phone($phone);
@@ -166,9 +145,6 @@ class Register_Controller extends Base_Controller {
         }
     }
 
-    public function get_phone(){
-        return View::make('register.phone');
-    }
 
     /*Проверка кода подтверждения*/
     public function post_phone(){
@@ -181,7 +157,7 @@ class Register_Controller extends Base_Controller {
         else {
             Auth::user()->status = 1;
             Auth::user()->save();
-            return Redirect::to('register/profile');
+            return Redirect::to('register');
         }
     }
 
@@ -192,7 +168,7 @@ class Register_Controller extends Base_Controller {
 
     /*Возвращает 10 цифр телефона*/
     private function trim_phone($phone){
-        return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers,self::$numbers );
+        return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers );
     }
 
 }

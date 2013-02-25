@@ -128,10 +128,11 @@ Asset::add('screen', 'css/screen.css');
 |------------------------------------
 */
 
-Route::controller('admin');
+//Route::controller('admin');
+
 
 Route::controller('home');
-Route::get('home/auth', array('uses'=>'home@auth'));
+
 
 //Route for Jobs_Controller
 Route::controller('jobs');
@@ -142,7 +143,13 @@ Route::controller('workers');
 // Route for Register_Controller
 Route::controller('register');
 
+// Route for Profile_Controller
+Route::controller('profile');
 
+
+// Route for Admins_Controllers
+Route::controller('admin/works');
+Route::controller('admin/users');
 
 
 // Route for Test_Controller

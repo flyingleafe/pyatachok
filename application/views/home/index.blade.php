@@ -1,15 +1,15 @@
 @layout('master')
 
 @section('content')
-     
+
 	<header>
 		<nav class="top">
 			<ul class="menu">
 				<li>Раз</li>
 				<li>
                     @if(Auth::check())
-                    <a href="{{URL::to('register/auth') }}"> {{Auth::user()->phone}}</a>
-                    @else  <a href="{{URL::to('register/auth') }}">Войти</a>
+                    <a href="{{URL::to('register/index') }}"> {{Auth::user()->phone}}</a>
+                    @else  <a href="{{URL::to('register.index') }}">Войти</a>
                     @endif
                 </li>
 				<li>

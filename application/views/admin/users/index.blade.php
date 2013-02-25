@@ -16,10 +16,10 @@
                         <a href="./index.html"></a>
                     </li>
                     <li class="active">
-                        <a href="./getting-started.html">Пользователи</a>
+                        <a href="">Пользователи</a>
                     </li>
                     <li class="">
-                        <a href="./scaffolding.html">Работа</a>
+                        <a href="{{URL::to('admin/works') }}">Работа</a>
                     </li>
                     <li class="">
                         <a href="./base-css.html"></a>
