@@ -9,7 +9,7 @@
 				<li>
                     @if(Auth::check())
                     <a href="{{URL::to('register/index') }}"> {{Auth::user()->phone}}</a>
-                    @else  <a href="{{URL::to('register.index') }}">Войти</a>
+                    @else  <a href="{{URL::to('register/index') }}">Войти</a>
                     @endif
                 </li>
 				<li>

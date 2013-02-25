@@ -6,7 +6,7 @@ class User extends Eloquent {
 
 	public function jobtypes()
 	{
-		return $this->has_and_belongs_to_many('Jobtype');
+		return $this->has_many_and_belongs_to('Jobtype', 'user_jobtype');
 	}
 
 }

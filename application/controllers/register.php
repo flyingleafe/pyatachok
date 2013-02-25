@@ -132,16 +132,16 @@ class Register_Controller extends Base_Controller {
         $trimmed_phone =  $this->trim_phone($phone);
 
         $user = User::where('phone', '=', $trimmed_phone)->first();
-        $hashed_value = $user->password;
 
-        if (Hash::check($password, $hashed_value)){
+        if ( !empty($user) AND Hash::check($password,  $user->password)){
             Auth::login($user);
             return Redirect::to('/');
         }
+
         else {
              $errors = new Laravel\Messages();
              $errors->add('auth', 'Неверное имя пользователя или пароль!');
-             return Redirect::to('register/auth')->with_errors($errors);
+            return View::make('register.index', array('auth_errors' => $errors));
         }
     }
 
