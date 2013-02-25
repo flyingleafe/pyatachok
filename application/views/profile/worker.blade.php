@@ -2,6 +2,8 @@
 
 @section('content')
 
+<? print_r ($user_jobtypes);?>
+
 <div class="b-user-info">
     <h1>Личный кабинет</h1>
     <div class="b-one__fieldset">
@@ -37,34 +39,41 @@
     <script type="text/javascript">
         $(function (){
 
-            var user_jobtypes;
+
             $("#select_job_types").chosen({
                 no_results_text: "Ничего не найдено",
                 placeholder_text: 'Выберите типы работ'
+
             });
 
+
+            $('#select_job_types option:eq(1)').prop('selected', true);
+            $('#select_job_types option:eq(2)').prop('selected', true);
+
+
+            $("#select_job_types").trigger('liszt:updated');
+
             $('#add_job_types').click( function (){
-                var selected_job_types =  $('#select_job_types').val();
+                var ids_array =  $('#select_job_types').val();
 
-                var quantity_selected = selected_job_types.length;
+                var q_ids = ids_array.length;
 
-                for(i= 0; i<quantity_selected; i++){
+                for(i= 0; i<q_ids; i++){
 
-                    var job_name = $('#select_job_types  option[value='+selected_job_types[i]+']').text()
+                    var job_name = $('#select_job_types  option[value='+ids_array[i]+']').text()
 
                     var job =
-                          '<p>Cтоимость: '
-                           +job_name+ '<input type="text" value="'
-                           +selected_job_types[i]+'" name="job_ids[]" />' +'</p>'
-                           +'<input type="text" name="cost[]" value="0"/>';
+                      '<div class="b-user-job">'+
+                          '<label>'+job_name+'</label>'
+                           +'Cтоимость:'
+                           +'<input type="text" name="cost[]" value="0"/>'
+                           +'<input type="hidden" value="'+ids_array[i]+'" name="job_ids[]" />'
+                       +'</div>';
 
                     $('.b-selected-job').append(job);
                 }
             });
-            $('').submit(function(){
 
-                $('#job_types').val(user_jobtypes)
-            });
         });
 
     </script>

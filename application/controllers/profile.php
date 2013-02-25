@@ -29,7 +29,15 @@ class Profile_Controller extends Base_Controller {
                 return View::make('profile.employer');
                 break;
             case 1:
-                return View::make('profile.worker');
+                $user = Auth::user();
+
+             // $user_jobtypes =  $user->to_array();
+                $user_jobtypes = $user->jobtypes()->get();
+                $ids_array = array();
+                foreach($user_jobtypes as $jobtype){
+                    $ids_array[$jobtype->id] = $jobtype->id;
+                }
+                return View::make('profile.worker')->with( array('user_jobtypes'=>json_encode($ids_array)));
                 break;
         }
 
