@@ -2,7 +2,6 @@
 
 @section('content')
 
-<? print_r ($user_jobtypes);?>
 
 <div class="b-user-info">
     <h1>Личный кабинет</h1>
@@ -16,19 +15,30 @@
         {{ Auth::user()->name_and_surname;}}
     </div>
 
-
-    <?
-        $jobtypes = Jobtype::All();
-    ?>
+    <? print_r($user_jobtypes);?>
+    <?  $jobtypes = Jobtype::All();  ?>
 
     {{ Form::open('profile/update', 'POST', array('class' => '')) }}
     <select id="select_job_types" class="chzn-select" multiple>
-        @foreach($jobtypes as $job)
-            <option value="{{$job->id}}">{{$job->name}}</option>
-        @endforeach;
+        <?foreach($jobtypes as $job){?>
+            <option <? if(array_key_exists($job->id, $user_jobtypes)) echo 'selected'?> value="{{$job->id}}">{{$job->name}}</option>
+        <?}?>endforeach;
     </select>
+
     <input id="add_job_types" type="button" value="Добавить">
     <div class="b-selected-job">
+        <?foreach ($user_jobtypes as $user_job=>$const){?>
+
+        <div class="b-user-job">
+            <label>Тип работ</label>
+            <?echo 'drere'?>
+            <label>Стоимость</label>
+            <input type="text" name="job_ids[]" value="{{$user_job}}">
+
+            <input type="text" name="cost[]" value="{{$const}}">
+        </div>
+
+        <?}?>
     </div>
 
 
@@ -38,17 +48,21 @@
 
     <script type="text/javascript">
         $(function (){
-
-
             $("#select_job_types").chosen({
                 no_results_text: "Ничего не найдено",
-                placeholder_text: 'Выберите типы работ'
+                placeholder_text: 'Выберите типы работ',
+                eval_function: function(){
+                    $.ajax({
+                        url: "<?=URL::to("profile/delete_job") ?>",
+                        type: 'GET',
+                        dataType: "json",
+                        cache: false,
+                        data: {"id":id }
+                    });
+                }
 
             });
 
-
-            $('#select_job_types option:eq(1)').prop('selected', true);
-            $('#select_job_types option:eq(2)').prop('selected', true);
 
 
             $("#select_job_types").trigger('liszt:updated');

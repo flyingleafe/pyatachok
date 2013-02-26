@@ -31,13 +31,13 @@ class Profile_Controller extends Base_Controller {
             case 1:
                 $user = Auth::user();
 
-             // $user_jobtypes =  $user->to_array();
-                $user_jobtypes = $user->jobtypes()->get();
-                $ids_array = array();
+                $user_jobtypes = $user->jobtypes()->pivot()->get();
+
                 foreach($user_jobtypes as $jobtype){
-                    $ids_array[$jobtype->id] = $jobtype->id;
+                    Jobtype::find($jobtype->jobtype_id)->name;
+                    $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
                 }
-                return View::make('profile.worker')->with( array('user_jobtypes'=>json_encode($ids_array)));
+                return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
                 break;
         }
 
@@ -57,7 +57,21 @@ class Profile_Controller extends Base_Controller {
 
             foreach($job_ids as $k=>$id ){
 
-                $user_jobtype =  $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
+                //Записи с составным ключом user.id+jobtype_id не существует
+                $row = DB::table('user_jobtype')
+                    ->where('user_id', '=', $user->id)
+                    ->where('jobtype_id', '=',$id);
+
+                if(!$row)
+                {
+                    $user_jobtype =  $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
+                }
+                else
+                {
+                    $row->update(
+                        array('cost'=>$job_cost[$k])
+                    );
+                }
 
             }
             return Redirect::to('profile');
@@ -65,6 +79,21 @@ class Profile_Controller extends Base_Controller {
         else {
 
             return Redirect::to('profile/index');
+        }
+    }
+
+    public function action_delete_job()
+    {
+        if (Request::ajax())
+        {
+            $id =  $_GET['id'];
+            $user = Auth::user();
+
+            DB::table('user_jobtype')
+                ->where('user_id', '=', $user->id)
+                ->where('jobtype_id', '=', $id)->delete();
+
+
         }
     }
 

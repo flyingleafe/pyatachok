@@ -64,8 +64,8 @@ class Register_Controller extends Base_Controller {
                 return View::make('register.phone');
                 break;
             case 1:
-                 return View::make('register.profile');
-                 break;
+                return View::make('register.profile');
+                break;
             case 2:
                  return Redirect::to('profile/index');
                  break;
@@ -125,7 +125,6 @@ class Register_Controller extends Base_Controller {
         $validation = self::validate(Input::All(), static::$auth_rules);
 
         if($validation->fails()){
-
             return View::make('register.index', array('auth_errors' => $validation->errors));
         }
 
