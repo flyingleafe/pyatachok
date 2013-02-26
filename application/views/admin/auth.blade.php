@@ -1,7 +1,5 @@
 @layout('admin')
 
-
-
 @section('content')
 <form class="form-horizontal" action='' method="POST" style="width: 600px; margin: 0 auto">
     <fieldset>

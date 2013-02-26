@@ -39,6 +39,9 @@ return array(
     'seovel' => array(
         'location' => 'seovel',
         'auto' => true
-    )
+    ),
+    'menu' => array(
+        'auto' => true
+    ),
 
 );
