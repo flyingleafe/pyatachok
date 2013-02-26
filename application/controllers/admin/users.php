@@ -1,5 +1,3 @@
-
-
 <?php
 
 class Admin_Users_Controller extends Base_Controller {

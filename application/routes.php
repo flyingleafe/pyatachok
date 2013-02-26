@@ -148,6 +148,7 @@ Route::controller('profile');
 
 
 // Route for Admins_Controllers
+Route::controller('admin/auth');
 Route::controller('admin/works');
 Route::controller('admin/users');
 
