@@ -10,4 +10,33 @@ class Admin_Users_Controller extends Base_Controller {
 
     }
 
+    public function action_edit($id){
+
+        if(Request::method() == 'GET'){
+            $user= User::find($id);
+
+            if($user){
+                return View::make('admin.users.edit')->with('user', $user);
+            }
+            else {
+                Redirect::to('admin/users');
+
+            }
+        }
+
+        else {
+            $id = Input::get('id');
+;
+            User::update($id, array(
+                'status'=>  Input::get('status'),
+                'name_and_surname'=>  Input::get('name_and_surname'),
+                'phone'=> Input::get('phone'),
+                'is_worker'=> Input::get('is_worker'),
+                'about'=> Input::get('about'),
+                'updated_at' => DB::raw('NOW()'),
+            ));
+            return Redirect::to('admin/users/');
+        }
+    }
+
 }

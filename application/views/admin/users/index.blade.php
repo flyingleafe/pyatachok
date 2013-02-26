@@ -26,7 +26,7 @@
                         <td>{{$user->phone}}</td>
                         <td>{{$user->name_and_surname}}</td>
                         <td>{{$user->status}}</td>
-                        <td><a href="admin/user/edit/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
+                        <td><a href="{{URL::to('admin/users/edit')}}/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
                     </tr>
                     @endforeach
                 </table>
@@ -51,7 +51,7 @@
                         <td>{{$employer->phone}}</td>
                         <td>{{$employer->name_and_surname}}</td>
                         <td>{{$employer->status}}</td>
-                        <td><a href="admin/user/edit/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
+                        <td><a href="{{URL::to('admin/users/edit')}}/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
                     </tr>
                     @endforeach
 
