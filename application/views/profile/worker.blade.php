@@ -30,13 +30,12 @@
                 <?}?>
             </select>
         </div>
-    @endif
+        <input id="add_job_types" type="button" value="Добавить" style="float: left">
 
 
-    <input id="add_job_types" type="button" value="Добавить" style="float: left">
     <div class="clear"></div>
     <div class="b-selected-job">
-        <div class="b-user-job">
+        <div class="b-user-job head">
             <span class="b-jobtype__label">Тип работ:</span>
             <span class="b-jobcost__label">Стоимость</span>
             <div class="clear"></div>
@@ -54,11 +53,6 @@
 
         <?}?>
     </div>
-
-
-    {{ Form::submit('Сохранить', array('class'=>''))    }}
-    {{ Form::close();}}
-</div>
 
     <script type="text/javascript">
         $(function (){
@@ -124,7 +118,13 @@
             });
 
         });
-
     </script>
+    {{ Form::submit('Сохранить', array('class'=>''))    }}
+    @endif
+
+    {{ Form::close();}}
+</div>
+
+
 
 @endsection

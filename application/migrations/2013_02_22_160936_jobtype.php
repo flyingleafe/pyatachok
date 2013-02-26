@@ -9,11 +9,60 @@ class Jobtype {
      */
     public function up()
     {
+
+
         Schema::create('jobtypes', function($table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('name', 255);
         });
+
+
+
+
+        $jobtype_action = array(
+            'Мытьё',
+            'Чистка',
+            'Уборка',
+            'Разгрузка',
+            'Сборка',
+            'Активация',
+            'Уничтожение',
+            'Перевозка',
+            'Загрузка',
+            'Покраска',
+        );
+
+        $jobtype_object = array(
+            'окон',
+            'помещений',
+            'наркоты',
+            'хомячков',
+            'дверей',
+            'складов',
+            'стен',
+            'труб',
+            'офисов',
+            'деревьев',
+            'тюленей',
+        );
+
+        $jobtypes = array();
+        for($i=0; $i<400; $i++){
+            $rand_act = array_rand($jobtype_action);
+            $rand_obj = array_rand($jobtype_object);
+            $jobtypes[$jobtype_action[$rand_act].' '.$jobtype_object[$rand_obj]] = $jobtype_action[$rand_act].' '.$jobtype_object[$rand_obj];
+        }
+
+        foreach($jobtypes as $jobtype) {
+            DB::table('jobtypes')->insert(
+                array(
+                    'name' => $jobtype,
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                )
+            );
+        }
 
         Schema::create('user_jobtype', function($table) {
             // fLf: Андрей, здесь был косяк: ID работы не может быть инкрементом, он же задает отношение к
