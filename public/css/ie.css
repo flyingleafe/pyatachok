@@ -72,6 +72,65 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/* line 1, ../../application/sass/_b-user-info.sass */
+.b-user-info {
+  padding-top: 30px;
+}
+/* line 3, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-jobtypes_inner {
+  padding-top: 30px;
+}
+/* line 5, ../../application/sass/_b-user-info.sass */
+.b-user-info h1 {
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+/* line 8, ../../application/sass/_b-user-info.sass */
+.b-user-info h3 {
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+/* line 11, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-one__fieldset {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+/* line 14, ../../application/sass/_b-user-info.sass */
+.b-user-info .chzn-select {
+  width: 300px;
+}
+/* line 17, ../../application/sass/_b-user-info.sass */
+.b-user-info .chzn-container {
+  float: left;
+  padding-right: 20px;
+}
+/* line 20, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-selected-job {
+  padding-top: 20px;
+}
+/* line 22, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-selected-job .b-user-job {
+  padding-bottom: 10px;
+}
+/* line 24, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-selected-job .b-user-job input {
+  width: 50px;
+}
+/* line 27, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-user-job .b-jobtype__label, .b-user-info .b-user-job .b-jobcost__label {
+  width: 200px;
+  display: block;
+  float: left;
+}
+/* line 31, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-user-job .b-jobcost__label {
+  width: 100px;
+}
+/* line 33, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-user-job .b-jobcost__label ins {
+  padding-left: 5px;
+}
+
 /* line 1, ../../application/sass/_b-form.sass */
 .b-auth__form {
   float: left;
@@ -108,25 +167,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   float: left;
 }
 
-/* line 22, ../../application/sass/screen.sass */
+/* line 26, ../../application/sass/screen.sass */
 html, body {
   min-width: 100%;
   min-height: 100%;
 }
 
-/* line 26, ../../application/sass/screen.sass */
+/* line 30, ../../application/sass/screen.sass */
 body {
   background: white url(/img/grid.png);
   font-size: 1em;
 }
 
-/* line 30, ../../application/sass/screen.sass */
+/* line 34, ../../application/sass/screen.sass */
 .container {
   width: 940px;
   margin: 0 auto;
 }
+/* line 37, ../../application/sass/screen.sass */
+.container .clear {
+  clear: both;
+  float: none;
+}
 
-/* line 34, ../../application/sass/screen.sass */
+/* line 41, ../../application/sass/screen.sass */
 .logo {
   position: relative;
   background: url("/img/logo.png") center center no-repeat;
@@ -134,24 +198,24 @@ body {
   height: 109px;
   margin: 0 auto;
 }
-/* line 38, ../../application/sass/screen.sass */
+/* line 45, ../../application/sass/screen.sass */
 .main .logo {
   top: -30px;
 }
 
-/* line 41, ../../application/sass/screen.sass */
+/* line 48, ../../application/sass/screen.sass */
 .main {
   border: 5px;
   -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
   -moz-border-image: url("/img/border-main.png") 10 10 stretch;
   border-image: url("/img/border-main.png") 10 10 stretch;
 }
-/* line 45, ../../application/sass/screen.sass */
+/* line 52, ../../application/sass/screen.sass */
 .main .buttons {
   text-align: center;
   margin: 1em 0;
 }
-/* line 49, ../../application/sass/screen.sass */
+/* line 56, ../../application/sass/screen.sass */
 .main .buttons .big-button {
   display: -moz-inline-stack;
   display: inline-block;

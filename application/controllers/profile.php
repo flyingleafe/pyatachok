@@ -32,10 +32,12 @@ class Profile_Controller extends Base_Controller {
                 $user = Auth::user();
 
                 $user_jobtypes = $user->jobtypes()->pivot()->get();
-
-                foreach($user_jobtypes as $jobtype){
-                    Jobtype::find($jobtype->jobtype_id)->name;
-                    $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
+                $ids_array = array();
+                if($user_jobtypes){
+                    foreach($user_jobtypes as $jobtype){
+                        Jobtype::find($jobtype->jobtype_id)->name;
+                        $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
+                    }
                 }
                 return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
                 break;
@@ -62,16 +64,15 @@ class Profile_Controller extends Base_Controller {
                     ->where('user_id', '=', $user->id)
                     ->where('jobtype_id', '=',$id);
 
-                if(!$row)
+                if(!$row->get())
                 {
-                    $user_jobtype =  $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
+                     $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
                 }
                 else
                 {
-                    $row->update(
-                        array('cost'=>$job_cost[$k])
-                    );
+                    $row->update( array('cost'=>$job_cost[$k])  );
                 }
+
 
             }
             return Redirect::to('profile');
