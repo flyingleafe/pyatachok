@@ -19,6 +19,8 @@
 
     <?  $jobtypes = Jobtype::All();  ?>
 
+
+
     {{ Form::open('profile/update', 'POST', array('class' => '')) }}
     @if($jobtypes)
         <div class="b-jobtypes_inner">
@@ -40,17 +42,18 @@
             <span class="b-jobcost__label">Стоимость</span>
             <div class="clear"></div>
         </div>
+
+        @if( $errors->has())
+        {{ $errors->first('cost', '<p class="form__error">:message</p>') }}
+        @endif
+
         <?foreach ($user_jobtypes as $user_job=>$const){?>
-
-
-
-        <div class="b-user-job" id="jobtype_{{$user_job}}">
-             <span class="b-jobtype__label"><?echo Jobtype::find($user_job)->name ?></span>
-             <span class="b-jobcost__label"><input type="text" name="cost[]" value="{{$const}}"> <ins>руб</ins></span>
-             <input type="hidden"  name="job_ids[]" value="{{$user_job}}">
-             <div class="clear"></div>
-        </div>
-
+            <div class="b-user-job" id="jobtype_{{$user_job}}">
+                 <span class="b-jobtype__label"><?echo Jobtype::find($user_job)->name ?></span>
+                 <span class="b-jobcost__label"><input type="text" name="cost[]" value="{{$const}}"> <ins>руб</ins></span>
+                 <input type="hidden"  name="job_ids[]" value="{{$user_job}}">
+                 <div class="clear"></div>
+            </div>
         <?}?>
     </div>
 

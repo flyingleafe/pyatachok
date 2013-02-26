@@ -103,25 +103,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .b-user-info .b-selected-job {
   padding-top: 20px;
 }
-/* line 22, ../../application/sass/_b-user-info.sass */
+/* line 21, ../../application/sass/_b-user-info.sass */
+.b-user-info .b-selected-job .form__error {
+  color: orangered;
+  padding-bottom: 5px;
+}
+/* line 25, ../../application/sass/_b-user-info.sass */
 .b-user-info .b-selected-job .b-user-job {
   padding-bottom: 10px;
 }
-/* line 24, ../../application/sass/_b-user-info.sass */
+/* line 27, ../../application/sass/_b-user-info.sass */
 .b-user-info .b-selected-job .b-user-job input {
   width: 50px;
 }
-/* line 27, ../../application/sass/_b-user-info.sass */
+/* line 30, ../../application/sass/_b-user-info.sass */
 .b-user-info .b-user-job .b-jobtype__label, .b-user-info .b-user-job .b-jobcost__label {
   width: 200px;
   display: block;
   float: left;
 }
-/* line 31, ../../application/sass/_b-user-info.sass */
+/* line 34, ../../application/sass/_b-user-info.sass */
 .b-user-info .b-user-job .b-jobcost__label {
   width: 100px;
 }
-/* line 33, ../../application/sass/_b-user-info.sass */
+/* line 36, ../../application/sass/_b-user-info.sass */
 .b-user-info .b-user-job .b-jobcost__label ins {
   padding-left: 5px;
 }

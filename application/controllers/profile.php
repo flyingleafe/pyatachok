@@ -13,14 +13,17 @@ class Profile_Controller extends Base_Controller {
 
     }
 
-    //@TODO комбинация user_id и job_type - составной ключ (уникальна)
+    //@TODO поиск по составному ключу, убрать поле id
     //Правила валидации
     public static $rules = array(
-
+        'cost' => 'required|min:1|max:8'
     );
 
 
+    public static function validate($data, $rules){
+        return  Validator::make($data, $rules);
 
+    }
     public function action_index(){
 
         $account_type = (int) Auth::user()->is_worker;
@@ -46,7 +49,7 @@ class Profile_Controller extends Base_Controller {
     }
 
     //почему то не работает post_update()?
-    //@TODO: валидация cost и user_id
+    //@TODO: user_id
     public function action_update(){
         if(Request::method()=='POST'){
             $input = Input::all();
@@ -58,6 +61,13 @@ class Profile_Controller extends Base_Controller {
 
 
             foreach($job_ids as $k=>$id ){
+
+                $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
+
+                if($validation->fails()){
+                    //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
+                    return Redirect::to_action('profile/index')->with_errors($validation);
+                }
 
                 //Записи с составным ключом user.id+jobtype_id не существует
                 $row = DB::table('user_jobtype')

@@ -33,6 +33,7 @@ class Users {
                     'name_and_surname' => $this->person_generator(),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
+                    'is_worker'=> rand(1,0),
                     'status'=>2,
                 )
             );
