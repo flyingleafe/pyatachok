@@ -121,20 +121,16 @@ class Users {
             'Зигмунд',
         );
 
-
         $gender = rand (1,2);
-        switch($gender){
+        switch($gender) {
             case 1:
                 $rand_name = array_rand($female_names,1);
                 $rand_surname = array_rand($surnames,1);
                 return $female_names[$rand_name].' '.$surnames[$rand_surname].'a' ;
-                break;
             case 2:
                 $rand_name = array_rand($male_names,1);
                 $rand_surname = array_rand($surnames,1);
                 return $male_names[$rand_name].' '.$surnames[$rand_surname] ;
-                break;
-
         }
     }
 	/**
