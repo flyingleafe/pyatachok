@@ -83,11 +83,7 @@ class Profile_Controller extends Base_Controller {
         if (Request::ajax())
         {
             $id =  $_GET['id'];
-            $user = Auth::user();
-
-            DB::table('user_jobtype')
-                ->where('user_id', '=', $user->id)
-                ->where('jobtype_id', '=', $id)->delete();
+            Auth::user()->jobtypes()->detach($id);
         }
     }
 

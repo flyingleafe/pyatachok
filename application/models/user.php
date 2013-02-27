@@ -6,7 +6,7 @@ class User extends Eloquent {
 
 	public function jobtypes()
 	{
-		return $this->has_many_and_belongs_to('Jobtype', 'user_jobtype');
+		return $this->has_many_and_belongs_to('Jobtype')->with('cost');
 	}
 
     public function set_password($password)

@@ -79,7 +79,7 @@ class Jobtype {
     public function down()
     {
         Schema::drop('jobtypes');
-        Schema::drop('user_jobtype');
+        Schema::drop('jobtype_user');
     }
 
 }
