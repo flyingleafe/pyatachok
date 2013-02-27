@@ -9,9 +9,7 @@
     <h1>Личные данные</h1>
 
     @if($errors->has())
-
         {{ $errors->first('name_and_surname', '<p>:message</p>') }}
-
     @endif
 
 

@@ -11,7 +11,6 @@ class Admin_Users_Controller extends Base_Controller {
     }
 
     public function action_edit($id){
-
         if(Request::method() == 'GET'){
             $user= User::find($id);
 

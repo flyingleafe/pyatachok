@@ -146,8 +146,12 @@ Route::controller('register');
 // Route for Profile_Controller
 Route::controller('profile');
 
+// Route for Search_Controller
+Route::controller('search');
+
 
 // Route for Admins_Controllers
+Route::controller('admin/index');
 Route::controller('admin/auth');
 Route::controller('admin/works');
 Route::controller('admin/users');

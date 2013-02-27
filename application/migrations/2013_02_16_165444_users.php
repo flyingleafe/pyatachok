@@ -13,6 +13,7 @@ class Users {
 		Schema::create('users', function($table) {
 			$table->increments('id');
 			$table->timestamps();
+
 			$table->string('phone', 11);
 			$table->string('password');
             $table->string('name_and_surname')->nullable();
@@ -20,21 +21,32 @@ class Users {
 			$table->text('about')->nullable();
 			$table->integer('status')->default(0);  //это статус 0 неподтвержденный, 1- незаполненный, 2 - уже в поиске
 			$table->boolean('is_worker')->default(true); //true -рабочий, false - работодат.
+
+            $table->boolean('gender'); //пол - 0 женщина, 1 мужчина
+            $table->boolean('team')->default(0); //бригада - 0 состоит, 1 нет
+            $table->integer('rating')->default(0); //рейтинг
+            $table->integer('age'); //возраст
+
 			$table->string('avatar_url')->nullable();
 
 		});
 
 
-        for($i=0; $i<600; $i++) {
+        for($i=0; $i<50; $i++) {
+            $person = $this->person_generator();
             DB::table('users')->insert(
                 array(
                     'phone' => $this->phone_generate(),
                     'password' =>  Hash::make(1234),
-                    'name_and_surname' => $this->person_generator(),
+                    'name_and_surname' => $person[1],
+                    'gender'=> (int)$person[0],
+                     'rating' => rand(1, 9999),
+                    'team'=>rand(0,1),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                     'is_worker'=> rand(1,0),
-                    'status'=>2,
+                    'age'=>$person[2],
+                    'status'=> rand(-1, 2),
                 )
             );
         }
@@ -123,17 +135,17 @@ class Users {
         );
 
 
-        $gender = rand (1,2);
+        $gender = rand (0,1);
         switch($gender){
-            case 1:
+            case 0:
                 $rand_name = array_rand($female_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return $female_names[$rand_name].' '.$surnames[$rand_surname].'a' ;
+                return array(0 , $female_names[$rand_name].' '.$surnames[$rand_surname].'a', rand(18, 70)) ;
                 break;
-            case 2:
+            case 1:
                 $rand_name = array_rand($male_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return $male_names[$rand_name].' '.$surnames[$rand_surname] ;
+                return array(1, $male_names[$rand_name].' '.$surnames[$rand_surname], rand(18, 70)) ;
                 break;
 
         }
