@@ -14,7 +14,7 @@ class Register_Controller extends Base_Controller {
     private static $numbers = 10;
 
     public function __construct() {
-        $this->filter('before', 'csrf')->on('post');
+        // $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(
             'phone' => 'required|unique:users|match:'.self::$phone_regexp,
@@ -79,7 +79,8 @@ class Register_Controller extends Base_Controller {
         $validation = self::validate(Input::All(), static::$register_rules);
 
         if($validation->fails()){
-            return View::make('register.index', array('register_errors' => $validation->errors));
+            // return View::make('register.index', array('register_errors' => $validation->errors));
+            return Redirect::to('register')->with_errors($validation)->with_input();
         }
 
         $user = User::create(array(
@@ -161,5 +162,4 @@ class Register_Controller extends Base_Controller {
     private function trim_phone($phone){
         return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers );
     }
-
 }

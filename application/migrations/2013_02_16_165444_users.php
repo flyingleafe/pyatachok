@@ -9,13 +9,12 @@ class Users {
 	 */
 	public function up()
 	{
-
 		Schema::create('users', function($table) {
 			$table->increments('id');
 			$table->timestamps();
 			$table->string('phone', 11);
 			$table->string('password');
-            $table->string('name_and_surname')->nullable();
+            $table->string('name')->nullable();
 
 			$table->text('about')->nullable();
 			$table->integer('status')->default(0);  //это статус 0 неподтвержденный, 1- незаполненный, 2 - уже в поиске
@@ -30,7 +29,7 @@ class Users {
                 array(
                     'phone' => $this->phone_generate(),
                     'password' =>  Hash::make(1234),
-                    'name_and_surname' => $this->person_generator(),
+                    'name' => $this->person_generator(),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                     'is_worker'=> rand(1,0),
