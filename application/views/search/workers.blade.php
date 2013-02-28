@@ -114,8 +114,6 @@ gi
     {{ Form::close();}}
 
     <script type="text/javascript">
-
-
         $.datepicker.regional['ru'] = {
             closeText: 'Закрыть',
             prevText: '&#x3c;Пред',
