@@ -100,19 +100,20 @@ Route::filter('after', function($response)
 	// Do stuff after every request to your application...
 });
 
-//Закомментил, отправка формы не работает с ним
-/*
 Route::filter('csrf', function()
 {
 	if (Request::forged()) return Response::error('500');
 });
-*/
 
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('register');
 });
 
+Route::filter('user_ready', function()
+{
+    if ( (Auth::guest()) or (Auth::user()->status < 2) ) return Redirect::to('register');
+});
 
 /*
 |------------------------------------

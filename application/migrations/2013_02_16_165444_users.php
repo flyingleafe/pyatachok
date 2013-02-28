@@ -9,14 +9,13 @@ class Users {
 	 */
 	public function up()
 	{
-
 		Schema::create('users', function($table) {
 			$table->increments('id');
 			$table->timestamps();
 
 			$table->string('phone', 11);
 			$table->string('password');
-            $table->string('name_and_surname')->nullable();
+            $table->string('name')->nullable();
 
 			$table->text('about')->nullable();
 			$table->integer('status')->default(0);  //это статус 0 неподтвержденный, 1- незаполненный, 2 - уже в поиске
@@ -38,10 +37,10 @@ class Users {
                 array(
                     'phone' => $this->phone_generate(),
                     'password' =>  Hash::make(1234),
-                    'name_and_surname' => $person[1],
                     'gender'=> (int)$person[0],
                      'rating' => rand(1, 9999),
                     'team'=>rand(0,1),
+                    'name' => $this->person_generator(),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                     'is_worker'=> rand(1,0),
@@ -134,20 +133,16 @@ class Users {
             'Зигмунд',
         );
 
-
-        $gender = rand (0,1);
-        switch($gender){
-            case 0:
+        $gender = rand (1,2);
+        switch($gender) {
+            case 1:
                 $rand_name = array_rand($female_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return array(0 , $female_names[$rand_name].' '.$surnames[$rand_surname].'a', rand(18, 70)) ;
-                break;
-            case 1:
+                return $female_names[$rand_name].' '.$surnames[$rand_surname].'a' ;
+            case 2:
                 $rand_name = array_rand($male_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return array(1, $male_names[$rand_name].' '.$surnames[$rand_surname], rand(18, 70)) ;
-                break;
-
+                return $male_names[$rand_name].' '.$surnames[$rand_surname] ;
         }
     }
 	/**

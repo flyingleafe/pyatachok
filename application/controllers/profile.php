@@ -39,7 +39,6 @@ class Profile_Controller extends Base_Controller {
     }
 
 
-    //@TODO: user_id
     public function post_update() {
         $input = Input::all();
 
@@ -47,36 +46,41 @@ class Profile_Controller extends Base_Controller {
             $job_ids = $input['job_ids'];
             $job_cost = $input['cost'];
 
-            $user = Auth::user();
+
+        $job_ids = $input['job_ids'];
+        $job_cost = $input['cost'];
+
+        $user = Auth::user();
 
 
-            foreach($job_ids as $k=>$id ){
+        foreach($job_ids as $k=>$id ){
 
-                $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
+            $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
 
-                if($validation->fails()){
-                    //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
-                    return Redirect::to_action('profile/index')->with_errors($validation);
-                }
-
-                //Записи с составным ключом user.id+jobtype_id не существует
-                $row = DB::table('user_jobtype')
-                    ->where('user_id', '=', $user->id)
-                    ->where('jobtype_id', '=',$id);
-
-                if(!$row->get())
-                {
-                     $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
-                }
-                else
-                {
-                    $row->update( array('cost'=>$job_cost[$k])  );
-                }
-
-
+            if($validation->fails()){
+                //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
+                return Redirect::to_action('profile/index')->with_errors($validation);
             }
+
+            //Записи с составным ключом user.id+jobtype_id не существует
+            $row = DB::table('user_jobtype')
+                ->where('user_id', '=', $user->id)
+                ->where('jobtype_id', '=',$id);
+
+            if(!$row->get())
+            {
+                 $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
+            }
+
+            else
+            {
+                $row->update( array('cost'=>$job_cost[$k])  );
+            }
+
+
         }
         return Redirect::to('profile');
+        }
     }
 
     public function post_delete_job()
