@@ -21,7 +21,7 @@ class Search_Controller extends Base_Controller {
             $age  = Input::get('age' );
             $gender  =  Input::get('gender' );
 
-            $name_and_surname = Input::get('name_and_surname');
+            $name_and_surname = Input::get('name');
 
             $team =   Input::get('team');
 
@@ -50,7 +50,7 @@ class Search_Controller extends Base_Controller {
 
             if(  $name_and_surname  ){
 
-                $query_users->where('name_and_surname' ,'LIKE', '%'.Input::get('name_and_surname').'%');
+                $query_users->where('name' ,'LIKE', '%'.Input::get('name').'%');
             }
 
 
@@ -79,7 +79,7 @@ class Search_Controller extends Base_Controller {
                     ->where_in('users.id', array_keys($user_ids))
                     ->where('user_jobtype.jobtype_id', '=', $jobtype_id)
                     ->distinct()
-                    ->get(array('users.id', 'users.phone', 'users.name_and_surname','user_jobtype.cost', 'user_jobtype.jobtype_id'));
+                    ->get(array('users.id', 'users.phone', 'users.name','user_jobtype.cost', 'user_jobtype.jobtype_id'));
 
                 return View::Make('search.workers')->with('workers', $workers);
 

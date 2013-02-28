@@ -9,7 +9,7 @@
     <h1>Найти рабочих</h1>
 
     @if($errors->has())
-    {{ $errors->first('name_and_surname', '<p>:message</p>') }}
+    {{ $errors->first('name', '<p>:message</p>') }}
     @endif
 
 
@@ -42,8 +42,8 @@
 
 
     <div class="b-one__fieldset">
-        {{ Form::label('name_and_surname', 'Имя и Фамилия', array('class'=>''))    }}
-        {{ Form::text('name_and_surname', '')    }}
+        {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
+        {{ Form::text('name', '')    }}
     </div>
 
 
@@ -168,7 +168,7 @@ gi
         @foreach($workers as $worker)
         <div class="b-worker_name"><!--{{$worker->id}}--></div>
         <div class="b-worker_name"><b>{{$worker->jobtype_id}}</b></div>
-        <div class="b-worker_name">{{$worker->name_and_surname}}</div>
+        <div class="b-worker_name">{{$worker->name}}</div>
         <div class="b-worker_cost">{{$worker->phone}}</div>
         <div class="b-worker_cost">{{$worker->cost}}</div>
         @endforeach

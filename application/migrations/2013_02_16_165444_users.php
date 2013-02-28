@@ -37,10 +37,10 @@ class Users {
                 array(
                     'phone' => $this->phone_generate(),
                     'password' =>  Hash::make(1234),
-                    'gender'=> (int)$person[0],
+                    'gender'=> $person[0],
                      'rating' => rand(1, 9999),
                     'team'=>rand(0,1),
-                    'name' => $this->person_generator(),
+                    'name' => $person[1],
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                     'is_worker'=> rand(1,0),
@@ -133,16 +133,16 @@ class Users {
             'Зигмунд',
         );
 
-        $gender = rand (1,2);
+        $gender = rand (0,1);
         switch($gender) {
-            case 1:
+            case 0:
                 $rand_name = array_rand($female_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return $female_names[$rand_name].' '.$surnames[$rand_surname].'a' ;
-            case 2:
+                return array(0, $female_names[$rand_name].' '.$surnames[$rand_surname].'a', rand(18, 70)) ;
+            case 1:
                 $rand_name = array_rand($male_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return $male_names[$rand_name].' '.$surnames[$rand_surname] ;
+                return array(0, $male_names[$rand_name].' '.$surnames[$rand_surname], rand(18, 70)) ;
         }
     }
 	/**

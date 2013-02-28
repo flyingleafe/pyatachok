@@ -28,7 +28,7 @@ class Admin_Users_Controller extends Base_Controller {
 ;
             User::update($id, array(
                 'status'=>  Input::get('status'),
-                'name_and_surname'=>  Input::get('name_and_surname'),
+                'name'=>  Input::get('name'),
                 'phone'=> Input::get('phone'),
                 'is_worker'=> Input::get('is_worker'),
                 'about'=> Input::get('about'),

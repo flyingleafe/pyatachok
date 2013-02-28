@@ -24,7 +24,7 @@
                     @foreach($users as $user)
                     <tr>
                         <td>{{$user->phone}}</td>
-                        <td>{{$user->name_and_surname}}</td>
+                        <td>{{$user->name}}</td>
                         <td>{{$user->status}}</td>
                         <td><a href="{{URL::to('admin/users/edit')}}/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
                     </tr>
@@ -49,7 +49,7 @@
                     @foreach($employers as $employer)
                     <tr>
                         <td>{{$employer->phone}}</td>
-                        <td>{{$employer->name_and_surname}}</td>
+                        <td>{{$employer->name}}</td>
                         <td>{{$employer->status}}</td>
                         <td><a href="{{URL::to('admin/users/edit')}}/{{$user->id}}"?><ins class=" icon-edit"></ins> </a></td>
                     </tr>

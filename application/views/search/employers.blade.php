@@ -5,7 +5,7 @@
         <h1>Найти работу</h1>
 
         @if($errors->has())
-        {{ $errors->first('name_and_surname', '<p>:message</p>') }}
+        {{ $errors->first('name', '<p>:message</p>') }}
         @endif
 
 
@@ -37,8 +37,8 @@
 
 
             <div class="b-one__fieldset">
-                 {{ Form::label('name_and_surname', 'Имя и Фамилия', array('class'=>''))    }}
-                 {{ Form::text('name_and_surname', '')    }}
+                 {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
+                 {{ Form::text('name', '')    }}
             </div>
 
             <div class="b-one__fieldset">

@@ -28,7 +28,7 @@ class Register_Controller extends Base_Controller {
             'password' => 'required',
         );
         self::$profile_rules = array(
-            'name_and_surname'  => 'required|max:200',
+            'name'  => 'required|max:200',
         );
         self::$phone_rules = array(
             'code'  => 'required|code_valid',
@@ -104,7 +104,7 @@ class Register_Controller extends Base_Controller {
         }
        
         else {
-            Auth::user()->name_and_surname = Input::get('name_and_surname');
+            Auth::user()->name = Input::get('name');
             Auth::user()->status = 2;
             Auth::user()->save();
             return Redirect::to('/');

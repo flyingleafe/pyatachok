@@ -4,6 +4,8 @@ class Profile_Controller extends Base_Controller {
 
     // fLf: не забывай эти штуки, Андрюх
     public $restful = true;
+
+
     //@TODO: добавить фильтры на проверку авторизации
     //@TODO: вывод только нужных скриптов в конкретный лейаут, а не всех
 
@@ -43,9 +45,6 @@ class Profile_Controller extends Base_Controller {
         $input = Input::all();
 
         if(isset($input['job_ids'])){
-            $job_ids = $input['job_ids'];
-            $job_cost = $input['cost'];
-
 
         $job_ids = $input['job_ids'];
         $job_cost = $input['cost'];
@@ -63,7 +62,7 @@ class Profile_Controller extends Base_Controller {
             }
 
             //Записи с составным ключом user.id+jobtype_id не существует
-            $row = DB::table('user_jobtype')
+            $row = DB::table('jobtype_user')
                 ->where('user_id', '=', $user->id)
                 ->where('jobtype_id', '=',$id);
 
