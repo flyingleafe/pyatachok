@@ -32,7 +32,6 @@ class Profile_Controller extends Base_Controller {
 
         $ids_array = array();
         foreach(Auth::user()->jobtypes()->pivot()->get() as $jobtype) {
-            Jobtype::find($jobtype->jobtype_id)->name;
             $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
         }
         return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
