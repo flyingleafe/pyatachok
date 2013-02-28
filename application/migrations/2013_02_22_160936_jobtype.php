@@ -9,16 +9,11 @@ class Jobtype {
      */
     public function up()
     {
-
-
         Schema::create('jobtypes', function($table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('name', 255);
         });
-
-
-
 
         $jobtype_action = array(
             'Мытьё',
@@ -64,18 +59,12 @@ class Jobtype {
             );
         }
 
-        Schema::create('user_jobtype', function($table) {
-            // fLf: Андрей, здесь был косяк: ID работы не может быть инкрементом, он же задает отношение к
-            // элементу в таблице работ. Еще добавил поле cost - помнишь, о нем говорили?
-            $table->integer('id')->nullable(); //как убрать Id? он не нужен, как искать по составному ключу?
-            $table->primary(array('jobtype_id', 'user_id')); //составной ключ
-
-
-            $table->timestamps();
+        Schema::create('jobtype_user', function($table) {
+            $table->integer('id')->nullable();
             $table->integer('jobtype_id');
             $table->integer('user_id');
-
             $table->integer('cost');
+            $table->primary(array('jobtype_id', 'user_id')); //составной ключ
         });
 
     }
@@ -88,7 +77,7 @@ class Jobtype {
     public function down()
     {
         Schema::drop('jobtypes');
-        Schema::drop('user_jobtype');
+        Schema::drop('jobtype_user');
     }
 
 }

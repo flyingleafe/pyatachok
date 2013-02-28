@@ -14,7 +14,7 @@ class Register_Controller extends Base_Controller {
     private static $numbers = 10;
 
     public function __construct() {
-        $this->filter('before', 'csrf')->on('post');
+        // $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(
             'phone' => 'required|unique:users|match:'.self::$phone_regexp,
@@ -24,7 +24,7 @@ class Register_Controller extends Base_Controller {
         );
 
         self::$auth_rules = array(
-            'phone' => 'required|match:/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/',
+            'phone' => 'required|match:'.self::$phone_regexp,
             'password' => 'required',
         );
         self::$profile_rules = array(
@@ -33,7 +33,6 @@ class Register_Controller extends Base_Controller {
         self::$phone_rules = array(
             'code'  => 'required|code_valid',
         );
-
     }
 
      /**
@@ -42,10 +41,8 @@ class Register_Controller extends Base_Controller {
      * @return Validator       объект валидации
      */
     public static function validate($data, $rules){
-        return  Validator::make($data, $rules);
-        
+        return Validator::make($data, $rules);   
     }
-
 
 	public function get_index()	{
 
@@ -56,10 +53,8 @@ class Register_Controller extends Base_Controller {
             return View::make('register.index');
         }
 
-        $status = (int) Auth::user()->status;
-
         //В зависимости от статуса пользователя покажем ему нужную страничку
-        switch($status){
+        switch(Auth::user()->status) {
             case 0:
                 return View::make('register.phone');
                 break;
@@ -67,25 +62,25 @@ class Register_Controller extends Base_Controller {
                 return View::make('register.profile');
                 break;
             case 2:
-                 return Redirect::to('profile/index');
-                 break;
+                return Redirect::to('profile/index');
+                break;
             default:
                 return View::make('register.profile');
-
         }
 	}
 
-     public function get_create(){
+    public function get_create() {
         return View::make('register.create');
-     }
+    }
 
     /*Регистрация*/
-    public function post_create(){
+    public function post_create() {
 
         $validation = self::validate(Input::All(), static::$register_rules);
 
         if($validation->fails()){
-            return View::make('register.index', array('register_errors' => $validation->errors));
+            // return View::make('register.index', array('register_errors' => $validation->errors));
+            return Redirect::to('register')->with_errors($validation)->with_input();
         }
 
         $user = User::create(array(
@@ -96,27 +91,26 @@ class Register_Controller extends Base_Controller {
 
         Auth::login($user);
 
-        return Redirect::to('register')->with('message' , 'Вы успешно зарегестрированы!');
+        return Redirect::to('register')->with('message' , 'Вы успешно зарегистрированы!');
 
     }
 
 
-    public function post_profile(){
-       $validation = self::validate(Input::All(), static::$profile_rules);
+    public function post_profile() {
+        $validation = self::validate(Input::All(), static::$profile_rules);
 
-       if($validation->fails()){
+        if($validation->fails()){
             return Redirect::to('register')->with_errors($validation)->with_input();
-       }
+        }
        
-       else {
+        else {
             Auth::user()->name_and_surname = Input::get('name_and_surname');
             Auth::user()->status = 2;
             Auth::user()->save();
             return Redirect::to('/');
-       }
+        }
         
     }
-
 
     public function post_auth(){
         $phone = Input::get('phone');
@@ -144,7 +138,6 @@ class Register_Controller extends Base_Controller {
         }
     }
 
-
     /*Проверка кода подтверждения*/
     public function post_phone(){
         $code = Input::get('code');
@@ -169,5 +162,4 @@ class Register_Controller extends Base_Controller {
     private function trim_phone($phone){
         return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers );
     }
-
 }

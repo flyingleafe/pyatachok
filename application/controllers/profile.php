@@ -2,6 +2,8 @@
 
 class Profile_Controller extends Base_Controller {
 
+    // fLf: не забывай эти штуки, Андрюх
+    public $restful = true;
     //@TODO: добавить фильтры на проверку авторизации
     //@TODO: вывод только нужных скриптов в конкретный лейаут, а не всех
 
@@ -10,7 +12,7 @@ class Profile_Controller extends Base_Controller {
         Asset::add('chosenjs', 'chosen/chosen.jquery.js');
         Asset::add('chosencss', 'chosen/chosen.css');
         Asset::add('chosenprotojs', 'chosen/chosen.proto.js');
-
+        Asset::add('profile', 'js/profile.js');
     }
 
     //@TODO поиск по составному ключу, убрать поле id
@@ -19,41 +21,29 @@ class Profile_Controller extends Base_Controller {
         'cost' => 'required|min:1|max:8'
     );
 
-
     public static function validate($data, $rules){
         return  Validator::make($data, $rules);
-
     }
-    public function action_index(){
 
-        $account_type = (int) Auth::user()->is_worker;
-        switch($account_type){
-            case 0:
-                return View::make('profile.employer');
-                break;
-            case 1:
-                $user = Auth::user();
-
-                $user_jobtypes = $user->jobtypes()->pivot()->get();
-                $ids_array = array();
-                if($user_jobtypes){
-                    foreach($user_jobtypes as $jobtype){
-                        Jobtype::find($jobtype->jobtype_id)->name;
-                        $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
-                    }
-                }
-                return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
-                break;
+    public function get_index() {
+        if(!Auth::user()->is_worker) {
+            return View::make('profile.employer');
         }
 
+        $ids_array = array();
+        foreach(Auth::user()->jobtypes()->pivot()->get() as $jobtype) {
+            Jobtype::find($jobtype->jobtype_id)->name;
+            $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
+        }
+        return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
     }
 
-    //почему то не работает post_update()?
-    //@TODO: user_id
-    public function action_update(){
-        if(Request::method()=='POST'){
-            $input = Input::all();
 
+    //@TODO: user_id
+    public function post_update() {
+        $input = Input::all();
+
+        if(isset($input['job_ids'])){
             $job_ids = $input['job_ids'];
             $job_cost = $input['cost'];
 
@@ -85,26 +75,16 @@ class Profile_Controller extends Base_Controller {
 
 
             }
-            return Redirect::to('profile');
         }
-        else {
-
-            return Redirect::to('profile/index');
-        }
+        return Redirect::to('profile');
     }
 
-    public function action_delete_job()
+    public function post_delete_job()
     {
         if (Request::ajax())
         {
             $id =  $_GET['id'];
-            $user = Auth::user();
-
-            DB::table('user_jobtype')
-                ->where('user_id', '=', $user->id)
-                ->where('jobtype_id', '=', $id)->delete();
-
-
+            Auth::user()->jobtypes()->detach($id);
         }
     }
 

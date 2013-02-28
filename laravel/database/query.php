@@ -947,4 +947,10 @@ class Query {
 		throw new \Exception("Method [$method] is not defined on the Query class.");
 	}
 
+    public function sql($columns = array('*'))
+    {
+        if (is_null($this->selects)) $this->select($columns);
+
+        return $this->grammar->select($this);
+    }
 }

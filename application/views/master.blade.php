@@ -3,15 +3,19 @@
 <head>
     {{ Seovel::title() }}
     {{ Seovel::description() }}
+
+    @yield('before_assets')
+
     {{ Asset::styles() }}
     {{ Asset::scripts() }}
+
+    @yield('after_assets')
 </head>
 <body>
     <div class="container">
         @if(Session::has('message'))
             <p>{{ Session::get('message') }}</p>
         @endif
-
 
         @yield('content')
     </div>

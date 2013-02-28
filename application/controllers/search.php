@@ -2,51 +2,92 @@
 
 class Search_Controller extends Base_Controller {
 
+    public $restful = true;
+
     public function __construct(){
         Asset::add('jquery', 'js/jquery-1.9.1.js');
-        Asset::add('chosenjs', 'chosen/chosen.jquery.js');
-        Asset::add('chosencss', 'chosen/chosen.css');
-        Asset::add('chosenprotojs', 'chosen/chosen.proto.js');
+
+        Asset::add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js');
+        Asset::add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css');
+
+        Asset::add('chosen_js', 'chosen/chosen.jquery.js');
+        Asset::add('chosen_css', 'chosen/chosen.css');
 
     }
 
 
-    public function action_workers(){
-        if(Request::method()=='POST'){
-            //$input = Input::all();
-
-            $job_ids = Input::get('job_ids[]');
-
-            $result = DB::table('users');
+    public function post_workers(){
             $rating  = Input::get('rating' );
             $age  = Input::get('age' );
-            $gender  = Input::get('gender' );
+            $gender  =  Input::get('gender' );
+
             $name_and_surname = Input::get('name_and_surname');
-            $team =  Input::get('team');
 
+            $team =   Input::get('team');
+
+            $jobtype_id = Input::get('job_id');
+            $created_at = Input::get('created_at');
+            $cost_min = Input::get('cost_min');
+            $cost_max = Input::get('cost_max');
+
+
+            $query_users = DB::table('users');
             if(  $rating  )
-                $result ->where('rating' ,'>=', Input::get('rating'));
+                $query_users ->where('rating' ,'>=', $rating);
 
 
-            if( $gender  )
-                $result->where('gender' ,'>=', Input::get('gender'));
+            if( $gender || $gender!==''){
+                $query_users->where('gender' ,'=', $gender);
+            }
+
+            if($created_at){
+
+                $query_users->where('created_at', '>=', $created_at);
+            }
 
             if( $age  )
-                $result->where('age' ,'>=', Input::get('age'));
+                $query_users->where('age' ,'>=', $age);
 
-            if(  $name_and_surname  )
-                $result->where('name_and_surname' ,'LIKE', '%'.Input::get('name_and_surname').'%');
+            if(  $name_and_surname  ){
 
-            $result->where('team' ,'=', $team );
+                $query_users->where('name_and_surname' ,'LIKE', '%'.Input::get('name_and_surname').'%');
+            }
 
-            echo $result->count();
 
-        }
+            if( $team || $team!==''){
+                $query_users->where('team' ,'=', $team );
+            }
 
-        else {
-            return View::Make('search.workers');
-        }
+            if($cost_min){
+                $query_users->where('cost', '>=', $cost_min);
+            }
 
+            if($cost_max){
+                $query_users->where('cost', '<=', $cost_max);
+
+            }
+
+
+            if($jobtype_id){
+
+                $users = (array) $query_users->get( array('id'));
+                $user_ids = array();
+                foreach($users as $user)  array_push($user_ids, $user->id);
+
+                $workers = DB::table('users')
+                    ->join('user_jobtype', 'users.id','=', 'user_jobtype.user_id')
+                    ->where_in('users.id', array_keys($user_ids))
+                    ->where('user_jobtype.jobtype_id', '=', $jobtype_id)
+                    ->distinct()
+                    ->get(array('users.id', 'users.phone', 'users.name_and_surname','user_jobtype.cost', 'user_jobtype.jobtype_id'));
+
+                return View::Make('search.workers')->with('workers', $workers);
+
+            }
+
+
+            $workers = $query_users->get();
+            return View::Make('search.workers')->with('workers', $workers);
     }
 
 
