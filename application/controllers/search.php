@@ -67,7 +67,6 @@ class Search_Controller extends Base_Controller {
 
             }
 
-
             if($jobtype_id){
 
                 $users = (array) $query_users->get( array('id'));
