@@ -14,12 +14,11 @@ class Register_Controller extends Base_Controller {
     private static $numbers = 10;
 
     public function __construct() {
-        // $this->filter('before', 'csrf')->on('post');
+        $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(
             'phone' => 'required|unique:users|match:'.self::$phone_regexp,
             'password' => 'required|max:64|min:6|confirmed',
-            'password_confirmation' => 'required',
             'is_worker'=>'required'
         );
 
@@ -37,6 +36,7 @@ class Register_Controller extends Base_Controller {
 
      /**
      * Валидация данных
+     * fLf: я вот думаю, это обертка нужна вообще? она ж ниче не делает.
      * @param  Array $data Правила валидации
      * @return Validator       объект валидации
      */
@@ -57,13 +57,10 @@ class Register_Controller extends Base_Controller {
         switch(Auth::user()->status) {
             case 0:
                 return View::make('register.phone');
-                break;
             case 1:
                 return View::make('register.profile');
-                break;
             case 2:
-                return Redirect::to('profile/index');
-                break;
+                return Redirect::to('profile');
             default:
                 return View::make('register.profile');
         }
@@ -78,7 +75,7 @@ class Register_Controller extends Base_Controller {
 
         $validation = self::validate(Input::All(), static::$register_rules);
 
-        if($validation->fails()){
+        if($validation->fails()) {
             // return View::make('register.index', array('register_errors' => $validation->errors));
             return Redirect::to('register')->with_errors($validation)->with_input();
         }
@@ -90,14 +87,11 @@ class Register_Controller extends Base_Controller {
         ));
 
         Auth::login($user);
-
         return Redirect::to('register')->with('message' , 'Вы успешно зарегистрированы!');
-
     }
 
-
     public function post_profile() {
-        $validation = self::validate(Input::All(), static::$profile_rules);
+        $validation = self::validate(Input::all(), static::$profile_rules);
 
         if($validation->fails()){
             return Redirect::to('register')->with_errors($validation)->with_input();
@@ -112,36 +106,39 @@ class Register_Controller extends Base_Controller {
         
     }
 
-    public function post_auth(){
+    public function post_auth() {
         $phone = Input::get('phone');
         $password = Input::get('password');
 
-        $validation = self::validate(Input::All(), static::$auth_rules);
+        $validation = self::validate(Input::all(), self::$auth_rules);
 
         if($validation->fails()){
-            return View::make('register.index', array('auth_errors' => $validation->errors));
+            // return View::make('register.index', array('auth_errors' => $validation->errors));
+            return Redirect::to('register')->with('auth_errors', $validation->errors);
         }
 
-        $trimmed_phone =  $this->trim_phone($phone);
+        $data = array(
+            'username' => $this->trim_phone($phone),
+            'password' => $password
+        );
 
-        $user = User::where('phone', '=', $trimmed_phone)->first();
-
-        if ( !empty($user) AND Hash::check($password,  $user->password)){
-            Auth::login($user);
+        // fLf: аутентификация ту делается в 1 строку:
+        if ( Auth::attempt($data) ){
             return Redirect::to('/');
         }
 
         else {
-             $errors = new Laravel\Messages();
-             $errors->add('auth', 'Неверное имя пользователя или пароль!');
-            return View::make('register.index', array('auth_errors' => $errors));
+            $errors = new Laravel\Messages();
+            $errors->add('auth', 'Неверное имя пользователя или пароль!');
+            // return View::make('register.index', array('auth_errors' => $errors));
+            return Redirect::to('register')->with('auth_errors', $errors);
         }
     }
 
     /*Проверка кода подтверждения*/
-    public function post_phone(){
+    public function post_phone() {
         $code = Input::get('code');
-        if($code !=1235){
+        if($code != 1235){
             $errors = new Laravel\Messages();
             $errors->add('valid_code', 'Неверный код подтверждения!');
             return Redirect::to('register/phone')->with_errors($errors);

@@ -9,14 +9,11 @@ class Jobtype {
      */
     public function up()
     {
-
         Schema::create('jobtypes', function($table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('name', 255);
         });
-
-
 
         Schema::create('jobtype_user', function($table) {
             $table->integer('id')->nullable();
@@ -26,7 +23,6 @@ class Jobtype {
             $table->primary(array('jobtype_id', 'user_id')); //составной ключ
 
         });
-
 
         $jobtype_action = array(
             'Мытьё',
@@ -56,7 +52,7 @@ class Jobtype {
         );
 
         $jobtypes = array();
-        for($i=0; $i<400; $i++){
+        for($i=0; $i<20; $i++){
             $rand_act = array_rand($jobtype_action);
             $rand_obj = array_rand($jobtype_object);
             $jobtypes[$jobtype_action[$rand_act].' '.$jobtype_object[$rand_obj]] = $jobtype_action[$rand_act].' '.$jobtype_object[$rand_obj];
@@ -71,8 +67,6 @@ class Jobtype {
                 )
             );
         }
-
-
     }
 
     /**

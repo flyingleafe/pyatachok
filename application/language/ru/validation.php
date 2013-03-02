@@ -99,6 +99,9 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
+	'attributes' => array(
+		'phone' => '"Телефон"',
+		'password' => '"Пароль"'
+	),
 
 );

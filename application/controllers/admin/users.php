@@ -25,7 +25,7 @@ class Admin_Users_Controller extends Base_Controller {
 
         else {
             $id = Input::get('id');
-;
+            
             User::update($id, array(
                 'status'=>  Input::get('status'),
                 'name'=>  Input::get('name'),

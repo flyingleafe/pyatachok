@@ -29,6 +29,7 @@
 
     {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
 
-    {{ Form::close();}}
+    {{ Form::token() }}
+    {{ Form::close() }}
 
 @endsection

@@ -9,7 +9,7 @@
 
 Laravel\Routing\Route::filter('after', function($response)
 {
-	if ($_SERVER['LARAVEL_ENV'] == 'local') {
+	if (Request::env() == 'local') {
 		$queries = Laravel\Database::profile();
 		$count = 0;
 		$sum = 0;
