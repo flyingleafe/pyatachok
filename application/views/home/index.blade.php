@@ -24,8 +24,8 @@
 		<div class="center">
 			<div class="logo"></div>
 			<div class="buttons">
-				<a href="/jobs" class="big-button jobs">Найти работу</a>
-				<a href="/workers" class="big-button workers">Найти рабочих</a>
+				<a href="{{URL::to('search/employers') }}" class="big-button jobs">Найти работу</a>
+				<a href="{{URL::to('search/workers') }}" class="big-button workers">Найти рабочих</a>
 			</div>
 		</div>
 	</div>

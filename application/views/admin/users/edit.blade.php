@@ -12,7 +12,7 @@
                 <label>Телефон: </label>
                 <input type="text" name="phone" value="{{$user->phone}}" class="input-xlarge">
                 <label>Имя и Фамилия: </label>
-                <input type="text" value="{{$user->name_and_surname}}" name="name_and_surname" class="input-xlarge">
+                <input type="text" value="{{$user->name}}" name="name" class="input-xlarge">
 
                 <label>Статус</label>
                 <input type="hidden" name="id" value="{{$user->id}}">

@@ -9,9 +9,7 @@
     <h1>Личные данные</h1>
 
     @if($errors->has())
-
-        {{ $errors->first('name_and_surname', '<p>:message</p>') }}
-
+        {{ $errors->first('name', '<p>:message</p>') }}
     @endif
 
 
@@ -24,8 +22,8 @@
     </div-->
 
     <div class="b-one__fieldset">
-           {{ Form::label('name_and_surname', 'Фамилия и Имя:') }}
-           {{ Form::text('name_and_surname', Auth::user()->name_and_surname);}}
+           {{ Form::label('name', 'Фамилия и Имя:') }}
+           {{ Form::text('name', Auth::user()->name);}}
     </div>
 
 

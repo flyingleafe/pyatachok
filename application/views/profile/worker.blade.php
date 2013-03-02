@@ -22,7 +22,7 @@
 
         <div class="b-one__fieldset">
             <label>Имя и фамилия:</label>
-            <span>{{ Auth::user()->name_and_surname }}</span>
+            <span>{{ Auth::user()->name }}</span>
         </div>
 
         <?php $jobtypes = Jobtype::All(); ?>
