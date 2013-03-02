@@ -10,7 +10,7 @@ class Users {
 	public function up()
 	{
 		Schema::create('users', function($table) {
-			$table->increments('id')->primary();
+			$table->increments('id');
 			$table->timestamps();
 
 			$table->string('phone', 11)->unique();

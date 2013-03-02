@@ -16,12 +16,11 @@ class Jobtype {
         });
 
         Schema::create('jobtype_user', function($table) {
-            $table->increments('id');
-            $table->integer('jobtype_id');
-            $table->integer('user_id');
+            $table->integer('id')->nullable();
+            $table->integer('jobtype_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('cost');
             $table->primary(array('jobtype_id', 'user_id')); //составной ключ
-
         });
 
         $jobtype_action = array(
@@ -77,6 +76,6 @@ class Jobtype {
     public function down()
     {
        Schema::drop('jobtypes');
-       // Schema::drop('jobtype_user');
+       Schema::drop('jobtype_user');
     }
 }

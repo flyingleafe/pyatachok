@@ -5,9 +5,9 @@ class Profile_Controller extends Base_Controller {
     // fLf: не забывай эти штуки, Андрюх
     public $restful = true;
 
-
     //@TODO: добавить фильтры на проверку авторизации
     //@TODO: вывод только нужных скриптов в конкретный лейаут, а не всех
+    // fLf: для этого, пожалуй, надо будет поставить бандл Basset - менеджер зависимостей ассетов.
 
     public function __construct(){
         Asset::add('jquery', 'js/jquery-1.9.1.js');
@@ -24,7 +24,7 @@ class Profile_Controller extends Base_Controller {
     );
 
     public static function validate($data, $rules){
-        return  Validator::make($data, $rules);
+        return Validator::make($data, $rules);
     }
 
     public function get_index() {
