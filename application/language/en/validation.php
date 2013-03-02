@@ -67,6 +67,9 @@ return array(
 	"unique"         => "The :attribute has already been taken.",
 	"url"            => "The :attribute format is invalid.",
 
+	'valid_phone' => "Incorrect phone format.",
+	'new_phone' => "This phone is already registered.",
+
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines

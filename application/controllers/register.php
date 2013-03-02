@@ -3,7 +3,7 @@
 class Register_Controller extends Base_Controller {
 
     public $restful = true;
-    public static  $phone_regexp =  '/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/';
+    // public static  $phone_regexp =  '/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/';
 
     /*Правила валидации*/
     private static $register_rules;
@@ -17,13 +17,14 @@ class Register_Controller extends Base_Controller {
         $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(
-            'phone' => 'required|unique:users|match:'.self::$phone_regexp,
+            // 'phone' => 'required|unique:users|match:'.self::$phone_regexp,
+            'phone' => 'required|valid_phone|new_phone',
             'password' => 'required|max:64|min:6|confirmed',
             'is_worker'=>'required'
         );
 
         self::$auth_rules = array(
-            'phone' => 'required|match:'.self::$phone_regexp,
+            'phone' => 'required|valid_phone',
             'password' => 'required',
         );
         self::$profile_rules = array(
@@ -77,12 +78,12 @@ class Register_Controller extends Base_Controller {
 
         if($validation->fails()) {
             // return View::make('register.index', array('register_errors' => $validation->errors));
-            return Redirect::to('register')->with_errors($validation)->with_input();
+            return Redirect::to('register')->with('register_errors', $validation->errors)->with_input();
         }
 
         $user = User::create(array(
             'phone'=>$this->trim_phone(Input::get('phone')),
-            'password'=> Hash::make(Input::get('password')),
+            'password'=> Input::get('password'),
             'is_worker'=> Input::get('is_worker'),
         ));
 

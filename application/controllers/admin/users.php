@@ -19,7 +19,6 @@ class Admin_Users_Controller extends Base_Controller {
             }
             else {
                 Redirect::to('admin/users');
-
             }
         }
 

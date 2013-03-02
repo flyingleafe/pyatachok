@@ -117,6 +117,22 @@ Route::filter('user_ready', function()
 
 /*
 |------------------------------------
+| Кастомные валидации
+|------------------------------------
+ */
+
+Validator::register('valid_phone', function($attr, $value, $params)
+{
+    return User::validate_phone($value);
+});
+
+Validator::register('new_phone', function($attr, $value, $params)
+{
+    return ! User::phone_exists($value);
+});
+
+/*
+|------------------------------------
 | Подключаем основные стили
 |------------------------------------
 */
@@ -156,7 +172,6 @@ Route::controller('admin/index');
 Route::controller('admin/auth');
 Route::controller('admin/works');
 Route::controller('admin/users');
-
 
 // Route for Test_Controller
 Route::controller('test');

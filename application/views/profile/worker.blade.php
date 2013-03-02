@@ -33,9 +33,9 @@
                 <h3>Выберите типы работ:</h3>
 
                 <select id="select_job_types" class="chzn-select" multiple>
-                    <?foreach($jobtypes as $job){?>
+                    <?php foreach($jobtypes as $job) : ?>
                         <option <?php if(array_key_exists($job->id, $user_jobtypes)) echo 'selected' ?> value="{{$job->id}}">{{$job->name}}</option>
-                    <?}?>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <input id="add_job_types" type="button" value="Добавить" style="float: left">
