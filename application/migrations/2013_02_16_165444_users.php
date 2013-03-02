@@ -10,10 +10,10 @@ class Users {
 	public function up()
 	{
 		Schema::create('users', function($table) {
-			$table->increments('id');
+			$table->increments('id')->primary();
 			$table->timestamps();
 
-			$table->string('phone', 11);
+			$table->string('phone', 11)->unique();
 			$table->string('password');
             $table->string('name')->nullable();
 
@@ -22,6 +22,9 @@ class Users {
 			$table->boolean('is_worker')->default(true); //true -рабочий, false - работодат.
 
             $table->boolean('gender'); //пол - 0 женщина, 1 мужчина
+
+            // fLf: мне кажется, что бригаду тоже надо будет делать отдельной моделью,
+            // с которой будет отношение has_one
             $table->boolean('team')->default(0); //бригада - 0 состоит, 1 нет
             $table->integer('rating')->default(0); //рейтинг
             $table->integer('age'); //возраст
@@ -93,7 +96,7 @@ class Users {
             'Морозов',
             'Петров',
             'Волков',
-            'Соловаьев',
+            'Соловьев',
             'Васильев',
             'Зайцев',
             'Павлов',
@@ -112,7 +115,6 @@ class Users {
             'Макаров',
             'Андреев',
             'Ковалёв',
-
         );
 
         $male_names = array(

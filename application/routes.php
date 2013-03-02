@@ -37,6 +37,12 @@ Route::get('/', function()
 	return View::make('home.index');
 });
 
+Route::get('logout', function()
+{
+    Auth::logout();
+    return Redirect::to('/');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

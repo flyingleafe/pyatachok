@@ -3,7 +3,6 @@
 class Register_Controller extends Base_Controller {
 
     public $restful = true;
-    // public static  $phone_regexp =  '/^(\+?[7-8]{1})?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/';
 
     /*Правила валидации*/
     private static $register_rules;
@@ -17,7 +16,6 @@ class Register_Controller extends Base_Controller {
         $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(
-            // 'phone' => 'required|unique:users|match:'.self::$phone_regexp,
             'phone' => 'required|valid_phone|new_phone',
             'password' => 'required|max:64|min:6|confirmed',
             'is_worker'=>'required'
@@ -33,16 +31,6 @@ class Register_Controller extends Base_Controller {
         self::$phone_rules = array(
             'code'  => 'required|code_valid',
         );
-    }
-
-     /**
-     * Валидация данных
-     * fLf: я вот думаю, это обертка нужна вообще? она ж ниче не делает.
-     * @param  Array $data Правила валидации
-     * @return Validator       объект валидации
-     */
-    public static function validate($data, $rules){
-        return Validator::make($data, $rules);   
     }
 
 	public function get_index()	{
@@ -74,17 +62,16 @@ class Register_Controller extends Base_Controller {
     /*Регистрация*/
     public function post_create() {
 
-        $validation = self::validate(Input::All(), static::$register_rules);
+        $validation = Validator::make(Input::All(), static::$register_rules);
 
         if($validation->fails()) {
-            // return View::make('register.index', array('register_errors' => $validation->errors));
             return Redirect::to('register')->with('register_errors', $validation->errors)->with_input();
         }
 
         $user = User::create(array(
-            'phone'=>$this->trim_phone(Input::get('phone')),
-            'password'=> Input::get('password'),
-            'is_worker'=> Input::get('is_worker'),
+            'phone'     => Input::get('phone'),
+            'password'  => Input::get('password'),
+            'is_worker' => Input::get('is_worker'),
         ));
 
         Auth::login($user);
@@ -92,7 +79,7 @@ class Register_Controller extends Base_Controller {
     }
 
     public function post_profile() {
-        $validation = self::validate(Input::all(), static::$profile_rules);
+        $validation = Validator::make(Input::all(), static::$profile_rules);
 
         if($validation->fails()){
             return Redirect::to('register')->with_errors($validation)->with_input();
@@ -108,18 +95,17 @@ class Register_Controller extends Base_Controller {
     }
 
     public function post_auth() {
-        $phone = Input::get('phone');
+        $phone    = Input::get('phone');
         $password = Input::get('password');
 
-        $validation = self::validate(Input::all(), self::$auth_rules);
+        $validation = Validator::make(Input::all(), self::$auth_rules);
 
         if($validation->fails()){
-            // return View::make('register.index', array('auth_errors' => $validation->errors));
             return Redirect::to('register')->with('auth_errors', $validation->errors);
         }
 
         $data = array(
-            'username' => $this->trim_phone($phone),
+            'username' => User::trim_phone($phone),
             'password' => $password
         );
 
@@ -131,7 +117,6 @@ class Register_Controller extends Base_Controller {
         else {
             $errors = new Laravel\Messages();
             $errors->add('auth', 'Неверное имя пользователя или пароль!');
-            // return View::make('register.index', array('auth_errors' => $errors));
             return Redirect::to('register')->with('auth_errors', $errors);
         }
     }
@@ -151,13 +136,5 @@ class Register_Controller extends Base_Controller {
         }
     }
 
-    public function get_logout(){
-        Auth::logout();
-        return Redirect::to('/');
-    }
-
-    /*Возвращает 10 цифр телефона*/
-    private function trim_phone($phone){
-        return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$numbers );
-    }
+    // fLf: перенес logout в роуты, че ему тут делать - никак ни от чего не зависит, и register/logout смотрится нелогично
 }

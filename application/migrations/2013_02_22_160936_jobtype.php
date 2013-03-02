@@ -16,7 +16,7 @@ class Jobtype {
         });
 
         Schema::create('jobtype_user', function($table) {
-            $table->integer('id')->nullable();
+            $table->increments('id');
             $table->integer('jobtype_id');
             $table->integer('user_id');
             $table->integer('cost');
@@ -77,10 +77,6 @@ class Jobtype {
     public function down()
     {
        Schema::drop('jobtypes');
-       Schema::drop('jobtype_user');
-
+       // Schema::drop('jobtype_user');
     }
-
-
-
 }

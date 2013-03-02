@@ -8,14 +8,14 @@
 				<li>Раз</li>
 				<li>
                     @if(Auth::check())
-                        <a href="{{URL::to('profile') }}"> {{Auth::user()->phone}}</a>
+                        <a href="{{ URL::to('profile') }}"> {{Auth::user()->phone}}</a>
                     @else
-                        <a href="{{URL::to('register') }}">Войти</a>
+                        <a href="{{ URL::to('register') }}">Войти</a>
                     @endif
                 </li>
 				<li>
                     @if(Auth::check())
-                        <a href="{{URL::to('register/logout') }}">Выйти</a>
+                        <a href="{{ URL::to('logout') }}">Выйти</a>
                     @endif
                 </li>
 			</ul>
