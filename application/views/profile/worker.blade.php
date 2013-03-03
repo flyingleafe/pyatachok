@@ -29,6 +29,7 @@
 
         {{ Form::open('profile/update', 'POST', array('class' => '')) }}
         @if($jobtypes)
+
             <div class="b-jobtypes_inner">
                 <h3>Выберите типы работ:</h3>
 
@@ -52,16 +53,17 @@
                 {{ $errors->first('cost', '<p class="form__error">:message</p>') }}
             @endif
 
-            <?foreach ($user_jobtypes as $user_job=>$const){?>
+            <?php foreach ($user_jobtypes as $user_job=>$const) : ?>
                 <div class="b-user-job" id="jobtype_{{$user_job}}">
                      <span class="b-jobtype__label"><?echo Jobtype::find($user_job)->name ?></span>
-                     <span class="b-jobcost__label"><input type="text" name="cost[]" value="{{$const}}"> <ins>руб</ins></span>
+                     <span class="b-jobcost__label"><input type="text" name="cost[]" value="{{$const}}"> <ins>руб/час</ins></span>
                      <input type="hidden"  name="job_ids[]" value="{{$user_job}}">
                      <div class="clear"></div>
                 </div>
-            <?}?>
+            <?php endforeach; ?>
         </div>
-        {{ Form::submit('Сохранить', array('class'=>''))    }}
+        {{ Form::submit('Сохранить', array('class'=>'')) }}
+        
         @endif
 
         {{ Form::close();}}

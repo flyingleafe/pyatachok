@@ -9,7 +9,8 @@ class Profile_Controller extends Base_Controller {
     //@TODO: вывод только нужных скриптов в конкретный лейаут, а не всех
     // fLf: для этого, пожалуй, надо будет поставить бандл Basset - менеджер зависимостей ассетов.
 
-    public function __construct(){
+    public function __construct()
+    {
         Asset::add('jquery', 'js/jquery-1.9.1.js');
         Asset::add('chosenjs', 'chosen/chosen.jquery.js');
         Asset::add('chosencss', 'chosen/chosen.css');
@@ -20,14 +21,13 @@ class Profile_Controller extends Base_Controller {
     //@TODO поиск по составному ключу, убрать поле id
     //Правила валидации
     public static $rules = array(
-        'cost' => 'required|min:1|max:8'
+        'cost' => 'required|numeric|min:10|max:15000'
     );
 
-    public static function validate($data, $rules){
-        return Validator::make($data, $rules);
-    }
+    // fLf: я опять не понимаю, зачем эта обертка валидации здесь была
 
-    public function get_index() {
+    public function get_index()
+    {
         if(!Auth::user()->is_worker) {
             return View::make('profile.employer');
         }
@@ -36,48 +36,43 @@ class Profile_Controller extends Base_Controller {
         foreach(Auth::user()->jobtypes()->pivot()->get() as $jobtype) {
             $ids_array[$jobtype->jobtype_id] = $jobtype->cost;
         }
-        return View::make('profile.worker')->with( array('user_jobtypes'=>$ids_array));
+        return View::make('profile.worker')->with( array('user_jobtypes' => $ids_array) );
     }
 
-
-    public function post_update() {
+    public function post_update()
+    {
         $input = Input::all();
 
-        if(isset($input['job_ids'])){
+        if(isset($input['job_ids'])) {
 
-        $job_ids = $input['job_ids'];
-        $job_cost = $input['cost'];
+            $job_ids = $input['job_ids'];
+            $job_cost = $input['cost'];
 
-        $user = Auth::user();
+            $user = Auth::user();
+
+            foreach($job_ids as $k=>$id ){
+
+                $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
+
+                if($validation->fails()){
+                    //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
+                    return Redirect::to_action('profile/index')->with_errors($validation);
+                }
+
+                //Записи с составным ключом user.id+jobtype_id не существует
+                $row = DB::table('jobtype_user')
+                    ->where('user_id', '=', $user->id)
+                    ->where('jobtype_id', '=',$id);
+
+                if( !$row->get() ) {
+                     $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
+                } else {
+                    $row->update( array('cost'=>$job_cost[$k])  );
+                }
 
 
-        foreach($job_ids as $k=>$id ){
-
-            $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
-
-            if($validation->fails()){
-                //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
-                return Redirect::to_action('profile/index')->with_errors($validation);
             }
-
-            //Записи с составным ключом user.id+jobtype_id не существует
-            $row = DB::table('jobtype_user')
-                ->where('user_id', '=', $user->id)
-                ->where('jobtype_id', '=',$id);
-
-            if(!$row->get())
-            {
-                 $user->jobtypes()->attach($id, array('cost'=>$job_cost[$k]) );
-            }
-
-            else
-            {
-                $row->update( array('cost'=>$job_cost[$k])  );
-            }
-
-
-        }
-        return Redirect::to('profile');
+            return Redirect::to('profile');
         }
     }
 

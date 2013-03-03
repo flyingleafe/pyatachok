@@ -151,11 +151,7 @@ Asset::add('screen', 'css/screen.css');
 |------------------------------------
 */
 
-//Route::controller('admin');
-
-
 Route::controller('home');
-
 
 //Route for Jobs_Controller
 Route::controller('jobs');
@@ -171,13 +167,6 @@ Route::controller('profile');
 
 // Route for Search_Controller
 Route::controller('search');
-
-
-// Route for Admins_Controllers
-Route::controller('admin/index');
-Route::controller('admin/auth');
-Route::controller('admin/works');
-Route::controller('admin/users');
 
 // Route for Test_Controller
 Route::controller('test');

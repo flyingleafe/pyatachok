@@ -21,13 +21,13 @@ class Users {
 			$table->integer('status')->default(0);  //это статус 0 неподтвержденный, 1- незаполненный, 2 - уже в поиске
 			$table->boolean('is_worker')->default(true); //true -рабочий, false - работодат.
 
-            $table->boolean('gender'); //пол - 0 женщина, 1 мужчина
+            $table->boolean('gender')->default(1); //пол - 0 женщина, 1 мужчина
 
             // fLf: мне кажется, что бригаду тоже надо будет делать отдельной моделью,
             // с которой будет отношение has_one
             $table->boolean('team')->default(0); //бригада - 0 состоит, 1 нет
             $table->integer('rating')->default(0); //рейтинг
-            $table->integer('age'); //возраст
+            $table->integer('age')->nullable(); //возраст
 
 			$table->string('avatar_url')->nullable();
 
@@ -36,19 +36,17 @@ class Users {
 
         for($i=0; $i<50; $i++) {
             $person = $this->person_generator();
-            DB::table('users')->insert(
+            User::create(
                 array(
-                    'phone' => $this->phone_generate(),
-                    'password' =>  Hash::make(1234),
-                    'gender'=> $person[0],
-                     'rating' => rand(1, 9999),
-                    'team'=>rand(0,1),
-                    'name' => $person[1],
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),
-                    'is_worker'=> rand(1,0),
-                    'age'=>$person[2],
-                    'status'=> rand(-1, 2),
+                    'phone'      => $this->phone_generate(),
+                    'password'   => Hash::make(1234),
+                    'gender'     => $person[0],
+                    'rating'     => rand(1, 9999),
+                    'team'       => rand(0,1),
+                    'name'       => $person[1],
+                    'is_worker'  => rand(1,0),
+                    'age'        => $person[2],
+                    'status'     => rand(-1, 2),
                 )
             );
         }

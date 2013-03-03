@@ -9,11 +9,12 @@ class User_Improvements {
 	 */
 	public function up()
 	{
+		// fLf: Андрей, не обращай внимания на эту хрень, я тут долго и нудно мигрировал туда-сюда
 		Schema::table('users', function($table)
 		{
 			// fLf: прописал дефолтное значение, без него херня
 			// $table->drop_column('gender');
-			$table->integer('age')->unsigned()->nullable();
+			// $table->integer('age')->unsigned()->nullable();
 		});
 	}
 
@@ -26,7 +27,7 @@ class User_Improvements {
 	{
 		Schema::table('users', function($table)
 		{
-			$table->drop_column('age');
+			// $table->drop_column('age');
 		});
 	}
 

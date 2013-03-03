@@ -36,13 +36,9 @@
 return array(
     'bob',
 	'docs' => array('handles' => 'docs'),
-    'seovel' => array(
-        'location' => 'seovel',
-        'auto' => true
-    ),
-    'menu' => array(
-        'auto' => true
-    ),
+    'seovel' => array('auto' => true),
+    'menu' => array('auto' => true),
     'query-viewer' => array('auto' => true),
+    'admin' => array('handles' => 'admin'),
 
 );

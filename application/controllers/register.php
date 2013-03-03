@@ -10,8 +10,6 @@ class Register_Controller extends Base_Controller {
     private static $profile_rules;
     private static $phone_rules;
 
-    private static $numbers = 10;
-
     public function __construct() {
         $this->filter('before', 'csrf')->on('post');
 
@@ -33,11 +31,8 @@ class Register_Controller extends Base_Controller {
         );
     }
 
-	public function get_index()	{
-
-        $input = Input::all();
-
-		// code here..
+	public function get_index()
+    {
         if(Auth::guest()) {
             return View::make('register.index');
         }
@@ -55,13 +50,9 @@ class Register_Controller extends Base_Controller {
         }
 	}
 
-    public function get_create() {
-        return View::make('register.create');
-    }
-
     /*Регистрация*/
-    public function post_create() {
-
+    public function post_create()
+    {
         $validation = Validator::make(Input::All(), static::$register_rules);
 
         if($validation->fails()) {
@@ -78,7 +69,8 @@ class Register_Controller extends Base_Controller {
         return Redirect::to('register')->with('message' , 'Вы успешно зарегистрированы!');
     }
 
-    public function post_profile() {
+    public function post_profile()
+    {
         $validation = Validator::make(Input::all(), static::$profile_rules);
 
         if($validation->fails()){
@@ -94,7 +86,8 @@ class Register_Controller extends Base_Controller {
         
     }
 
-    public function post_auth() {
+    public function post_auth()
+    {
         $phone    = Input::get('phone');
         $password = Input::get('password');
 
@@ -122,7 +115,8 @@ class Register_Controller extends Base_Controller {
     }
 
     /*Проверка кода подтверждения*/
-    public function post_phone() {
+    public function post_phone()
+    {
         $code = Input::get('code');
         if($code != 1235){
             $errors = new Laravel\Messages();
