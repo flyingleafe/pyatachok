@@ -28,14 +28,6 @@
                     <?}?>
                 </select>
 
-            <script type="text/javascript">
-                $(function (){
-                    $("#select_job_types").chosen({
-                        no_results_text: "Ничего не найдено",
-                        placeholder_text: 'Выберите типы работ'
-                    });
-                });
-            </script>
         </div>
         @endif
 
@@ -146,7 +138,10 @@
 
             $.datepicker.setDefaults($.datepicker.regional['ru']);
 
-
+            $("#select_job_types").chosen({
+                no_results_text: "Ничего не найдено",
+                placeholder_text: 'Выберите типы работ'
+            });
 
             $( "#created_at" ).datepicker({
                 defaultDate: "+1w",
