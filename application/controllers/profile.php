@@ -2,7 +2,7 @@
 
 class Profile_Controller extends Base_Controller {
 
-    // fLf: не забывай эти штуки, Андрюх
+
     public $restful = true;
 
     //@TODO: добавить фильтры на проверку авторизации
@@ -11,6 +11,7 @@ class Profile_Controller extends Base_Controller {
 
     public function __construct()
     {
+        $this->filter('before', 'auth');
         Asset::add('jquery', 'js/jquery-1.9.1.js');
         Asset::add('chosenjs', 'chosen/chosen.jquery.js');
         Asset::add('chosencss', 'chosen/chosen.css');
@@ -38,6 +39,12 @@ class Profile_Controller extends Base_Controller {
         }
         return View::make('profile.worker')->with( array('user_jobtypes' => $ids_array) );
     }
+
+    //Удалил и не проверил, опять всё упало
+    public static function validate($data, $rules){
+        return  Validator::make($data, $rules);
+    }
+
 
     public function post_update()
     {
@@ -83,6 +90,10 @@ class Profile_Controller extends Base_Controller {
             $id =  $_GET['id'];
             Auth::user()->jobtypes()->detach($id);
         }
+    }
+
+    public function get_edit(){
+        return View::Make('register.profile');
     }
 
 }

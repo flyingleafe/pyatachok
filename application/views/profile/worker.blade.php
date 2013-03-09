@@ -15,6 +15,10 @@
     <a href="/">Назад</a>
     <div class="b-user-info">
         <h1>Личный кабинет</h1>
+        <a href="{{URL::to('profile/edit') }}">Редактировать информацию</a>
+        <br>
+        <br>
+
         <div class="b-one__fieldset">
             <label>Номер телефона:</label>
             <span>{{ Auth::user()->phone;}}</span>
@@ -24,6 +28,12 @@
             <label>Имя и фамилия:</label>
             <span>{{ Auth::user()->name }}</span>
         </div>
+
+         <div class="b-one__fieldset">
+            <label>Пол: </label>
+            <? $gender = array(0=>'Женский', 1=>'Мужской' ) ?>
+            <span>{{ $gender[Auth::user()->gender] }}</span>
+         </div>
 
         <?php $jobtypes = Jobtype::All(); ?>
 

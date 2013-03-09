@@ -26,6 +26,19 @@
            {{ Form::text('name', Auth::user()->name);}}
     </div>
 
+    <h3>Выберите ваш пол: </h3>
+
+    <?php $gender = array(1=>'Мужской', 0=>'Женский') ?>
+    <?php foreach($gender as $k=>$v){
+        $checked = (Auth::user()->gender == $k);
+    ?>
+    <div class="b-one__fieldset">
+        <label>{{$v}}</label>
+        <input type="radio" name="gender" value="{{$k}}" <?if($checked) echo 'checked'?> />
+    </div>
+    <?}?>
+
+
 
     {{ Form::submit('Отправить', array('class'=>'i-submit__button'))    }}
 

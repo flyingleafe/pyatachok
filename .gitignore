@@ -1,3 +1,5 @@
 .htaccess
 .sass-cache/
 storage
+access.log
+error.log

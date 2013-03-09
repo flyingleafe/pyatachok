@@ -54,7 +54,7 @@ class Users {
 
 
     public function phone_generate(){
-        return (int) '9'.rand(10, 55).rand(100,999).rand(56, 99).rand(66, 99);
+        return '9'.substr(number_format(time() * rand(),0,'',''),0,9);
     }
 
     public function person_generator(){
@@ -142,7 +142,7 @@ class Users {
             case 1:
                 $rand_name = array_rand($male_names,1);
                 $rand_surname = array_rand($surnames,1);
-                return array(0, $male_names[$rand_name].' '.$surnames[$rand_surname], rand(18, 70)) ;
+                return array(1, $male_names[$rand_name].' '.$surnames[$rand_surname], rand(18, 70)) ;
         }
     }
 	/**

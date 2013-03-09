@@ -19,7 +19,7 @@
                         <th>Действия</th>
                     </tr>
 
-                    <? $users = DB::table('users')->where('is_worker', '=', true)->get();?>
+
 
                     @foreach($users as $user)
                     <tr>
