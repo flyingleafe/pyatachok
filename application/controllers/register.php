@@ -26,6 +26,7 @@ class Register_Controller extends Base_Controller {
         );
         self::$profile_rules = array(
             'name'  => 'required|max:200',
+            'gender'  => 'required',
         );
         self::$phone_rules = array(
             'code'  => 'required|code_valid',
@@ -81,6 +82,7 @@ class Register_Controller extends Base_Controller {
         else {
             Auth::user()->name = Input::get('name');
             Auth::user()->status = 2;
+            Auth::user()->gender = Input::get('gender');
             Auth::user()->save();
             return Redirect::to('/');
         }
@@ -89,8 +91,10 @@ class Register_Controller extends Base_Controller {
 
     public function post_auth()
     {
-        $phone    = Input::get('phone');
+
+       $phone    = Input::get('phone');
         $password = Input::get('password');
+
 
         $validation = Validator::make(Input::all(), self::$auth_rules);
 
@@ -102,6 +106,7 @@ class Register_Controller extends Base_Controller {
             'username' => User::trim_phone($phone),
             'password' => $password
         );
+
 
         // fLf: аутентификация ту делается в 1 строку:
         if ( Auth::attempt($data) ){
