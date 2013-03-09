@@ -11,11 +11,10 @@ class Profile_Controller extends Base_Controller {
 
     public function __construct()
     {
-        Asset::add('jquery', 'js/jquery-1.9.1.js');
-        Asset::add('chosenjs', 'chosen/chosen.jquery.js');
+        Asset::add('chosenjs', 'chosen/chosen.jquery.js', 'jquery');
         Asset::add('chosencss', 'chosen/chosen.css');
-        Asset::add('chosenprotojs', 'chosen/chosen.proto.js');
-        Asset::add('profile', 'js/profile.js');
+        Asset::add('chosenprotojs', 'chosen/chosen.proto.js', 'jquery');
+        Asset::add('profile', 'js/profile.js', 'jquery');
     }
 
     //@TODO поиск по составному ключу, убрать поле id
@@ -41,22 +40,18 @@ class Profile_Controller extends Base_Controller {
 
     public function post_update()
     {
-        $input = Input::all();
+        $job_ids  = Input::get('job_ids');
+        $job_cost = Input::get('cost');
 
-        if(isset($input['job_ids'])) {
-
-            $job_ids = $input['job_ids'];
-            $job_cost = $input['cost'];
-
+        if( !empty($job_ids) ) {
             $user = Auth::user();
+            foreach($job_ids as $k => $id){
 
-            foreach($job_ids as $k=>$id ){
-
-                $validation = self::validate(array('cost'=>$job_cost[$k]), static::$rules);
+                $validation = Validator::make(array('cost'=>$job_cost[$k]), static::$rules);
 
                 if($validation->fails()){
                     //@TODO: вывод ошибок над кокретной строчкой (как передать в парам. $k? вместе с ошибками)
-                    return Redirect::to_action('profile/index')->with_errors($validation);
+                    return Redirect::to('profile')->with_errors($validation);
                 }
 
                 //Записи с составным ключом user.id+jobtype_id не существует
@@ -69,18 +64,16 @@ class Profile_Controller extends Base_Controller {
                 } else {
                     $row->update( array('cost'=>$job_cost[$k])  );
                 }
-
-
             }
-            return Redirect::to('profile');
         }
+        return Redirect::to('profile');
     }
 
     public function post_delete_job()
     {
         if (Request::ajax())
         {
-            $id =  $_GET['id'];
+            $id = $_GET['id'];
             Auth::user()->jobtypes()->detach($id);
         }
     }

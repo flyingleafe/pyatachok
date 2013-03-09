@@ -10,7 +10,8 @@ class Register_Controller extends Base_Controller {
     private static $profile_rules;
     private static $phone_rules;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->filter('before', 'csrf')->on('post');
 
         self::$register_rules = array(

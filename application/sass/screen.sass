@@ -7,58 +7,18 @@
 @import compass/reset
 @import compass/css3
 
-@import _b-user-info.sass
-@import _b-form
-
-
-
 $red: #dd2121
+$almost-white: #EBEBEB
+$linkblue: #469ccf
 
-=border-image($url, $num, $mode)
-  -webkit-border-image: url($url) $num $mode
-  -moz-border-image: url($url) $num $mode
-  border-image: url($url) $num $mode
-=img-like($name)
-  background: url("/img/#{$name}.png") center center no-repeat
-  width: image-width("#{$name}.png")
-  height: image-height("#{$name}.png")
+@import _mixins
+@import _typo
 
-html, body
-  min-width: 100%
-  min-height: 100%
-
-body
-  background: white url(/img/grid.png)
-  font-size: 1em
-
-.container
-  width: 940px
-  margin: 0 auto
-  .clear
-    clear: both
-    float: none
-
-.logo
-  position: relative
-  +img-like("logo")
-  margin: 0 auto
-  .main &
-    top: -30px
-
-.main
-  border: 5px
-  +border-image("/img/border-main.png", 10 10, stretch)
-
-  .buttons
-    text-align: center
-    margin: 1em 0
-
-    .big-button
-      +inline-block
-      font-size: 1.5em
-      padding: 1.5em 1em
-      width: 7em
-      text-align: center
-      +border-radius(5px)
-      +background-image(linear-gradient(top, $red, darken($red, 10%)))
-
+@import _layout
+@import _general
+@import ui/_link-to
+@import _header
+@import _home
+@import _logo
+@import _b-user-info
+@import _b-form

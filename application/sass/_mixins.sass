@@ -1,0 +1,13 @@
+/**
+ * Миксины добавляем сюда
+ */
+
+=border-image($url, $num, $mode)
+  -webkit-border-image: url($url) $num $mode
+  -moz-border-image: url($url) $num $mode
+  border-image: url($url) $num $mode
+
+=img-like($name)
+  background: url("/img/#{$name}.png") center center no-repeat
+  width: image-width("#{$name}.png")
+  height: image-height("#{$name}.png")

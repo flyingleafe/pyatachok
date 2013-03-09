@@ -1,0 +1,26 @@
+/**
+ * Элементы главной страницы
+ */
+.main
+  border: 5px
+  +border-image("/img/border-main.png", 10 10, stretch)
+
+  .buttons
+    text-align: center
+    margin: 2em 0
+
+    .big-button
+      color: $almost-white
+      +text-shadow(0 -1px 0 rgba(black, .4))
+      text-decoration: none
+      font-weight: bold
+      +inline-block
+      font-size: 1.5em
+      margin-right: 1em
+      padding: 1.5em 1em
+      width: 7.5em
+      text-align: center
+      +border-radius(5px)
+      +background-image(linear-gradient(top, $red, darken($red, 10%)))
+      border: 2px solid
+      border-color: rgba(white, .4) rgba(gray, .2) rgba(black, .3)

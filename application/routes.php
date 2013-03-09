@@ -144,6 +144,7 @@ Validator::register('new_phone', function($attr, $value, $params)
 */
 
 Asset::add('screen', 'css/screen.css');
+Asset::add('jquery', 'js/jquery-1.9.1.js');
 
 /*
 |------------------------------------

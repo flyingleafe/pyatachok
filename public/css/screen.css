@@ -1,8 +1,9 @@
+@charset "UTF-8";
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,47 +25,207 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../home/flyingleafe/.rvm/gems/ruby-1.9.3-p385/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
+}
+
+/*
+ * Миксины добавляем сюда
+ */
+/*
+ * Определения шрифтов и типографические классы
+ */
+@font-face {
+  font-family: "Segoe PR";
+  src: url('/fonts/segoepr.eot');
+  src: url('/fonts/segoepr.eot?#iefix') format('eot'), url('/fonts/segoepr.ttf') format('truetype'), url('/fonts/segoepr.svg') format('svg'), url('/fonts/segoepr.woff') format('woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Segoe PR";
+  src: url('/fonts/segoeprb.eot');
+  src: url('/fonts/segoeprb.eot?#iefix') format('eot'), url('/fonts/segoeprb.ttf') format('truetype'), url('/fonts/segoeprb.svg') format('svg'), url('/fonts/segoeprb.woff') format('woff');
+  font-weight: bold;
+}
+
+/*
+ * Основной лэйаут здесь
+ */
+/* line 4, ../../application/sass/_layout.sass */
+html, body {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* line 8, ../../application/sass/_layout.sass */
+body {
+  background: white url(/img/grid.png);
+  font: 1em normal Tahoma, Arial, Verdana, sans-serif;
+}
+
+/* line 12, ../../application/sass/_layout.sass */
+.container {
+  width: 940px;
+  margin: 0 auto;
+}
+/* line 15, ../../application/sass/_layout.sass */
+.container .clear {
+  clear: both;
+  float: none;
+}
+
+/*
+ * Общие стили
+ */
+/* line 4, ../../application/sass/_general.sass */
+.clearfix, header {
+  *zoom: 1;
+}
+/* line 6, ../../application/sass/_general.sass */
+.clearfix:before, header:before, .clearfix:after, header:after {
+  content: " ";
+  display: table;
+}
+/* line 9, ../../application/sass/_general.sass */
+.clearfix:after, header:after {
+  clear: both;
+}
+
+/*
+ * Служебные ссылочки
+ */
+/* line 4, ../../application/sass/ui/_link-to.sass */
+.link-to {
+  color: #469ccf;
+  border-bottom: 1px solid #469ccf;
+  text-decoration: none;
+}
+
+/*
+ * Шапка
+ */
+/* line 4, ../../application/sass/_header.sass */
+header {
+  position: relative;
+  padding: 1em 0;
+}
+/* line 9, ../../application/sass/_header.sass */
+header nav.top {
+  float: left;
+}
+/* line 11, ../../application/sass/_header.sass */
+header .account {
+  float: right;
+}
+
+/*
+ * Элементы главной страницы
+ */
+/* line 4, ../../application/sass/_home.sass */
+.main {
+  border: 5px;
+  -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
+  -moz-border-image: url("/img/border-main.png") 10 10 stretch;
+  border-image: url("/img/border-main.png") 10 10 stretch;
+}
+/* line 8, ../../application/sass/_home.sass */
+.main .buttons {
+  text-align: center;
+  margin: 2em 0;
+}
+/* line 12, ../../application/sass/_home.sass */
+.main .buttons .big-button {
+  color: #ebebeb;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  font-weight: bold;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  font-size: 1.5em;
+  margin-right: 1em;
+  padding: 1.5em 1em;
+  width: 7.5em;
+  text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dd2121), color-stop(100%, #b11a1a));
+  background-image: -webkit-linear-gradient(top, #dd2121, #b11a1a);
+  background-image: -moz-linear-gradient(top, #dd2121, #b11a1a);
+  background-image: -o-linear-gradient(top, #dd2121, #b11a1a);
+  background-image: linear-gradient(top, #dd2121, #b11a1a);
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.4) rgba(128, 128, 128, 0.2) rgba(0, 0, 0, 0.3);
+}
+
+/*
+ * Логотип
+ */
+/* line 5, ../../application/sass/_logo.sass */
+.logo {
+  background: url("/img/logo.png") center center no-repeat;
+  width: 400px;
+  height: 109px;
+  margin: 0 auto;
+}
+/* line 8, ../../application/sass/_logo.sass */
+.main .logo {
+  margin-top: -30px;
+}
+
+/* line 11, ../../application/sass/_logo.sass */
+.slogan {
+  text-align: center;
+  font-size: 1.3em;
+  margin-top: 0.5em;
+  font-family: "Segoe PR";
+  font-weight: normal;
 }
 
 /* line 1, ../../application/sass/_b-user-info.sass */
@@ -165,76 +326,4 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 120px;
   display: block;
   float: left;
-}
-
-/* line 26, ../../application/sass/screen.sass */
-html, body {
-  min-width: 100%;
-  min-height: 100%;
-}
-
-/* line 30, ../../application/sass/screen.sass */
-body {
-  background: white url(/img/grid.png);
-  font-size: 1em;
-}
-
-/* line 34, ../../application/sass/screen.sass */
-.container {
-  width: 940px;
-  margin: 0 auto;
-}
-/* line 37, ../../application/sass/screen.sass */
-.container .clear {
-  clear: both;
-  float: none;
-}
-
-/* line 41, ../../application/sass/screen.sass */
-.logo {
-  position: relative;
-  background: url("/img/logo.png") center center no-repeat;
-  width: 400px;
-  height: 109px;
-  margin: 0 auto;
-}
-/* line 45, ../../application/sass/screen.sass */
-.main .logo {
-  top: -30px;
-}
-
-/* line 48, ../../application/sass/screen.sass */
-.main {
-  border: 5px;
-  -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
-  -moz-border-image: url("/img/border-main.png") 10 10 stretch;
-  border-image: url("/img/border-main.png") 10 10 stretch;
-}
-/* line 52, ../../application/sass/screen.sass */
-.main .buttons {
-  text-align: center;
-  margin: 1em 0;
-}
-/* line 56, ../../application/sass/screen.sass */
-.main .buttons .big-button {
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
-  *display: inline;
-  font-size: 1.5em;
-  padding: 1.5em 1em;
-  width: 7em;
-  text-align: center;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dd2121), color-stop(100%, #b11a1a));
-  background-image: -webkit-linear-gradient(top, #dd2121, #b11a1a);
-  background-image: -moz-linear-gradient(top, #dd2121, #b11a1a);
-  background-image: -o-linear-gradient(top, #dd2121, #b11a1a);
-  background-image: linear-gradient(top, #dd2121, #b11a1a);
 }
