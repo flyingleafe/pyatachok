@@ -2,6 +2,19 @@
  * Служебные ссылочки
  */
 .link-to
+  position: relative
   color: $linkblue
   border-bottom: 1px solid $linkblue
   text-decoration: none
+  margin-left: 2em
+  &::before
+    position: absolute
+    left: -1.2em
+    color: black
+    font-family: FontAwesome
+  &.profile::before
+    content: "\f007"
+  &.logout::before
+    content: "\f08b"
+  &.register::before
+    content: "\f090"
