@@ -25,12 +25,16 @@ class Workers_Controller extends Base_Controller {
     public function action_search(){
         if (Request::ajax()) {
             $rating  = Input::get('rating' );
-            $age  = Input::get('age' );
+
+            $age_min  = Input::get('age_min' );
+            $age_max  = Input::get('age_max' );
+
             $gender  =  Input::get('gender' );
             $name = Input::get('name');
             $team =   Input::get('team');
             $jobtype_id = Input::get('jobtype_id');
             $created_at = Input::get('created_at');
+
             $cost_min = Input::get('cost_min');
             $cost_max = Input::get('cost_max');
 
@@ -49,8 +53,14 @@ class Workers_Controller extends Base_Controller {
                 $query_users->where('created_at', '>=', $created_at);
             }
 
-            if( $age || $age!=='' )
-                $query_users->where('age' ,'>=', $age);
+            if( $age_min || $age_min!=='' )
+                $query_users->where('age' ,'>=', $age_min);
+
+            if( $age_max || $age_max!=='' )
+                $query_users->where('age' ,'<=', $age_max);
+
+
+
 
             if(  $name || $name!==''   ){
 
@@ -83,6 +93,8 @@ class Workers_Controller extends Base_Controller {
                     $workers->where('jobtype_user.cost', '<=', $cost_max);
 
                 }
+
+                echo $workers->sql();
 
                 $workers = $workers->paginate(self::$per_page, array('users.id', 'users.phone', 'users.name','jobtype_user.cost', 'jobtype_user.jobtype_id'));
                 //return Response::make(View::make('workers.search')->render(), 200, array('workers'=> $workers));
