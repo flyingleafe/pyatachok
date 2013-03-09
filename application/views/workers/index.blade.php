@@ -124,7 +124,7 @@
         {{ Form::close();}}
 
         <script type="text/javascript">
-
+            $(function() {
             $.datepicker.regional['ru'] = {
                 closeText: 'Закрыть',
                 prevText: '&#x3c;Пред',
@@ -146,98 +146,113 @@
 
             $.datepicker.setDefaults($.datepicker.regional['ru']);
 
-            $(function() {
-                $('#reset_filter').on('click', function(){
-                    $('#search-workers').each (function(){
-                        this.reset();
-                    });
-                });
-                $('#search-workers').on('change' ,function(){
-                    var jobtype_id = $('#select_job_types').val();
-                    var name = $('#name').val();
-                    var created_at = $('#created_at').val();
-                    var rating = $('#rating').val();
-                    var gender = $('input[name=gender]:checked', this).val();
-                    var team = $('#team').val();
-                    var age = $('#age').val();
+            //ajax-поиск рабочих
+            $('#search-workers').on('change' ,function(){
+                var jobtype_id = $('#select_job_types').val();
+                var name = $('#name').val();
+                var created_at = $('#created_at').val();
+                var rating = $('#rating').val();
+                var gender = $('input[name=gender]:checked', this).val();
+                var team = $('#team').val();
+                var age = $('#age').val();
 
-                    var cost_min = $('#cost_min').val();
-                    var cost_max = $('#cost_max').val();
+                var cost_min = $('#cost_min').val();
+                var cost_max = $('#cost_max').val();
 
 
-                    var age_min = $('#age_min').val();
-                    var age_max = $('#age_max').val();
+                var age_min = $('#age_min').val();
+                var age_max = $('#age_max').val();
 
-                    $.ajax({
-                        // AJAX-specified URL
-                        url: "<?=URL::to('workers/search')?>",
-                        dataType : "html",
-                        type: 'POST',
-                        data: {
-                            'jobtype_id':jobtype_id,
-                            'name':name,
-                            'rating':rating,
-                            'gender':gender,
-                            'created_at':created_at,
-                            'team':team,
-                            'age':age,
-                            'cost_min':cost_min,
-                            'cost_max':cost_max,
-                            'age_min':age_min,
-                            'age_max':age_max
-                        },
-                        success: function (data) {
-                            $('#ajaxResponceSearch').html(data);
-                        }
-                    });
-
-                }).change();
-
-                $( "#created_at" ).datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    changeYear: true
+                $.ajax({
+                    // AJAX-specified URL
+                    url: "<?=URL::to('workers/search')?>",
+                    dataType : "html",
+                    type: 'POST',
+                    data: {
+                        'jobtype_id':jobtype_id,
+                        'name':name,
+                        'rating':rating,
+                        'gender':gender,
+                        'created_at':created_at,
+                        'team':team,
+                        'age':age,
+                        'cost_min':cost_min,
+                        'cost_max':cost_max,
+                        'age_min':age_min,
+                        'age_max':age_max
+                    },
+                    success: function (data) {
+                        $('#ajaxResponceSearch').html(data);
+                    }
                 });
 
+            }).change();
 
-                $(function() {
-                    $("#cost_slider").slider({
-                        min: 0,
-                        max: 10000,
-                        values: [0,10000],
-                        range: true,
-                        stop: function(event, ui) {
-                            jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
-                            jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
-                        },
-                        slide: function(event, ui){
-                            jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
-                            jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
-                        },
-                        change: function( event, ui ) {
-                            $('#search-workers').change();
-                        }
-                    });
+            $( "#created_at" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true
+            });
 
-                    $("#age_slider").slider({
-                        min: 18,
-                        max: 100,
-                        values: [18,100],
-                        range: true,
-                        stop: function(event, ui) {
-                            jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
-                            jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
-                        },
-                        slide: function(event, ui){
-                            jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
-                            jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
-                        },
-                        change: function( event, ui ) {
-                            $('#search-workers').change();
-                        }
-                    });
+            //Слайдер для выбора зарплаты
+            var min_cost = 0;
+            var max_cost = 10000;
+            $("#cost_slider").slider({
+                min: min_cost,
+                max: max_cost,
+                values: [min_cost,max_cost],
+                range: true,
+                stop: function(event, ui) {
+                    jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
+                    jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
+                },
+                slide: function(event, ui){
+                    jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
+                    jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
+                },
+                change: function( event, ui ) {
+                    $('#search-workers').change();
+                }
+            });
 
+            //Слайдер для выбора возраста
+            var min_age = 18;
+            var max_age = 100;
+
+            $("#age_slider").slider({
+                min: min_age,
+                max: max_age,
+                values: [min_age,max_age],
+                range: true,
+                stop: function(event, ui) {
+                    jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
+                    jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
+                },
+                slide: function(event, ui){
+                    jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
+                    jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
+                },
+                change: function( event, ui ) {
+                    $('#search-workers').change();
+                }
+            });
+
+            //Cброс фильтрации
+            $('#reset_filter').on('click', function(){
+                var search_workers_form = $('#search-workers');
+
+                search_workers_form.each (function(){
+                    this.reset();
                 });
+                //reset slider position
+                $('#age_slider').slider("values", 0, min_age);
+                $('#age_slider').slider("values", 1, max_age);
+
+                $('#cost_slider').slider("values", 0, min_cost);
+                $('#cost_slider').slider("values", 1, max_cost);
+
+                search_workers_form.change();//submit form
+            });
             });
         </script>
 
