@@ -124,7 +124,7 @@
         {{ Form::close();}}
 
         <script type="text/javascript">
-            $(function() {
+        $(function() {
             $.datepicker.regional['ru'] = {
                 closeText: 'Закрыть',
                 prevText: '&#x3c;Пред',
@@ -146,9 +146,64 @@
 
             $.datepicker.setDefaults($.datepicker.regional['ru']);
 
+
+
+            $( "#created_at" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true
+            });
+
+            //Слайдер для выбора зарплаты
+            var min_cost = 0;
+            var max_cost = 10000;
+            $("#cost_slider").slider({
+                min: min_cost,
+                max: max_cost,
+                values: [min_cost,max_cost],
+                range: true,
+                stop: function(event, ui) {
+                    $("#cost_min").val($("#cost_slider").slider("values",0));
+                    $("#cost_max").val($("#cost_slider").slider("values",1));
+                },
+                slide: function(event, ui){
+                    $("#cost_min").val($("#cost_slider").slider("values",0));
+                    $("#cost_max").val($("#cost_slider").slider("values",1));
+                },
+                change: function( event, ui ) {
+                    $('#search-workers').change();
+                }
+            });
+            $( "#cost_slider" ).slider( "disable" ); //заблокируем выбор диапазона зарплат, пока не выбран тип работ
+
+            //Слайдер для выбора возраста
+            var min_age = 18;
+            var max_age = 100;
+
+            $("#age_slider").slider({
+                min: min_age,
+                max: max_age,
+                values: [min_age,max_age],
+                range: true,
+                stop: function(event, ui) {
+                    $("#age_min").val($("#age_slider").slider("values",0));
+                    $("#age_max").val($("#age_slider").slider("values",1));
+                },
+                slide: function(event, ui){
+                    $("#age_min").val($("#age_slider").slider("values",0));
+                    $("#age_max").val($("#age_slider").slider("values",1));
+                },
+                change: function( event, ui ) {
+                    $('#search-workers').change();
+                }
+            });
+
             //ajax-поиск рабочих
             $('#search-workers').on('change' ,function(){
                 var jobtype_id = $('#select_job_types').val();
+                if(jobtype_id.length != 0 ){
+                    $( "#cost_slider" ).slider( "enable" );
+                }
                 var name = $('#name').val();
                 var created_at = $('#created_at').val();
                 var rating = $('#rating').val();
@@ -188,55 +243,6 @@
 
             }).change();
 
-            $( "#created_at" ).datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                changeYear: true
-            });
-
-            //Слайдер для выбора зарплаты
-            var min_cost = 0;
-            var max_cost = 10000;
-            $("#cost_slider").slider({
-                min: min_cost,
-                max: max_cost,
-                values: [min_cost,max_cost],
-                range: true,
-                stop: function(event, ui) {
-                    jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
-                    jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
-                },
-                slide: function(event, ui){
-                    jQuery("#cost_min").val(jQuery("#cost_slider").slider("values",0));
-                    jQuery("#cost_max").val(jQuery("#cost_slider").slider("values",1));
-                },
-                change: function( event, ui ) {
-                    $('#search-workers').change();
-                }
-            });
-
-            //Слайдер для выбора возраста
-            var min_age = 18;
-            var max_age = 100;
-
-            $("#age_slider").slider({
-                min: min_age,
-                max: max_age,
-                values: [min_age,max_age],
-                range: true,
-                stop: function(event, ui) {
-                    jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
-                    jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
-                },
-                slide: function(event, ui){
-                    jQuery("#age_min").val(jQuery("#age_slider").slider("values",0));
-                    jQuery("#age_max").val(jQuery("#age_slider").slider("values",1));
-                },
-                change: function( event, ui ) {
-                    $('#search-workers').change();
-                }
-            });
-
             //Cброс фильтрации
             $('#reset_filter').on('click', function(){
                 var search_workers_form = $('#search-workers');
@@ -251,9 +257,11 @@
                 $('#cost_slider').slider("values", 0, min_cost);
                 $('#cost_slider').slider("values", 1, max_cost);
 
+                $( "#cost_slider" ).slider( "disable" );
+                $("#select_job_types").val('').trigger("liszt:updated");
                 search_workers_form.change();//submit form
             });
-            });
+        });
         </script>
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">

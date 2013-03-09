@@ -60,8 +60,6 @@ class Workers_Controller extends Base_Controller {
                 $query_users->where('age' ,'<=', $age_max);
 
 
-
-
             if(  $name || $name!==''   ){
 
                 $query_users->where('name' ,'LIKE', '%'.Input::get('name').'%');
@@ -93,8 +91,6 @@ class Workers_Controller extends Base_Controller {
                     $workers->where('jobtype_user.cost', '<=', $cost_max);
 
                 }
-
-                echo $workers->sql();
 
                 $workers = $workers->paginate(self::$per_page, array('users.id', 'users.phone', 'users.name','jobtype_user.cost', 'jobtype_user.jobtype_id'));
                 //return Response::make(View::make('workers.search')->render(), 200, array('workers'=> $workers));
