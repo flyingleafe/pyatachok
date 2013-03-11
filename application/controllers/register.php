@@ -92,8 +92,7 @@ class Register_Controller extends Base_Controller {
     {
 
        $phone    = Input::get('phone');
-        $password = Input::get('password');
-
+       $password = Input::get('password');
 
         $validation = Validator::make(Input::all(), self::$auth_rules);
 

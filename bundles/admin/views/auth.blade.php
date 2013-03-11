@@ -1,4 +1,4 @@
-@layout('admin::master')
+@layout('admin::blank')
 
 @section('content')
 <form class="form-horizontal" action='' method="POST" style="width: 600px; margin: 0 auto">

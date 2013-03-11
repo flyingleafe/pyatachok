@@ -28,7 +28,8 @@
 
 
                         Menu::items('notify', array('class' => 'dropdown-menu'), 'ul')
-                            ->add('admin/users/', '<i class="icon-pencil active"></i>Управление')
+                            ->add('admin/users/', '<i class="icon-pencil active"></i>Работники и Работадатели')
+                            ->add('admin/users/control', '<i class="icon-pencil active"></i>Администраторы и Модераторы')
                             ->add('admin/users/registers', '<i class="icon-file"></i>Ждут активации')
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 

@@ -203,30 +203,37 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
 }
 
-/* line 28, ../../application/sass/screen.sass */
+/* line 3, ../../application/sass/_pagination.sass */
+.pagination ul li {
+  display: block;
+  float: left;
+  padding: 0 10px;
+}
+
+/* line 29, ../../application/sass/screen.sass */
 html, body {
   min-width: 100%;
   min-height: 100%;
 }
 
-/* line 32, ../../application/sass/screen.sass */
+/* line 33, ../../application/sass/screen.sass */
 body {
   background: white url(/img/grid.png);
   font-size: 1em;
 }
 
-/* line 36, ../../application/sass/screen.sass */
+/* line 37, ../../application/sass/screen.sass */
 .container {
   width: 940px;
   margin: 0 auto;
 }
-/* line 39, ../../application/sass/screen.sass */
+/* line 40, ../../application/sass/screen.sass */
 .container .clear {
   clear: both;
   float: none;
 }
 
-/* line 43, ../../application/sass/screen.sass */
+/* line 44, ../../application/sass/screen.sass */
 .logo {
   position: relative;
   background: url("/img/logo.png") center center no-repeat;
@@ -234,24 +241,24 @@ body {
   height: 109px;
   margin: 0 auto;
 }
-/* line 47, ../../application/sass/screen.sass */
+/* line 48, ../../application/sass/screen.sass */
 .main .logo {
   top: -30px;
 }
 
-/* line 50, ../../application/sass/screen.sass */
+/* line 51, ../../application/sass/screen.sass */
 .main {
   border: 5px;
   -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
   -moz-border-image: url("/img/border-main.png") 10 10 stretch;
   border-image: url("/img/border-main.png") 10 10 stretch;
 }
-/* line 54, ../../application/sass/screen.sass */
+/* line 55, ../../application/sass/screen.sass */
 .main .buttons {
   text-align: center;
   margin: 1em 0;
 }
-/* line 58, ../../application/sass/screen.sass */
+/* line 59, ../../application/sass/screen.sass */
 .main .buttons .big-button {
   display: -moz-inline-stack;
   display: inline-block;

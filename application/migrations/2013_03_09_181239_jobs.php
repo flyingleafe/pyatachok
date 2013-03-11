@@ -28,9 +28,9 @@ class Jobs {
         //отношения работ и рабочих, принявших участие (many-to-many)
         Schema::create('job_user', function($table) {
             $table->integer('id');
-            $table->integer('worker_id'); //id рабочего
+            $table->integer('user_id'); //id рабочего
             $table->integer('job_id'); //id работы
-            $table->primary(array('worker_id', 'job_id')); //составной ключ
+            $table->primary(array('user_id', 'job_id')); //составной ключ
 
         });
 
@@ -43,9 +43,9 @@ class Jobs {
 	 * @return void
 	 */
 	public function down()
-	{
-        Schema::drop('jobs');
+    {
         Schema::drop('job_user');
+        Schema::drop('jobs');
 	}
 
 }

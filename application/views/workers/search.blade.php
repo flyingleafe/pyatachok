@@ -15,13 +15,3 @@
 @endif
 
 
-<script>
-    $(function(){
-        $('.pagination li a').click(function(event){
-            event.preventDefault();
-            var page =  $(this).text();
-            return false;
-        });
-    })
-
-</script>
