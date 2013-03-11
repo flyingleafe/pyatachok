@@ -1,19 +1,24 @@
-.b-auth__form
+.b-auth__form, .b-register__form
   float: left
+
 .b-register__form
-  float: right
+  text-align: center
 
 .b-form
-  width: 440px
   padding-right: 20px
   .form__error
     color: #cc4f26
     line-height: 16px
   h1
-    font-size: 24px
     padding-bottom: 10px
+    font-size: 1.5em
   .b-one__fieldset
     padding-bottom: 15px
+    input
+      font-size: 1.1em
+      padding: 0.3em
+      border: none
+      +box-shadow(inset rgba(black, .4) 1px 1px 3px 1px)
     label
       width: 120px
       display: block

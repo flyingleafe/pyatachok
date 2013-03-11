@@ -39,7 +39,7 @@ class Users {
             User::create(
                 array(
                     'phone'      => $this->phone_generate(),
-                    'password'   => Hash::make(1234),
+                    'password'   => 1234,
                     'gender'     => $person[0],
                     'rating'     => rand(1, 9999),
                     'team'       => rand(0,1),

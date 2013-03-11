@@ -12,6 +12,8 @@
 
 @section('content')
 
+    @include('blocks.header')
+    
     <a href="/">Назад</a>
     <div class="b-user-info">
         <h1>Личный кабинет</h1>

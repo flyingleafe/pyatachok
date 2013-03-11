@@ -141,6 +141,10 @@ if (Config::get('application.profiler'))
 
 Blade::sharpen();
 
+Blade::extend(function($value) {
+    return preg_replace('/\{\{([^\-].+?)\}\}/s', '<?php echo $1; ?>', $value);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Set The Default Timezone

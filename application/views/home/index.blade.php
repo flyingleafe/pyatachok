@@ -2,7 +2,7 @@
 
 @section('content')
     
-    @include('blocks.header')
+    @include('blocks.header-home')
 	<div class="main">
 		<div class="center">
 			<div class="logo"></div>

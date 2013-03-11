@@ -3,10 +3,13 @@
  */
 
 .logo
-  +img-like("logo")
-  margin: 0 auto
+  +img-like("logo-min")
+  float: left
   .main &
-    margin-top: -30px
+    float: none
+    margin: 0 auto
+    +img-like("logo")
+    margin-top: -50px
 
 .slogan
   text-align: center

@@ -1,6 +1,9 @@
 @layout('master')
 
 @section('content')
+
+@include('blocks.header')
+
 <div class="container">
     <h1>Найти работу</h1>
 

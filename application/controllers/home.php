@@ -32,10 +32,12 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		Asset::add('screen', 'css/screen.css');
 		Seovel::setTitle('Пятачок-онлайн :: Работа у вас, рабочие у нас!')->noSuffix();
-		return View::make('home.index');
+		return view('home.index');
 	}
 
-
+	public function action_about()
+	{
+		return view('home.about');
+	}
 }

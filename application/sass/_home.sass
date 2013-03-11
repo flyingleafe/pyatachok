@@ -3,7 +3,9 @@
  */
 .main
   border: 5px
+  padding: 1em
   +border-image("/img/border-main.png", 10 10, stretch)
+  @extend .clearfix
 
   .buttons
     text-align: center

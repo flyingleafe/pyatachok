@@ -32,11 +32,6 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home.index');
-});
-
 Route::get('logout', function()
 {
     Auth::logout();

@@ -10,6 +10,8 @@
 
 @section('content')
 
+@include('blocks.header')
+
 <div class="container">
     <div class="b-content">
         <h1>Найти рабочих</h1>

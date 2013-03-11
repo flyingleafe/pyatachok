@@ -15,7 +15,7 @@
                 </button>
                 <a class="brand" href="/">5ok</a>
                 <div class="nav-collapse collapse">
-                    <?=
+                    {{
                         Menu::handler('sineld', array('class' => 'nav'))
                         ->add('/', '<i class="icon-home"></i>На главную</a>')
                         ->add('#', '<i class="icon-edit"></i>Пользователи <b class="caret"></b>',
@@ -51,8 +51,7 @@
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown')
 
                     )->render(array('active_child_class' => 'active', 'active_class' => 'active'));
-
-                    ?>
+                    }}
                 </div>
             </div>
         </div>

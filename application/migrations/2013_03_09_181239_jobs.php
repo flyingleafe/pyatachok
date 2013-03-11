@@ -31,10 +31,7 @@ class Jobs {
             $table->integer('worker_id'); //id рабочего
             $table->integer('job_id'); //id работы
             $table->primary(array('worker_id', 'job_id')); //составной ключ
-
         });
-
-
 	}
 
 	/**
