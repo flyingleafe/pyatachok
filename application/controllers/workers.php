@@ -59,18 +59,13 @@ class Workers_Controller extends Base_Controller {
             if( $age_max || $age_max!=='' )
                 $query_users->where('age' ,'<=', $age_max);
 
-
-            if(  $name || $name!==''   ){
-
-                $query_users->where('name' ,'LIKE', '%'.Input::get('name').'%');
+            if(  $name || $name!==''   ) {
+                $query_users->where('name' ,'LIKE', '%'.$name.'%');
             }
-
 
             if( $team || $team!==''){
                 $query_users->where('team' ,'=', $team );
             }
-
-
 
             if($jobtype_id || $jobtype_id!==''){
                 $users = $query_users->get( array('id'));
@@ -95,9 +90,7 @@ class Workers_Controller extends Base_Controller {
                 $workers = $workers->paginate(self::$per_page, array('users.id', 'users.phone', 'users.name','jobtype_user.cost', 'jobtype_user.jobtype_id'));
                 //return Response::make(View::make('workers.search')->render(), 200, array('workers'=> $workers));
                 //echo render('workers.search',array('workers'=> $workers) );
-
                 return render('workers.search', array( 'workers' => $workers));
-
             }
 
             $workers = $query_users->paginate(self::$per_page);
@@ -107,8 +100,4 @@ class Workers_Controller extends Base_Controller {
         }
         //return View::Make('workers.index')->with('workers', $workers);
     }
-
-
-
-
 }
