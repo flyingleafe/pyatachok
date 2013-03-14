@@ -6,11 +6,13 @@ class Admin_Users_Controller extends Base_Controller {
     public $restful = true;
 
     public  static $register_rules = array(
-    'phone' => 'required|valid_phone|new_phone',
-    'password' => 'required|max:64|min:6|confirmed',
-    'is_worker'=>'required'
+        'phone' => 'required|valid_phone|new_phone',
+        'password' => 'required|max:64|min:6|confirmed',
     );
 
+    public function __construct(){
+        $this->filter('before', 'auth')->on('post');
+    }
     public function get_index()
     {
         return View::make('admin::users.index');
@@ -38,6 +40,8 @@ class Admin_Users_Controller extends Base_Controller {
         ));
         return Redirect::to('admin/users/')->with('message', 'Пользователь изменен');
     }
+
+
 
     public function get_control(){
         return View::make('admin::users.control');

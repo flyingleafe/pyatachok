@@ -16,29 +16,16 @@
                 <input type="text" value="{{$user->name}}" name="name" class="input-xlarge">
 
                 <label>Статус</label>
-                <?php
-                $stats_type = array(
-                    -1 => 'Заблокирован',
-                    0  => 'Подтверждение телефона',
-                    1  => 'Заполнение информации',
-                    2  => 'Активен',
-                )
-                ?>
+
                 <select name="status">
-                    @foreach($stats_type as $code=>$status)
+                    @foreach(User::$stats_type as $code=>$status)
                         <option <?if($code==$user->status) echo 'selected'?> value="{{$code}}">{{$status}}</option>
                     @endforeach
                 </select>
 
                 <label>Тип аккаунта</label>
-                <?php
-                $acc_type = array(
-                    0=>'Работодатель',
-                    1=>'Рабочий',
-                );
-                ?>
                 <select name="is_worker">
-                    @foreach($acc_type as $k=>$type)
+                    @foreach(User::$acc_type as $k=>$type)
                     <option <?if($k== (int) $user->is_worker) echo 'selected'?> value="{{$k}}">{{$type}}</option>
                     @endforeach
                 </select>

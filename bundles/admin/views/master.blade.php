@@ -8,8 +8,10 @@
     <link href="/bootstrap/css/docs.css" rel="stylesheet">
     <script src="/js/jquery-1.9.1.js"></script>
     <script src="/bootstrap/js/bootstrap.js"></script>
-
+    @yield('before_assets')
 </head>
+
+
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
@@ -41,15 +43,28 @@
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 
-                        ->add('#', '<i class="icon-picture"></i>Журналы <b class="caret"></b>',
 
+
+                        ->add('/admin', '<i class="icon-wrench"></i>Работы <b class="caret"></b>',
+                            Menu::items('sellers', array('class' => 'dropdown-menu'), 'ul')
+                                ->add('admin/jobs/', '<i class="icon-pencil"></i>Cписок')
+                                ->add('admin/seller/list', '<i class="icon-file"></i>Listele')
+                            , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
+
+                        ->add('#', '<i class="icon-picture"></i>Журналы <b class="caret"></b>',
                         Menu::items('sellers', array('class' => 'dropdown-menu'), 'ul')
                             ->add('admin/seller/add', '<i class="icon-pencil"></i>Ekle')
                             ->add('admin/seller/list', '<i class="icon-file"></i>Listele')
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 
-                        ->add('/admin', '<i class="icon-wrench"></i>Администратор <b class="caret"></b>',
+
+
+
+
+
+
+                            ->add('/admin', '<i class="icon-wrench"></i>Администратор <b class="caret"></b>',
 
                         Menu::items('admin', array('class' => 'dropdown-menu'), 'ul')
                             ->add('admin/user', '<i class="icon-user"></i>Выход')

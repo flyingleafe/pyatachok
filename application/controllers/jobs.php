@@ -59,11 +59,6 @@ class Jobs_Controller extends Base_Controller {
 
         return View::make('jobs.create', array('model'=>$job) );
 
-
-    }
-
-    public function get_create(){
-        return View::make('jobs.create' );
     }
 
     public function post_create(){

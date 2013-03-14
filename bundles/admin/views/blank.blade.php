@@ -10,6 +10,6 @@
     <script src="/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
-    @yield('content')
+@yield('content')
 </body>
 </html>
