@@ -4,18 +4,25 @@
 
 <div class="container">
 
-    @if($errors->has())
-    {{ $errors->first('name', '<p>:message</p>') }}
+    @if( isset($errors))
+    {{ $errors->first('phone', '<p>:message</p>') }}
+    {{ $errors->first('jobtype_id', '<p>:message</p>') }}
+    {{ $errors->first('price', '<p>:message</p>') }}
+    {{ $errors->first('description', '<p>:message</p>') }}
+    {{ $errors->first('place', '<p>:message</p>') }}
+    {{ $errors->first('time_start', '<p>:message</p>') }}
+    {{ $errors->first('time_end', '<p>:message</p>') }}
+    {{ $errors->first('target_count', '<p>:message</p>') }}
     @endif
 
 
-    {{ Form::open('register/profile', 'POST', array('class' => 'b-user-register__form')) }}
+    {{ Form::open('jobs/create', 'POST', array('class' => '')) }}
 
 
     <div class="b-one__fieldset">
         {{ Form::label('jobtype_id', 'Тип работ' )    }}
         <?php  $jobtypes = Jobtype::All();  ?>
-        <select id="select_job_types"  name="job_id" class="chzn-select">
+        <select id="select_job_types"  name="jobtype_id" class="chzn-select">
             <option value="">Тип работ</option>
             <?foreach($jobtypes as $job){?>
             <option value="{{$job->id}}">{{$job->name}}</option>
@@ -23,11 +30,9 @@
         </select>
     </div>
 
-
-
     <div class="b-one__fieldset">
         {{ Form::label('name', 'Ваше имя', array('class'=>''))    }}
-        {{ Form::text('name', '',  array('id'=>'phone') )    }}
+        {{ Form::text('name', $model->name,  array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
@@ -37,7 +42,7 @@
 
     <div class="b-one__fieldset">
         {{ Form::label('phone', 'Телефон', array('class'=>''))    }}
-        {{ Form::text('phone', '',  array('id'=>'phone') )    }}
+        {{ Form::text('phone', $model->phone,   array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
@@ -54,17 +59,18 @@
 
     <div class="b-one__fieldset">
         {{ Form::label('time_start', 'Дата начала', array('class'=>''))    }}
-        {{ Form::text('time_start', '', array('id'=>'time_start'))    }}
+        {{ Form::text('time_start', '', array('id'=>'time_start', ))    }}
     </div>
 
     <div class="b-one__fieldset">
         {{ Form::label('time_end', 'Дата окончания', array('class'=>''))    }}
-        {{ Form::text('time_end', '', array('id'=>'time_end'))    }}
+        {{ Form::text('time_end', '', array('id'=>'time_end', ))    }}
     </div>
 
     <div class="b-one__fieldset">
         {{ Form::label('target_count', 'Количество человек', array('class'=>''))    }}
-        {{ Form::text('target_count', '')    }}
+        {{ Form::select('target_count', array(1,2,3,4,5,6,7))    }}
+        <p>Большее количество участников доступно в платном режиме</p>
     </div>
 
 
@@ -74,18 +80,19 @@
     <script>
         $(function(){
 
-
             $("#select_job_types").chosen({
                 no_results_text: "Ничего не найдено",
                 placeholder_text: 'Выберите типы работ'
             });
 
             $('#time_start').datetimepicker({
-                timeFormat: "hh:mm tt"
+                dateFormat: "dd-MM-yy",
+                timeFormat: "HH:mm"
             });
 
             $('#time_end').datetimepicker({
-                timeFormat: "hh:mm tt"
+                dateFormat: "dd-MM-yy",
+                timeFormat: "HH:mm"
             });
         });
     </script>

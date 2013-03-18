@@ -2,6 +2,23 @@
 
 class User extends Eloquent {
 
+    public  static $stats_type = array(
+        -1 => 'Заблокирован',
+        0  => 'Подтверждение телефона',
+        1  => 'Заполнение информации',
+        2  => 'Активен',
+    );
+    public static $acc_type = array(
+        0=>'Работодатель',
+        1=>'Рабочий',
+    );
+
+    public static $gender = array(
+        ''=>'Любой',
+        '0'=>'Женский',
+        '1'=>'Мужской'
+    );
+
 	public static $timestamps = true;
     private static $phone_pattern = '/^(\+7[-. ]?|8[-. ]?)?(\()?([0-9]{3})(?(2)\))[-. ]?(([0-9]{2})|([0-9]{3}))[-. ]?([0-9]{2})[-. ]?(?(6)([0-9]{2})|([0-9]{3}))$/';
     private static $phone_nums = 10;
