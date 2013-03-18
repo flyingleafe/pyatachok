@@ -35,6 +35,8 @@ class Register_Controller extends Base_Controller {
 
 	public function get_index()
     {
+        Seovel::setTitle('Регистрация');
+
         if(Auth::guest()) {
             return View::make('register.index');
         }
@@ -92,9 +94,8 @@ class Register_Controller extends Base_Controller {
     public function post_auth()
     {
 
-       $phone    = Input::get('phone');
+        $phone    = Input::get('phone');
         $password = Input::get('password');
-
 
         $validation = Validator::make(Input::all(), self::$auth_rules);
 
@@ -106,7 +107,6 @@ class Register_Controller extends Base_Controller {
             'username' => User::trim_phone($phone),
             'password' => $password
         );
-
 
         // fLf: аутентификация ту делается в 1 строку:
         if ( Auth::attempt($data) ){

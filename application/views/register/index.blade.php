@@ -2,7 +2,10 @@
 
 @section('content')
 
+@include('blocks.header-home')
+
 <div class="main">
+    <div class="logo"></div>
     <div class="b-form b-register__form tile">
         <div class="spiral"></div>
         <h1>Регистрация пользователей</h1>

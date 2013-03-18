@@ -15,12 +15,17 @@ header
       margin-right: 0.5em
       +box-sizing(border-box)
       float: left
-      width: 130px
       height: 37px
       text-align: center
+      border: 7px solid transparent
       &.active
+        width: 130px
         background: url(/img/menu-item-bg.png)
-        color: white
+        &:hover
+          +border-image(none)
+      &:hover
+        +border-image("/img/understroke.png", 7 7, stretch)
+
       a
         color: inherit
         text-decoration: none
