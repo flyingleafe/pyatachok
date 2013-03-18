@@ -1,7 +1,8 @@
 <?php
 
 class Workers_Controller extends Base_Controller {
-    public $resful = true;
+
+    public $restful = true;
 
     private static $per_page = 10;
 
@@ -11,22 +12,26 @@ class Workers_Controller extends Base_Controller {
         Asset::add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js');
         Asset::add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css');
 
-        Asset::add('chosen_js', 'chosen/chosen.jquery.js');
+        Asset::add('chosen', 'chosen/chosen.jquery.js', 'jquery');
         Asset::add('chosen_css', 'chosen/chosen.css');
+        Asset::add('workers-search', 'js/workers-search.js', 'chosen');
     }
 
-	public function action_index(){
+	public function get_index()
+    {
+        Seovel::setTitle('Поиск рабочих');
 		return View::make('workers.index');
 	}
 
-    public function get_search(){
-		return View::make('workers.index');
+    public function get_search()
+    {
+		return Redirect::to('workers');
 	}
 
     // fLf: ужс, можно же просто писать !empty($param) - встроенная конструкция пыхи
 
     //@TODO: фильтры для вводимых данных
-    public function action_search(){
+    public function post_search(){
 
         $rating     = Input::get('rating' );
         $age_min    = Input::get('age_min' );

@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    @yield('before_assets')
     {{ Asset::container('admin')->styles()  }}
     {{ Asset::container('admin')->scripts() }}
 </head>

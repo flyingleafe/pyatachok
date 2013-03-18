@@ -27,8 +27,8 @@
         @if($jobtypes)
         <div class="b-one-group">
             <h3>Выберите тип работ:</h3>
-            <select id="select_job_types"  name="job_id" class="chzn-select">
-                <option value="">Тип работ</option>
+            <select id="select_job_types" name="job_id" class="chzn-select">
+                <option></option>
                 @foreach($jobtypes as $job)
                     <option value="{{$job->id}}">{{$job->name}}</option>
                 @endforeach

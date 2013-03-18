@@ -26,6 +26,8 @@ $(function() {
         placeholder_text: 'Выберите типы работ'
     });
 
+    console.log($("select_job_types"));
+
     $( "#created_at" ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
