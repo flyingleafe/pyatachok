@@ -84,7 +84,7 @@ $(function() {
         if(jobtype_id.length != 0 ){
             $( "#cost_slider" ).slider( "enable" );
         }
-        var name = $('#name').val();
+        /*var name = $('#name').val();
         var created_at = $('#created_at').val();
         var rating = $('#rating').val();
         var gender = $('input[name=gender]:checked', this).val();
@@ -96,26 +96,14 @@ $(function() {
 
 
         var age_min = $('#age_min').val();
-        var age_max = $('#age_max').val();
+        var age_max = $('#age_max').val();*/
 
         $.ajax({
             // AJAX-specified URL
             url: URLS.workers_search,
             dataType : "html",
             type: 'POST',
-            data: {
-                'jobtype_id':jobtype_id,
-                'name':name,
-                'rating':rating,
-                'gender':gender,
-                'created_at':created_at,
-                'team':team,
-                'age':age,
-                'cost_min':cost_min,
-                'cost_max':cost_max,
-                'age_min':age_min,
-                'age_max':age_max
-            },
+            data: $(this).serialize(),
             success: function (data) {
                 $('#ajaxResponceSearch').html(data);
             }

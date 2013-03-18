@@ -27,10 +27,10 @@
         @if($jobtypes)
         <div class="b-one-group">
             <h3>Выберите тип работ:</h3>
-            <select id="select_job_types" name="job_id" class="chzn-select">
+            <select id="select_job_types" name="jobtype_id" class="chzn-select">
                 <option></option>
                 @foreach($jobtypes as $job)
-                    <option value="{{$job->id}}">{{$job->name}}</option>
+                    <option value="{{ $job->id }}">{{ $job->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="b-one__fieldset">
                 {{ Form::label('gender', 'Мужской', array('class'=>'' ))    }}
-                {{ Form::radio('gender', 1 )    }}
+                {{ Form::radio('gender', 1)    }}
             </div>
         </div>
 
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        {{ Form::close();}}
+        {{ Form::close() }}
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">
         <div id="ajaxResponceSearch"></div>

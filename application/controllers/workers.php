@@ -70,7 +70,8 @@ class Workers_Controller extends Base_Controller {
         if( !empty($jobtype_id) ){
             $users = $query_users->get( array('id'));
             $user_ids = array();
-            foreach($users as $user)  array_push($user_ids, $user->id);
+            foreach($users as $user)
+                array_push($user_ids, $user->id);
             $workers = DB::table('users')
                 ->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
                 ->where_in('users.id', $user_ids)
