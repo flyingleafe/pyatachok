@@ -22,7 +22,7 @@
 
         {{ Form::open('workers/search', 'POST', array('class' => 'b-form', 'id'=>'search-workers')) }}
 
-        <?  $jobtypes = Jobtype::All();  ?>
+        <?php $jobtypes = Jobtype::All(); ?>
 
         @if($jobtypes)
         <div class="b-one-group">
@@ -36,13 +36,10 @@
         </div>
         @endif
 
-
         <div class="b-one__fieldset">
             {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
             {{ Form::text('name', '')    }}
         </div>
-
-
 
         <div class="b-one__fieldset">
             {{ Form::label('created_at', 'На сайте', array('class'=>'' ))    }}

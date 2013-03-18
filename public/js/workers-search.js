@@ -16,7 +16,8 @@ $(function() {
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: ''};
+        yearSuffix: ''
+    };
 
     $.datepicker.setDefaults($.datepicker.regional['ru']);
 
