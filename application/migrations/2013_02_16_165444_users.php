@@ -19,6 +19,7 @@ class Users {
 
 			$table->text('about')->nullable();
 			$table->integer('status')->default(0);  //это статус 0 неподтвержденный, 1- незаполненный, 2 - уже в поиске
+
 			$table->boolean('is_worker')->default(true); //true -рабочий, false - работодат.
 
             $table->boolean('gender')->default(1); //пол - 0 женщина, 1 мужчина
@@ -31,6 +32,7 @@ class Users {
 
 			$table->string('avatar_url')->nullable();
 
+            $table->integer('role')->default(0);  //0 пользователь, 1 - модератор, 2-кадмин
 		});
 
 

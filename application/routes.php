@@ -164,5 +164,9 @@ Route::controller('profile');
 // Route for Search_Controller
 Route::controller('search');
 
+// Route for Job_Controller
+Route::controller('jobs');
+
+
 // Route for Test_Controller
 Route::controller('test');
