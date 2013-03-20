@@ -22,6 +22,7 @@
 
     {{ Form::open('jobs/search', 'POST', array('class' => 'b-form', 'id'=>'search-jobs')) }}
 
+
     @include('blocks.jobtypes')
 
     <h3>Дата работ</h3>

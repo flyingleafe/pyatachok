@@ -42,6 +42,15 @@ class Jobs_Controller extends Base_Controller {
         return View::make('jobs.type');
     }
 
+    public function get_view($id){
+        $job = Job::find($id);
+
+        if($job){
+            return View::make('jobs.view', array('job'=>$job));
+        }
+
+        else  return Event::first('404');
+    }
 
     //@TODO: фильтры для вводимых данных
     public function post_search(){
