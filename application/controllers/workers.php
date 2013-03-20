@@ -15,6 +15,7 @@ class Workers_Controller extends Base_Controller {
         Asset::add('chosen', 'chosen/chosen.jquery.js', 'jquery');
         Asset::add('chosen_css', 'chosen/chosen.css');
         Asset::add('search', 'js/search.js', 'chosen');
+        Asset::add('workers-search', 'js/workers-search.js', 'search');
     }
 
 	public function get_index()

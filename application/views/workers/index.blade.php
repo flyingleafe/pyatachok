@@ -22,8 +22,6 @@
 
         {{ Form::open('workers/search', 'POST', array('class' => 'b-form', 'id'=>'search-workers')) }}
 
-        <?php $jobtypes = Jobtype::All(); ?>
-
         @include('blocks.jobtypes')
 
         <div class="b-one__fieldset">

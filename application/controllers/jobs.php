@@ -29,7 +29,8 @@ class Jobs_Controller extends Base_Controller {
         Asset::add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js');
         Asset::add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js');
         Asset::add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js');
-        Asset::add('search', 'js/search.js');
+        Asset::add('search', 'js/search.js', 'jquery-ui-timepicker');
+        Asset::add('jobs-search', 'js/jobs-search.js', 'search');
     }
 
 	public function get_index(){
