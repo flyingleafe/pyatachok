@@ -29,6 +29,7 @@ class Jobs_Controller extends Base_Controller {
         Asset::add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js');
         Asset::add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js');
         Asset::add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js');
+        Asset::add('search', 'js/search.js');
     }
 
 	public function get_index(){
@@ -38,6 +39,38 @@ class Jobs_Controller extends Base_Controller {
 
     public function get_add(){
         return View::make('jobs.type');
+    }
+
+
+    //@TODO: фильтры для вводимых данных
+    public function post_search(){
+        $jobtype_id = Input::get('jobtype_id');
+        $date_start    = Input::get('date_start' );
+        $date_end    = Input::get('date_end' );
+        $cost_min   = Input::get('cost_min');
+        $cost_max   = Input::get('cost_max');
+
+        $query_jobs = DB::table('jobs');
+
+
+        /*if( !empty($name) )
+            $query_jobs->where('name' ,'LIKE', '%'.$name.'%');
+        */
+
+        if( !empty($jobtype_id) ){
+            $query_jobs->where('jobtype_id', '=', $jobtype_id );
+
+
+            if(!empty($cost_min) )
+                $query_jobs->where('price', '>=', $cost_min);
+
+            if(!empty($cost_max))
+                $query_jobs->where('price', '<=', $cost_max);
+
+        }
+
+        $jobs = $query_jobs->get();
+        return render('jobs.search', array( 'jobs' => $jobs));
     }
 
     public function post_add(){

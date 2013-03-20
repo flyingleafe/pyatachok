@@ -1,5 +1,13 @@
 @layout('master')
 
+@section('before_assets')
+    <script>
+        var URLS = {
+            jobs_search : "{{ URL::to('jobs/search') }}"
+        }
+    </script>
+@endsection
+
 @section('content')
 
 @include('blocks.header')
@@ -12,59 +20,24 @@
     @endif
 
 
-    {{ Form::open('register/profile', 'POST', array('class' => 'b-form')) }}
+    {{ Form::open('jobs/search', 'POST', array('class' => 'b-form', 'id'=>'search-jobs')) }}
 
-    <?  $jobtypes = Jobtype::All();  ?>
+    @include('blocks.jobtypes')
 
-    @if($jobtypes)
+    <h3>Дата работ</h3>
     <div class="b-one__fieldset">
-        <div class="b-jobtypes_inner">
-            <h3>Выберите типы работ:</h3>
-            <select id="select_job_types" class="chzn-select" multiple>
-                <?foreach($jobtypes as $job){?>
-                <option value="{{$job->id}}">{{$job->name}}</option>
-                <?}?>
-            </select>
-        </div>
-
-        <script type="text/javascript">
-            $(function (){
-                $("#select_job_types").chosen({
-                    no_results_text: "Ничего не найдено",
-                    placeholder_text: 'Выберите типы работ'
-                });
-            });
-        </script>
-    </div>
-    @endif
-
-
-    <div class="b-one__fieldset">
-        {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
-        {{ Form::text('name', '')    }}
-    </div>
-
-    <div class="b-one__fieldset">
-        {{ Form::label('rating', 'Рейтинг', array('class'=>''))    }}
-        {{ Form::text('rating', '')    }}
-    </div>
-
-    <div class="b-one__fieldset">
-        {{ Form::label('team', 'Бригада', array('class'=>'' ))    }}
-        {{ Form::checkbox('team', 1  )    }}
-    </div>
-
-    <div class="b-one__fieldset">
-        {{ Form::label('gender', 'Женский', array('class'=>''))    }}
-        {{ Form::radio('gender', 0)    }}
+        {{ Form::label('start_date', 'Дата начала', array('class'=>''))    }}
+        {{ Form::text('start_date', '',  array('id'=>'start_date'))    }}
     </div>
     <div class="b-one__fieldset">
-        {{ Form::label('gender', 'Мужской', array('class'=>'' ))    }}
-        {{ Form::radio('gender', 1, array('checked') )    }}
+        {{ Form::label('end_date', 'Дата окончания', array('class'=>''))    }}
+        {{ Form::text('end_date', '', array('id'=>'end_date'))    }}
     </div>
+
 
     <h3>Зарплата</h3>
     <div class="b-one__fieldset">
+        <div id="cost_slider"></div>
         {{ Form::label('cost_min', 'От', array('class'=>''))    }}
         {{ Form::text('cost_min', 0)    }}
     </div>
@@ -74,17 +47,13 @@
     </div>
 
     {{ Form::submit('Искать', array('class'=>''))    }}
-
+    <input type="button" value="Сбросить фильтр" id="reset_filter">
+    <div id="ajaxResponceSearch"></div>
     {{ Form::close();}}
 
 
-    @if(isset($results))
-    <div class="b-results">
-        @foreach($results as $work)
-        <div class="b-work__title">{{$work->name}}</div>
-        @endforeach
-    </div>
-    @endif
 
 </div>
 @endsection
+
+

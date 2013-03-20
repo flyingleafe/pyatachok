@@ -24,17 +24,7 @@
 
         <?php $jobtypes = Jobtype::All(); ?>
 
-        @if($jobtypes)
-        <div class="b-one-group">
-            <h3>Выберите тип работ:</h3>
-            <select id="select_job_types" name="job_id" class="chzn-select">
-                <option></option>
-                @foreach($jobtypes as $job)
-                    <option value="{{$job->id}}">{{$job->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        @endif
+        @include('blocks.jobtypes')
 
         <div class="b-one__fieldset">
             {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
