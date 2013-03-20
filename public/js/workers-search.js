@@ -57,7 +57,7 @@ $(function() {
     $( "#cost_slider" ).slider( "disable" ); //заблокируем выбор диапазона зарплат, пока не выбран тип работ
 
     //Слайдер для выбора возраста
-    var min_age = 18;
+    var min_age = 14;
     var max_age = 100;
 
     $("#age_slider").slider({
