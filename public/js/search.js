@@ -1,8 +1,29 @@
 $(function() {
 
+
+    $('#start_date').datetimepicker({
+        dateFormat: "dd-MM-yy",
+        timeFormat: "HH:mm",
+        numberOfMonths: 3,
+        onClose: function( selectedDate ) {
+            $( "#end_date" ).datepicker( "option", "minDate", selectedDate );
+        }
+    });
+
+    $('#end_date').datetimepicker({
+        dateFormat: "dd-MM-yy",
+        timeFormat: "HH:mm",
+        onClose: function( selectedDate ) {
+            $( "#start_date" ).datepicker( "option", "maxDate", selectedDate );
+        }
+
+    });
+
+/*
     $( "#start_date" ).datepicker({
         changeMonth: true,
         numberOfMonths: 3,
+        dateFormat: 'dd MM yy',
         onClose: function( selectedDate ) {
             $( "#end_date" ).datepicker( "option", "minDate", selectedDate );
         }
@@ -11,11 +32,12 @@ $(function() {
     $( "#end_date" ).datepicker({
         changeMonth: true,
         numberOfMonths: 3,
+        dateFormat: 'dd MM yy',
         onClose: function( selectedDate ) {
             $( "#start_date" ).datepicker( "option", "maxDate", selectedDate );
         }
     });
-
+*/
     $.datepicker.regional['ru'] = {
         closeText: 'Закрыть',
         prevText: '&#x3c;Пред',
@@ -66,7 +88,7 @@ $(function() {
             $("#cost_max").val($("#cost_slider").slider("values",1));
         },
         change: function( event, ui ) {
-            $('#search-workers').change();
+            $('#search-workers, #search-jobs').change();
         }
     });
     $( "#cost_slider" ).slider( "disable" ); //заблокируем выбор диапазона зарплат, пока не выбран тип работ
@@ -138,26 +160,18 @@ $(function() {
 
     }).change();
 
-
-
     $('#search-jobs').on('change' ,function(){
         var jobtype_id = $('#select_job_types').val();
         if(jobtype_id.length != 0 ){
             $( "#cost_slider" ).slider( "enable" );
         }
-        var name = $('#name').val();
-        var created_at = $('#created_at').val();
-        var rating = $('#rating').val();
-        var gender = $('input[name=gender]:checked', this).val();
-        var team = $('#team').val();
-        var age = $('#age').val();
+        var start_date = $('#start_date').val();
+        var end_date = $('#end_date').val();
+
 
         var cost_min = $('#cost_min').val();
         var cost_max = $('#cost_max').val();
 
-
-        var age_min = $('#age_min').val();
-        var age_max = $('#age_max').val();
 
         $.ajax({
             url: URLS.jobs_search,
@@ -165,16 +179,10 @@ $(function() {
             type: 'POST',
             data: {
                 'jobtype_id':jobtype_id,
-                'name':name,
-                'rating':rating,
-                'gender':gender,
-                'created_at':created_at,
-                'team':team,
-                'age':age,
                 'cost_min':cost_min,
                 'cost_max':cost_max,
-                'age_min':age_min,
-                'age_max':age_max
+                'start_date':start_date,
+                'end_date':end_date
             },
             success: function (data) {
                 $('#ajaxResponceSearch').html(data);

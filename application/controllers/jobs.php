@@ -45,10 +45,11 @@ class Jobs_Controller extends Base_Controller {
     //@TODO: фильтры для вводимых данных
     public function post_search(){
         $jobtype_id = Input::get('jobtype_id');
-        $date_start    = Input::get('date_start' );
-        $date_end    = Input::get('date_end' );
+        $start_date    = Input::get('start_date' );
+        $end_date    = Input::get('end_date' );
         $cost_min   = Input::get('cost_min');
         $cost_max   = Input::get('cost_max');
+
 
         $query_jobs = DB::table('jobs');
 
@@ -68,6 +69,12 @@ class Jobs_Controller extends Base_Controller {
                 $query_jobs->where('price', '<=', $cost_max);
 
         }
+        if(!empty($start_date))
+            $query_jobs->where('time_start', '>=',  self::return_timestamp($start_date));
+
+        if(!empty($end_date))
+            $query_jobs->where('time_end', '<=',  self::return_timestamp($end_date));
+
 
         $jobs = $query_jobs->get();
         return render('jobs.search', array( 'jobs' => $jobs));
