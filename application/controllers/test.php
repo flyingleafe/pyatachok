@@ -11,4 +11,13 @@ class Test_Controller extends Base_Controller {
     {
         return Request::env();
     }
+
+    public function action_usermodel($value='')
+    {
+        $u = User::query();
+        $u->where('age', '>=', 18);
+        $r = $u->get();
+        var_dump($r);
+        return '';
+    }
 }

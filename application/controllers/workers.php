@@ -28,21 +28,15 @@ class Workers_Controller extends Base_Controller {
 		return Redirect::to('workers');
 	}
 
-    //@TODO: фильтры для вводимых данных
-    public function post_search(){
+    //@TODO: фильтры для вводимых данных - не нужны, т. к. fluent фильтрует все автоматически.
+    // разве что фильтры в смысле на корректность? ну дак их можно сделать на клиенте, а всякие 
+    // экспериментаторы будут просто получать нулевой результат.
+    public function post_search()
+    {
+        // сбрасываем все из массива в переменные
+        extract(Input::all());
 
-        $rating     = Input::get('rating' );
-        $age_min    = Input::get('age_min' );
-        $age_max    = Input::get('age_max' );
-        $gender     = Input::get('gender' );
-        $name       = Input::get('name');
-        $team       = Input::get('team');
-        $jobtype_id = Input::get('jobtype_id');
-        $created_at = Input::get('created_at');
-        $cost_min   = Input::get('cost_min');
-        $cost_max   = Input::get('cost_max');
-
-        $query_users = DB::table('users');
+        $query_users = User::query();
 
         if( !empty($rating)  )
             $query_users->where('rating' ,'>=', $rating);
@@ -60,7 +54,7 @@ class Workers_Controller extends Base_Controller {
             $query_users->where('age' ,'<=', $age_max);
 
         if( !empty($name) )
-        $query_users->where('name', 'LIKE', '%'.$name.'%');
+            $query_users->where('name', 'ILIKE', '%'.$name.'%');
 
         if( !empty($team) )
             $query_users->where('team' ,'=', $team );
@@ -77,16 +71,7 @@ class Workers_Controller extends Base_Controller {
                 $query_users->where('jobtype_user.cost', '<=', $cost_max);
         }
 
-        $page = Input::get('page', 1);
-        $page = $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false ? $page : 1;
-
-        $total = $query_users->count();
-        $results = $query_users
-            ->for_page($page, static::$per_page)
-            ->get();
-
-        //$workers = $query_users->paginate(self::$per_page);
-        $workers = Paginator::make($results, $total, static::$per_page);
+        $workers = $query_users->paginate(self::$per_page);
         return render('workers.search', array( 'workers' => $workers));
     }
 }
