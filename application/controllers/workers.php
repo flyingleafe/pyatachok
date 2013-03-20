@@ -28,8 +28,6 @@ class Workers_Controller extends Base_Controller {
 		return Redirect::to('workers');
 	}
 
-    // fLf: ужс, можно же просто писать !empty($param) - встроенная конструкция пыхи
-
     //@TODO: фильтры для вводимых данных
     public function post_search(){
 
@@ -62,38 +60,21 @@ class Workers_Controller extends Base_Controller {
             $query_users->where('age' ,'<=', $age_max);
 
         if( !empty($name) )
-        $query_users->where('name' ,'LIKE', '%'.$name.'%');
+        $query_users->where('name', 'LIKE', '%'.$name.'%');
 
         if( !empty($team) )
             $query_users->where('team' ,'=', $team );
 
         if( !empty($jobtype_id) ){
-            $users = $query_users->get( array('id'));
-            $user_ids = array();
-            foreach($users as $user)
-                array_push($user_ids, $user->id);
-            $workers = DB::table('users')
-                ->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
-                ->where_in('users.id', $user_ids)
+            $query_users->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
                 ->where('jobtype_user.jobtype_id', '=', $jobtype_id)
                 ->distinct();
 
             if(!empty($cost_min) )
-                $workers->where('jobtype_user.cost', '>=', $cost_min);
+                $query_users->where('jobtype_user.cost', '>=', $cost_min);
 
             if(!empty($cost_max))
-                $workers->where('jobtype_user.cost', '<=', $cost_max);
-
-            $workers = $workers->paginate(self::$per_page,
-                array(
-                    'users.id',
-                    'users.phone',
-                    'users.name',
-                    'jobtype_user.cost',
-                    'jobtype_user.jobtype_id')
-            );
-
-            return render('workers.search', array( 'workers' => $workers));
+                $query_users->where('jobtype_user.cost', '<=', $cost_max);
         }
 
         $page = Input::get('page', 1);

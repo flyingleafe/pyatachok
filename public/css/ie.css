@@ -1842,20 +1842,20 @@ header nav.top {
 /* line 12, ../../application/sass/_header.sass */
 header nav.top li {
   color: black;
-  padding: 0.5em;
+  padding: 0.5em 0.5em 0.1em;
   margin-right: 0.5em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
-  height: 37px;
   text-align: center;
   border: 7px solid transparent;
 }
-/* line 21, ../../application/sass/_header.sass */
+/* line 20, ../../application/sass/_header.sass */
 header nav.top li.active {
+  color: white;
   width: 130px;
-  background: url(/img/menu-item-bg.png);
+  background: url(/img/menu-item-bg.png) -7px -2px no-repeat;
 }
 /* line 24, ../../application/sass/_header.sass */
 header nav.top li.active:hover {

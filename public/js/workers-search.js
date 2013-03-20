@@ -23,10 +23,9 @@ $(function() {
 
     $("#select_job_types").chosen({
         no_results_text: "Ничего не найдено",
-        placeholder_text: 'Выберите типы работ'
+        placeholder_text: 'Выберите типы работ',
+        allow_single_deselect: true
     });
-
-    console.log($("select_job_types"));
 
     $( "#created_at" ).datepicker({
         defaultDate: "+1w",
