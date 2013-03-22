@@ -15,9 +15,9 @@ class Test_Controller extends Base_Controller {
     public function action_usermodel($value='')
     {
         $u = User::query();
-        $u->where('age', '>=', 18);
+        $u->where('team', '=', 1);
         $r = $u->get();
-        var_dump($r);
+        print_r($r);
         return '';
     }
 }

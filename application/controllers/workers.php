@@ -35,6 +35,7 @@ class Workers_Controller extends Base_Controller {
     {
         // сбрасываем все из массива в переменные
         extract(Input::all());
+        var_dump(Input::all());
 
         $query_users = User::query();
 
@@ -57,7 +58,7 @@ class Workers_Controller extends Base_Controller {
             $query_users->where('name', 'ILIKE', '%'.$name.'%');
 
         if( !empty($team) )
-            $query_users->where('team' ,'=', $team );
+            $query_users->where('team' ,'=', (int) $team);
 
         if( !empty($jobtype_id) ){
             $query_users->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
