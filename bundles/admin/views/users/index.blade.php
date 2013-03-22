@@ -63,7 +63,7 @@
             <tr>
                 <td>{{$user->phone}}</td>
                 <td>{{$user->name}}</td>
-                <td>{{$user->status}}</td>
+                <td>{{ User::$stats_type[$user->status] }}</td>
                 <td>
                     <?php $sex = array('0'=>'Женский', '1'=>'Мужской')?>
                     {{$sex[$user->gender] }}
