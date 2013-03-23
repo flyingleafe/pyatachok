@@ -17,7 +17,8 @@ class Admin_Jobtypes_Controller extends Base_Controller {
 
     public function get_add()
     {
-        return View::make('admin::jobtypes.add');
+        $model = new Jobtype();
+        return View::make('admin::jobtypes.add', array('model'=>$model));
     }
     
     public function post_add()
@@ -25,7 +26,7 @@ class Admin_Jobtypes_Controller extends Base_Controller {
         $validation = Validator::make(Input::All(), static::$jobtype_add_rules);
 
         if($validation->fails()){
-            return View::make('admin::jobtypes.add')->with_errors($validation->errors);
+            return View::make('admin::jobtypes.add', array('model'=> new Jobtype()))->with_errors($validation->errors);
         }
 
         Jobtype::create(array(
@@ -33,6 +34,18 @@ class Admin_Jobtypes_Controller extends Base_Controller {
         ));
         return Redirect::to('admin/jobtypes/index');
 
+    }
+
+    public function get_edit($id){
+        $model = Jobtype::find($id);
+        return View::make('admin::jobtypes.edit', array( 'model'=>$model));
+    }
+
+    public function post_search(){
+        $input = Input::all();
+        $name = $input['jobtype_name'];
+        $jobtypes = DB::table('jobtypes')->where('name',  'LIKE', '%'.$name.'%')->get();
+        return View::make('admin::jobtypes.search', array('jobtypes'=>$jobtypes));
     }
 
 }
