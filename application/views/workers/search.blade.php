@@ -1,17 +1,27 @@
 @if(isset($workers))
-    <div class="b-results">
-        @foreach($workers->results as $worker)
-            <div class="b-one__worker">
-                <label>Выбрать :</label> <input type="checkbox"/ >
-                <div class="b-worker_name"><label>Имя :</label> <span>{{ $worker->name }}</span></div>
-                <div class="b-worker_cost"><label>Телефон: </label> <span>{{ $worker->phone }}</span></div>
-                @if(isset($worker->jobtype_id))
-                <div class="b-worker_cost">Стоимость: {{ $worker->cost }} руб./час</div>
+    <table class="results">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Телефон</th>
+                @if($has_jobtype)
+                    <th>Стоимость</th>
                 @endif
-            </div>
-        @endforeach
-        {{ $workers->links() }}
-    </div>
+                <th>Выбрать</th>
+            </tr>
+        </thead>
+            @foreach($workers->results as $worker)
+                <tr class="worker">
+                    <td class="worker_name"><span>{{ $worker->name }}</span></td>
+                    <td class="worker_phone"><span>{{ $worker->phone }}</span></td>
+                    @if($has_jobtype)
+                        <td class="worker_cost">{{ $worker->cost }} руб./час</td>
+                    @endif
+                    <td class="worker_choose"><input type="checkbox"/ ></td>
+                </tr>
+            @endforeach
+    </table>
+    {{ $workers->links() }}
 @endif
 
 

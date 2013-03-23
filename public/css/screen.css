@@ -2067,3 +2067,29 @@ header .account {
   font-size: 18px;
   font-weight: bold;
 }
+
+/*
+ * Результаты поиска рабочих
+ */
+/* line 4, ../../application/sass/_results.sass */
+.results {
+  padding-top: 30px;
+}
+/* line 6, ../../application/sass/_results.sass */
+.results th, .results td {
+  padding: 1.5em;
+}
+/* line 8, ../../application/sass/_results.sass */
+.results th {
+  font-weight: bold;
+}
+/* line 10, ../../application/sass/_results.sass */
+.results .worker {
+  padding-bottom: 20px;
+}
+/* line 12, ../../application/sass/_results.sass */
+.results .worker label {
+  width: 100px;
+  float: left;
+  font-weight: bold;
+}

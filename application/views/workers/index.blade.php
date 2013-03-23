@@ -118,7 +118,9 @@
         {{ Form::close() }}
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">
-        <div id="ajaxResponceSearch"></div>
+        @include('blocks.workers-results-hb')
+        <div id="ajaxResponseSearch"></div>
+        <div id="workers-pagination"></div>
     </div>
 </div>
 @endsection
