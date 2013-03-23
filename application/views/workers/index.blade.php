@@ -3,7 +3,8 @@
 @section('before_assets')
     <script>
     var URLS = {
-        workers_search : "{{ URL::to('workers/search') }}"
+        workers_search : "{{ URL::to('workers/search') }}",
+        workers_chosen : "{{ URL::to('workers/chosen') }}"
     }
     </script>
 @endsection
@@ -13,6 +14,7 @@
 @include('blocks.header')
 
 <div class="container">
+    @include('blocks.worker-chosen-list-hb')
     <div class="b-content">
         <h1>Найти рабочих</h1>
 
@@ -119,8 +121,9 @@
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">
         @include('blocks.workers-results-hb')
+        <div class="workers-pagination"></div>
         <div id="ajaxResponseSearch"></div>
-        <div id="workers-pagination"></div>
+        <div class="workers-pagination"></div>
     </div>
 </div>
 @endsection

@@ -1,12 +1,49 @@
-$(function() {
 
+function Employer(url, container, template) {
+    var self = this;
+    self.data = null;
+    self.url = url;
+    self.container = container;
+    self.template = Handlebars.compile(template.html());
+}
+
+Employer.prototype.update = function() {
+    var self = this;
+    $.getJSON(self.url, function(data) {
+        console.log(data);
+        self.data = data;
+    });
+};
+
+Employer.prototype.choose = function(id) {
+    var self = this;
+    $.post(self.url + '/' + id, function(data) {
+        console.log(data);
+        self.update();
+    }, 'json');
+};
+
+Employer.prototype.remove = function(id) {
+    var self = this;
+    $.post(self.url + '/' + id, { _method: 'DELETE' }, function(data) {
+        console.log(data);
+        self.update();
+    }, 'json');
+};
+
+$(function() {
     var WorkersResult = new Result(
             null,
             URLS.workers_search,
             $('#search-workers'),
             $("#ajaxResponseSearch"),
             $("#result-template"),
-            $("#workers-pagination")
+            $(".workers-pagination")
+        ),
+        WorkerEmployer = new Employer(
+            URLS.workers_chosen,
+            $("#chosenWorkersContainer"),
+            $("#chosen-template")
         );
 
     $( "#created_at" ).datepicker({
@@ -34,6 +71,15 @@ $(function() {
         },
         change: function( event, ui ) {
             $('#search-workers').change();
+        }
+    });
+
+    $('body').on('change', '.worker_choose input', function() {
+        if(this.checked) {
+            console.log('hi');
+            WorkerEmployer.choose($(this).val());
+        } else {
+            WorkerEmployer.remove($(this).val());
         }
     });
 

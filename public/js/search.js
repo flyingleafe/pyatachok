@@ -25,18 +25,22 @@ function Result(data, url, form, container, template, paginator) {
     };
     self.paginator = paginator.pagination(self.pg_settings);
 
-    self.sort_criteria = 'name';
+    self.sort_criteria = '';
     self.sort_order = 'asc';
     self.has_jobtype = false;
     self.form.change();
 }
 
 Result.prototype.display = function() {
-    this.paginator.pagination($.extend({
-        items: this.data.total,
-        itemsOnPage: this.data.per_page,
-        currentPage: this.data.page
-    }, this.pg_settings));
+    if(this.data.results.length > 0) {
+        this.paginator.pagination($.extend({
+            items: this.data.total,
+            itemsOnPage: this.data.per_page,
+            currentPage: this.data.page
+        }, this.pg_settings)).show();
+    } else {
+        this.paginator.hide();
+    }
     this.container.html(this.template(this.data));
 };
 
@@ -51,10 +55,9 @@ Result.prototype.fetch = function() {
         page_num = self.paginator.pagination('getCurrentPage'),
         params = self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order;
 
-    console.log(params);
     $.ajax({
         // AJAX-specified URL
-        url: URLS.workers_search,
+        url: self.fetch_url,
         dataType : "json",
         type: 'POST',
         data: params,

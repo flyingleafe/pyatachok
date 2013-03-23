@@ -78,4 +78,32 @@ class Workers_Controller extends Base_Controller {
         // return render('workers.search', array( 'workers' => $workers, 'has_jobtype' => !empty($jobtype_id) ) );
         return Response::json($workers);
     }
+
+    public function get_chosen()
+    {
+        if(Session::has('chosen_workers')) {
+            return Response::json(Session::get('chosen_workers'));
+        }
+        return Response::json(array());
+    }
+
+    public function post_chosen($id = '')
+    {
+        $user = User::find($id);
+        if($user) {
+            $arr = Session::get('chosen_workers');
+            $arr[] = $id;
+            Session::put('chosen_workers', $arr);
+            return Response::json(array('added' => true));
+        }
+        return Response::json(array('added' => false));
+    }
+
+    public function delete_chosen($id = '')
+    {
+        $arr = Session::get('chosen_workers');
+        $pos = array_search($id, $arr);
+        Session::forget('chosen_workers.'.$id);
+        return Response::json(array('deleted' => true));
+    }
 }

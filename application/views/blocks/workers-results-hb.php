@@ -19,12 +19,12 @@
                         {{#if ../has_jobtype}}
                             <td class='worker_cost'>{{ attributes.cost }} руб./час</td>
                         {{/if}}
-                        <td class='worker_choose'><input type='checkbox'/ ></td>
+                        <td class='worker_choose'><input type='checkbox' value='{{ attributes.id }}'></td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
     {{else}}
-        No results found...
+        <span class="results-not-found">Никого не найдено. Попробуйте изменить параметры поиска.</span>
     {{/if}}
 </script>
