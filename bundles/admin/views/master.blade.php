@@ -35,11 +35,10 @@
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 
-                        ->add('#', '<i class="icon-picture"></i>Журналы <b class="caret"></b>',
+                        ->add('#', '<i class="icon-picture"></i>Статистика <b class="caret"></b>',
 
                         Menu::items('sellers', array('class' => 'dropdown-menu'), 'ul')
-                            ->add('admin/seller/add', '<i class="icon-pencil"></i>Ekle')
-                            ->add('admin/seller/list', '<i class="icon-file"></i>Listele')
+                            ->add('admin/home/stats', '<i class="icon-pencil"></i>Список')
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 

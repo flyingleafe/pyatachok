@@ -36,10 +36,13 @@ class Admin_Home_Controller extends Base_Controller {
         else{
             $errors = new Laravel\Messages();
             $errors->add('password', 'Неверный текущий пароль!');
-
             return Redirect::to('admin/home/profile')->with('errors', $errors);
         }
 
+    }
+
+    public function get_stats(){
+        return View::Make('admin::stats');
     }
 
 
