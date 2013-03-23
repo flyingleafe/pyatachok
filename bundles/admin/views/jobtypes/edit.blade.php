@@ -9,6 +9,18 @@
     {{ $errors->first('name', '<p class="alert alert-error">:message</p>') }}
     @endif
 
-    <?php  echo View::make('admin::jobtypes._form' , array('model'=> $model));?>
+    {{ Form::open('admin/jobtypes/edit', 'POST', array('class' => '')) }}
+
+    <div class="b-one__fieldset">
+        {{ Form::label('name', 'Название:') }}
+        {{ Form::text('name', $model->name) }}
+    </div>
+
+
+    <div class="form-actions">
+        {{ Form::submit('Отправить', array('class'=>'btn btn-primary'))    }}
+        <a class="btn" href="{{URL::to('admin/jobtypes') }}">Отмена</a>
+    </div>
+    {{ Form::close() }}
 </div>
 @endsection

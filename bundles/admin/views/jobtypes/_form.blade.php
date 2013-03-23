@@ -1,4 +1,4 @@
-{{ Form::open('admin/jobtypes/add', 'POST', array('class' => '')) }}
+{{ Form::open($action, 'POST', array('class' => '')) }}
 
 <div class="b-one__fieldset">
     {{ Form::label('name', 'Название:') }}
