@@ -1,5 +1,13 @@
 @layout('admin::master')
 
+@section('before_assets')
+<script>
+    var URLS = {
+        jobstype_search : "{{ URL::to('admin/jobtypes/search') }}"
+    }
+</script>
+@endsection
+
 @section('content')
     <h3>Список типов работ</h3>
 
@@ -37,10 +45,9 @@
     <script>
         $(function(){
             $('#ajaxSearchJobtypes').on('click', function(){
-
                 var val = $('#jobtype_id').val();
                 $.ajax({
-                    url: '<?php echo Url::to('admin/jobtypes/search')?>',
+                    url: URLS.jobstype_search,
                     type: 'POST',
                     data: {jobtype_name: val },
                     success : function(data){

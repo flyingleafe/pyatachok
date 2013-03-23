@@ -8,7 +8,7 @@
     @if($errors->has())
     {{ $errors->first('name', '<p class="alert alert-error">:message</p>') }}
     @endif
-    
+
     <?php  echo View::make('admin::jobtypes._form' , array('model'=> $model));?>
 </div>
 @endsection
