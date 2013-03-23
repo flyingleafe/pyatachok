@@ -1,6 +1,6 @@
 $(function() {
 
-    WorkersResult = new Result(
+    var WorkersResult = new Result(
             null,
             URLS.workers_search,
             $('#search-workers'),

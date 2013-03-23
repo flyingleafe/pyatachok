@@ -61,9 +61,8 @@ class Workers_Controller extends Base_Controller {
             $query_users->where('team' ,'=', $team);
 
         if( !empty($jobtype_id) ){
-            $query_users->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
-                ->where('jobtype_user.jobtype_id', '=', $jobtype_id)
-                ->distinct();
+            $query_users->join('jobtype_user', 'users.id', '=', 'jobtype_user.user_id')
+                ->where('jobtype_user.jobtype_id', '=', $jobtype_id);
 
             if(!empty($cost_min) )
                 $query_users->where('jobtype_user.cost', '>=', $cost_min);
@@ -73,7 +72,7 @@ class Workers_Controller extends Base_Controller {
         }
 
         if(!empty($sort_criteria))
-            $query_users->order_by($sort_criteria, $sort_order);
+            $query_users->order_by('users.'.$sort_criteria, $sort_order);
 
         $workers = $query_users->paginate(self::$per_page);
         // return render('workers.search', array( 'workers' => $workers, 'has_jobtype' => !empty($jobtype_id) ) );

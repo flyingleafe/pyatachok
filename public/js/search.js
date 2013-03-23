@@ -25,7 +25,7 @@ function Result(data, url, form, container, template, paginator) {
     };
     self.paginator = paginator.pagination(self.pg_settings);
 
-    self.sort_criteria = 'created_at';
+    self.sort_criteria = 'name';
     self.sort_order = 'asc';
     self.has_jobtype = false;
     self.form.change();
@@ -48,18 +48,20 @@ Result.prototype.setData = function(data) {
 
 Result.prototype.fetch = function() {
     var self = this,
-        page_num = self.paginator.pagination('getCurrentPage');
+        page_num = self.paginator.pagination('getCurrentPage'),
+        params = self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order;
+
+    console.log(params);
     $.ajax({
         // AJAX-specified URL
         url: URLS.workers_search,
         dataType : "json",
         type: 'POST',
-        data: self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order,
+        data: params,
         success: function (data) {
             self.setData(data);
         }
     });
-    page_num = page_num || 1;
 };
 
 $.datepicker.regional['ru'] = {
