@@ -22,7 +22,19 @@
 
         {{ Form::open('workers/search', 'POST', array('class' => 'b-form', 'id'=>'search-workers')) }}
 
-        @include('blocks.jobtypes')
+        <?php $jobtypes = Jobtype::All(); ?>
+
+        @if($jobtypes)
+        <div class="b-one-group">
+            <h3>Выберите тип работ:</h3>
+            <select id="select_job_types" name="jobtype_id" class="chzn-select">
+                <option></option>
+                @foreach($jobtypes as $job)
+                    <option value="{{ $job->id }}">{{ $job->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        @endif
 
         <div class="b-one__fieldset">
             {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
@@ -52,7 +64,7 @@
             </div>
             <div class="b-one__fieldset">
                 {{ Form::label('gender', 'Мужской', array('class'=>'' ))    }}
-                {{ Form::radio('gender', 1 )    }}
+                {{ Form::radio('gender', 1)    }}
             </div>
         </div>
 
@@ -103,10 +115,12 @@
             </div>
         </div>
 
-        {{ Form::close();}}
+        {{ Form::close() }}
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">
-        <div id="ajaxResponceSearch"></div>
+        @include('blocks.workers-results-hb')
+        <div id="ajaxResponseSearch"></div>
+        <div id="workers-pagination"></div>
     </div>
 </div>
 @endsection

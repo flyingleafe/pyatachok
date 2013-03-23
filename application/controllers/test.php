@@ -11,4 +11,12 @@ class Test_Controller extends Base_Controller {
     {
         return Request::env();
     }
+
+    public function action_usermodel($param='0')
+    {
+        $u = User::query();
+        $u->where('team', '=', $param);
+        $r = $u->paginate(30);
+        return render('workers.search', array( 'workers' => $r));
+    }
 }
