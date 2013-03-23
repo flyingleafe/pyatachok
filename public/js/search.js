@@ -51,7 +51,7 @@ Result.prototype.fetch = function() {
         page_num = self.paginator.pagination('getCurrentPage');
     $.ajax({
         // AJAX-specified URL
-        url: URLS.workers_search,
+        url: self.fetch_url,
         dataType : "json",
         type: 'POST',
         data: self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order,

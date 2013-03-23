@@ -6,6 +6,7 @@ class Jobs_Controller extends Base_Controller {
 
     private static $date_regexp = '/(\d{2})-([А-я]{3,7})-(\d{4}) (\d{2}):(\d{2})/ui';
 
+    private static $per_page = 10;
     public static $for_register = array(
         'phone' => 'required|valid_phone',
         'price'=>'required',
@@ -21,16 +22,19 @@ class Jobs_Controller extends Base_Controller {
 
     public function __construct()  {
 
-        Asset::add('jquery', 'js/jquery-1.9.1.js');
-        Asset::add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js');
-        Asset::add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css');
-        Asset::add('chosen_js', 'chosen/chosen.jquery.js');
-        Asset::add('chosen_css', 'chosen/chosen.css');
-        Asset::add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js');
-        Asset::add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js');
-        Asset::add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js');
-        Asset::add('search', 'js/search.js', 'jquery-ui-timepicker');
-        Asset::add('jobs-search', 'js/jobs-search.js', 'search');
+        Asset::add('jquery', 'js/jquery-1.9.1.js')
+       ->add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js')
+       ->add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css')
+       ->add('chosen_js', 'chosen/chosen.jquery.js')
+       ->add('chosen_css', 'chosen/chosen.css')
+       ->add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js')
+       ->add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js')
+       ->add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js')
+       ->add('handlebars', 'js/handlebars.js')
+       ->add('pagination', 'js/jquery.simplePagination.js')
+       ->add('pagination_css', 'css/simplePagination.css')
+       ->add('search', 'js/search.js', 'jquery-ui-timepicker')
+       ->add('jobs-search', 'js/jobs-search.js', 'search');
     }
 
 	public function get_index(){
@@ -54,16 +58,12 @@ class Jobs_Controller extends Base_Controller {
 
     //@TODO: фильтры для вводимых данных
     public function post_search(){
-        $jobtype_id = Input::get('jobtype_id');
-        $start_date    = Input::get('start_date' );
-        $end_date    = Input::get('end_date' );
-        $cost_min   = Input::get('cost_min');
-        $cost_max   = Input::get('cost_max');
+        extract(Input::all());
+        $query_jobs = Job::query();
 
+        $jobs = $query_jobs->paginate(self::$per_page);
 
-        $query_jobs = DB::table('jobs');
-
-
+        return Response::json($jobs);
         /*if( !empty($name) )
             $query_jobs->where('name' ,'LIKE', '%'.$name.'%');
         */
@@ -86,7 +86,7 @@ class Jobs_Controller extends Base_Controller {
             $query_jobs->where('time_end', '<=',  self::return_timestamp($end_date));
 
 
-        $jobs = $query_jobs->get();
+
         return render('jobs.search', array( 'jobs' => $jobs));
     }
 

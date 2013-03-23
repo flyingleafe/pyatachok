@@ -1,11 +1,11 @@
 @layout('master')
 
 @section('before_assets')
-    <script>
-        var URLS = {
-            jobs_search : "{{ URL::to('jobs/search') }}"
-        }
-    </script>
+<script>
+    var URLS = {
+        jobs_search : "{{ URL::to('jobs/search') }}"
+    }
+</script>
 @endsection
 
 @section('content')
@@ -52,7 +52,9 @@
     <div id="ajaxResponceSearch"></div>
     {{ Form::close();}}
 
-
+    @include('blocks.jobs-results-hb')
+    <div id="ajaxResponseSearch"></div>
+    <div id="jobs-pagination"></div>
 
 </div>
 @endsection

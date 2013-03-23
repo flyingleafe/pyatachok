@@ -36,7 +36,7 @@ class Users {
 		});
 
 
-        for($i=0; $i<50; $i++) {
+        for($i=0; $i<100; $i++) {
             $person = $this->person_generator();
             User::create(
                 array(
@@ -54,9 +54,8 @@ class Users {
         }
 	}
 
-
     public function phone_generate(){
-        return '9'.substr(number_format(time() * rand(),0,'',''),0,9);
+        return (int) '9'.rand(10, 55).rand(100,999).rand(56, 99).rand(66, 99);
     }
 
     public function person_generator(){
