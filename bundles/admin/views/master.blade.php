@@ -46,8 +46,8 @@
                         ->add('/admin', '<i class="icon-wrench"></i>Администратор <b class="caret"></b>',
 
                         Menu::items('admin', array('class' => 'dropdown-menu'), 'ul')
-                            ->add('admin/user', '<i class="icon-user"></i>Выход')
-                            ->add('admin/password', '<i class="icon-file"></i>Профайл')
+                            ->add('logout', '<i class="icon-user"></i>Выход')
+                            ->add('/admin/home/profile', '<i class="icon-file"></i>Профайл')
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown')
 
