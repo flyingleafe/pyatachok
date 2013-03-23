@@ -40,4 +40,5 @@ return array(
     'menu' => array('auto' => true),
     'query-viewer' => array('auto' => true),
     'admin' => array('handles' => 'admin'),
+    'sms'=>array('auto' => true),
 );
