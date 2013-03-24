@@ -1,5 +1,16 @@
 $(function() {
 
+
+    Jobs = new Result(
+        null,
+        URLS.jobs_search,
+        $('#search-jobs'),
+        $("#ajaxResponseSearch"),
+        $("#result-template"),
+        $("#jobs-pagination")
+    );
+
+
     $('#start_date').datetimepicker({
         dateFormat: "dd-MM-yy",
         timeFormat: "HH:mm",
@@ -18,7 +29,7 @@ $(function() {
 
     });
 
-    $('#search-jobs').on('change' ,function(){
+    /*$('#search-jobs').on('change' ,function(){
         var jobtype_id = $('#select_job_types').val();
         if(jobtype_id.length != 0 ){
             $( "#cost_slider" ).slider( "enable" );
@@ -47,6 +58,17 @@ $(function() {
             }
         });
 
-    }).change();
+    }).change();*/
+
+
+    Jobs.form.on('change' ,function(){
+        var jobtype_id = $('#select_job_types').val();
+        if(jobtype_id.length != 0 ){
+            $( "#cost_slider" ).slider( "enable" );
+            Jobs.has_jobtype = true;
+        } else {
+            Jobs.has_jobtype = false;
+        }
+    });
 
 });

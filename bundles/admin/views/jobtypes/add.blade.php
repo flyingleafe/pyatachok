@@ -5,18 +5,16 @@
     <div class="b-form">
         <h3>Добавить тип работ</h3>
 
-        {{ Form::open('admin/jobtypes/add', 'POST', array('class' => '')) }}
-
         @if($errors->has())
-        {{ $errors->first('name', '<p class="form__error">:message</p>') }}
+        {{ $errors->first('name', '<p class="alert alert-error">:message</p>') }}
         @endif
 
+        {{ Form::open('admin/jobtypes/add', 'POST', array('class' => '')) }}
 
         <div class="b-one__fieldset">
             {{ Form::label('name', 'Название:') }}
-            {{ Form::text('name') }}
+            {{ Form::text('name', $model->name) }}
         </div>
-
 
 
         <div class="form-actions">
@@ -24,5 +22,6 @@
             <a class="btn" href="{{URL::to('admin/jobtypes') }}">Отмена</a>
         </div>
         {{ Form::close() }}
+
     </div>
 @endsection

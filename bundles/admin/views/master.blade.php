@@ -35,19 +35,18 @@
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 
-                        ->add('#', '<i class="icon-picture"></i>Журналы <b class="caret"></b>',
+                        ->add('#', '<i class="icon-picture"></i>Статистика <b class="caret"></b>',
 
                         Menu::items('sellers', array('class' => 'dropdown-menu'), 'ul')
-                            ->add('admin/seller/add', '<i class="icon-pencil"></i>Ekle')
-                            ->add('admin/seller/list', '<i class="icon-file"></i>Listele')
+                            ->add('admin/home/stats', '<i class="icon-pencil"></i>Список')
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown'))
 
                         ->add('/admin', '<i class="icon-wrench"></i>Администратор <b class="caret"></b>',
 
                         Menu::items('admin', array('class' => 'dropdown-menu'), 'ul')
-                            ->add('admin/user', '<i class="icon-user"></i>Выход')
-                            ->add('admin/password', '<i class="icon-file"></i>Профайл')
+                            ->add('logout', '<i class="icon-user"></i>Выход')
+                            ->add('/admin/home/profile', '<i class="icon-file"></i>Профайл')
 
                         , array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'), array('class'=>'dropdown')
 
