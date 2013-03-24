@@ -48,10 +48,12 @@
             {{ Form::text('created_at', '', array('id'=>'created_at'))    }}
         </div>
 
+        <!--
         <div class="b-one__fieldset">
             {{ Form::label('rating', 'Рейтинг', array('class'=>''))    }}
             {{ Form::text('rating', '', array('id'=>'rating'))    }}
         </div>
+        -->
 
         <div class="b-one-group">
             <h3>Пол</h3>
@@ -70,6 +72,7 @@
             </div>
         </div>
 
+        <!--
         <div class="b-one-group">
             <h3>Бригада</h3>
 
@@ -88,7 +91,7 @@
                 {{ Form::radio('team', 1)    }}
             </div>
         </div>
-
+        -->
 
         <div class="b-one-group">
             <h3>Возраст</h3>

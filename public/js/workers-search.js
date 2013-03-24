@@ -7,11 +7,13 @@ function Employer(url, container, template) {
     self.template = Handlebars.compile(template.html());
 }
 
-Employer.prototype.update = function() {
+Employer.prototype.update = function(callback) {
     var self = this;
     $.getJSON(self.url, function(data) {
         console.log(data);
         self.data = data;
+        if(callback)
+            callback();
     });
 };
 
@@ -32,19 +34,28 @@ Employer.prototype.remove = function(id) {
 };
 
 $(function() {
-    var WorkersResult = new Result(
+    var WorkerEmployer = new Employer(
+            URLS.workers_chosen,
+            $("#chosenWorkersContainer"),
+            $("#chosen-template")
+        ),
+        WorkersResult = new Result(
             null,
             URLS.workers_search,
             $('#search-workers'),
             $("#ajaxResponseSearch"),
             $("#result-template"),
             $(".workers-pagination")
-        ),
-        WorkerEmployer = new Employer(
-            URLS.workers_chosen,
-            $("#chosenWorkersContainer"),
-            $("#chosen-template")
         );
+    WorkerEmployer.update(function() {
+        WorkersResult.fetch();
+    });
+
+    Handlebars.registerHelper('if_chosen', function(id, options) {
+        if($.inArray(id.toString(), WorkerEmployer.data.ids) > -1) {
+            return options.fn(this);
+        }
+    });
 
     $( "#created_at" ).datepicker({
         defaultDate: "+1w",
@@ -76,7 +87,6 @@ $(function() {
 
     $('body').on('change', '.worker_choose input', function() {
         if(this.checked) {
-            console.log('hi');
             WorkerEmployer.choose($(this).val());
         } else {
             WorkerEmployer.remove($(this).val());

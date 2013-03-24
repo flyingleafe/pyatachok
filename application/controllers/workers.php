@@ -39,7 +39,7 @@ class Workers_Controller extends Base_Controller {
         extract(Input::all());
         $query_users = User::query();
 
-        if( !empty($rating)  )
+        if( isset($rating) && !empty($rating)  )
             $query_users->where('rating' ,'>=', $rating);
 
         if( $gender !== '' )
@@ -57,7 +57,7 @@ class Workers_Controller extends Base_Controller {
         if( !empty($name) )
             $query_users->where('name', 'ILIKE', '%'.$name.'%');
 
-        if( $team !== '' )
+        if( isset($team) && $team !== '' )
             $query_users->where('team' ,'=', $team);
 
         if( !empty($jobtype_id) ){
@@ -82,7 +82,12 @@ class Workers_Controller extends Base_Controller {
     public function get_chosen()
     {
         if(Session::has('chosen_workers')) {
-            return Response::json(Session::get('chosen_workers'));
+            $ids    = Session::get('chosen_workers');
+            $users  = User::where_in('id', $ids)->get();
+            return Response::json(array(
+                'ids'   => $ids,
+                'users' => $users,
+            ));
         }
         return Response::json(array());
     }
@@ -93,7 +98,7 @@ class Workers_Controller extends Base_Controller {
         if($user) {
             $arr = Session::get('chosen_workers');
             $arr[] = $id;
-            Session::put('chosen_workers', $arr);
+            Session::put('chosen_workers', array_unique($arr));
             return Response::json(array('added' => true));
         }
         return Response::json(array('added' => false));
@@ -103,7 +108,8 @@ class Workers_Controller extends Base_Controller {
     {
         $arr = Session::get('chosen_workers');
         $pos = array_search($id, $arr);
-        Session::forget('chosen_workers.'.$id);
+        array_splice($arr, $pos, 1);
+        Session::put('chosen_workers', $arr);
         return Response::json(array('deleted' => true));
     }
 }

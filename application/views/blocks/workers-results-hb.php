@@ -19,7 +19,7 @@
                         {{#if ../has_jobtype}}
                             <td class='worker_cost'>{{ attributes.cost }} руб./час</td>
                         {{/if}}
-                        <td class='worker_choose'><input type='checkbox' value='{{ attributes.id }}'></td>
+                        <td class='worker_choose'><input type='checkbox' value='{{ attributes.id }}' {{#if_chosen attributes.id}}checked{{/if_chosen}}></td>
                     </tr>
                 {{/each}}
             </tbody>

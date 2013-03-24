@@ -28,7 +28,6 @@ function Result(data, url, form, container, template, paginator) {
     self.sort_criteria = '';
     self.sort_order = 'asc';
     self.has_jobtype = false;
-    self.form.change();
 }
 
 Result.prototype.display = function() {
