@@ -30,6 +30,12 @@ class Workers_Controller extends Base_Controller {
 		return Redirect::to('workers');
 	}
 
+    public function get_hire()
+    {
+        Seovel::setTitle('Наем рабочих');
+        return View::make('workers.hire');
+    }
+
     // @TODO: фильтры для вводимых данных - не нужны, т. к. fluent фильтрует все автоматически.
     // разве что фильтры в смысле на корректность? ну дак их можно сделать на клиенте, а всякие 
     // экспериментаторы будут просто получать нулевой результат.
@@ -85,7 +91,7 @@ class Workers_Controller extends Base_Controller {
             $users  = User::where_in('id', $ids)->get();
             return Response::json(array(
                 'ids'   => $ids,
-                'users' => $users,
+                'chosen' => $users,
             ));
         }
         return Response::json(array());
@@ -105,6 +111,10 @@ class Workers_Controller extends Base_Controller {
 
     public function delete_chosen($id = '')
     {
+        if($id == 'all') {
+            Session::put('chosen_workers', array());
+            return Response::json(array('flushed' => true));
+        }
         $arr = Session::get('chosen_workers');
         $pos = array_search($id, $arr);
         array_splice($arr, $pos, 1);

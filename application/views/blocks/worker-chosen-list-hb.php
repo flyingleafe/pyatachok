@@ -14,12 +14,12 @@
                     <tr class='chosen_worker'>
                         <td class='chosen_name'><span>{{ attributes.name }}</span></td>
                         <td class='chosen_phone'><span>{{ attributes.phone }}</span></td>
-                        <td class='chosen_remove'><a href="#" title="Убрать">X</a></td>
+                        <td class='chosen_remove'><a href="#" title="Убрать" data-id="{{ attributes.id }}">X</a></td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
-        <a href="#" class="employ-button">Нанять</a>
+        <a href="workers/hire" class="employ-button">Нанять</a>
     {{else}}
         <span>Вы еще не выбрали ни одного рабочего</span>
     {{/if}}

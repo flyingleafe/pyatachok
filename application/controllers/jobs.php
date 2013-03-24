@@ -63,10 +63,6 @@ class Jobs_Controller extends Base_Controller {
         extract(Input::all());
         $query_jobs = Job::query();
 
-        /*if( !empty($name) )
-            $query_jobs->where('name' ,'LIKE', '%'.$name.'%');
-        */
-
         if( !empty($jobtype_id) ){
             $query_jobs->where('jobtype_id', '=', $jobtype_id );
 
@@ -85,8 +81,6 @@ class Jobs_Controller extends Base_Controller {
 
         $jobs = $query_jobs->paginate(self::$per_page);
         return Response::json($jobs);
-
-        // return render('jobs.search', array( 'jobs' => $jobs));
     }
 
     public function post_add()
@@ -105,7 +99,7 @@ class Jobs_Controller extends Base_Controller {
 
         Session::put('job', $job);
 
-        return View::make('jobs.create', array('model'=>$job) );
+        return View::make('jobs.create', array('model' => $job) );
 
     }
 

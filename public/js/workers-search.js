@@ -1,24 +1,33 @@
 /**
  * Класс Employer - управляет выбранными рабочими
  * @param {string} url       Адрес REST-интерфейса для выбранных рабочих
- * @param {[type]} container [description]
- * @param {[type]} template  [description]
+ * @param {jQuery.fn} container Контейнер для результатов
+ * @param {jQuery.fn} template  Контейнер для Handlebars-шаблона
+ * @param {Result} result_handler Управление результатами рабочих
  */
-function Employer(url, container, template) {
+function Employer(url, container, template, result_handler) {
     var self = this;
     self.data = null;
     self.url = url;
     self.container = container;
     self.template = Handlebars.compile(template.html());
+    self.rhandler = result_handler;
 }
 
-Employer.prototype.update = function(callback) {
+Employer.prototype.display = function() {
+    this.container.html(this.template(this.data));
+};
+
+Employer.prototype.update = function(fetch) {
     var self = this;
     $.getJSON(self.url, function(data) {
         console.log(data);
         self.data = data;
-        if(callback)
-            callback();
+        self.display();
+        if(fetch)
+            self.rhandler.fetch();
+        else
+            self.rhandler.display();
     });
 };
 
@@ -38,6 +47,10 @@ Employer.prototype.remove = function(id) {
     }, 'json');
 };
 
+Employer.prototype.hasChosen = function(id) {
+    return $.inArray(id.toString(), this.data.ids) > -1;
+};
+
 $(function() {
     var WorkerEmployer = new Employer(
             URLS.workers_chosen,
@@ -52,12 +65,12 @@ $(function() {
             $("#result-template"),
             $(".workers-pagination")
         );
-    WorkerEmployer.update(function() {
-        WorkersResult.fetch();
-    });
+    // fLf: соединяем Employer и Result в священный симбиоз
+    WorkerEmployer.rhandler = WorkersResult;
+    WorkerEmployer.update(true);
 
     Handlebars.registerHelper('if_chosen', function(id, options) {
-        if($.inArray(id.toString(), WorkerEmployer.data.ids) > -1) {
+        if(WorkerEmployer.hasChosen(id)) {
             return options.fn(this);
         }
     });
@@ -69,8 +82,8 @@ $(function() {
     });
 
     //Слайдер для выбора возраста
-    var min_age = 14;
-    var max_age = 100;
+    var min_age = 14,
+        max_age = 100;
 
     $("#age_slider").slider({
         min: min_age,
@@ -90,12 +103,19 @@ $(function() {
         }
     });
 
-    $('body').on('change', '.worker_choose input', function() {
-        if(this.checked) {
-            WorkerEmployer.choose($(this).val());
+    $('body').on('click', '.worker_choose input', function(e) {
+        e.preventDefault();
+        var id = $(this).val();
+        if( ! this.checked ) {
+            if( WorkerEmployer.hasChosen(id) )
+                WorkerEmployer.remove(id);
         } else {
-            WorkerEmployer.remove($(this).val());
+            if( ! WorkerEmployer.hasChosen(id) )
+                WorkerEmployer.choose(id);
         }
+    }).on('click', '.chosen_remove a', function(e) {
+        e.preventDefault();
+        WorkerEmployer.remove($(this).data('id'));
     });
 
     WorkersResult.form.on('change' ,function(){
