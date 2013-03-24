@@ -1,4 +1,9 @@
-
+/**
+ * Класс Employer - управляет выбранными рабочими
+ * @param {string} url       Адрес REST-интерфейса для выбранных рабочих
+ * @param {[type]} container [description]
+ * @param {[type]} template  [description]
+ */
 function Employer(url, container, template) {
     var self = this;
     self.data = null;

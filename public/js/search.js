@@ -61,6 +61,7 @@ Result.prototype.fetch = function() {
         type: 'POST',
         data: params,
         success: function (data) {
+            console.log(data);
             self.setData(data);
         }
     });

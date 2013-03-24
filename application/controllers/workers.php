@@ -75,7 +75,6 @@ class Workers_Controller extends Base_Controller {
             $query_users->order_by('users.'.$sort_criteria, $sort_order);
 
         $workers = $query_users->paginate(self::$per_page);
-        // return render('workers.search', array( 'workers' => $workers, 'has_jobtype' => !empty($jobtype_id) ) );
         return Response::json($workers);
     }
 

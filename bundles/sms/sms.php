@@ -1,13 +1,13 @@
 <?php
 // SMSC.RU API (smsc.ru) версия 2.7 (07.06.2012)
 
-define("SMSC_LOGIN", "<login>");		// логин клиента
-define("SMSC_PASSWORD", "<password>");	// пароль или MD5-хеш пароля в нижнем регистре
+define("SMSC_LOGIN", "5ok");		// логин клиента
+define("SMSC_PASSWORD", "eb83d6775d974c1c5daf887abbfdb858");	// пароль или MD5-хеш пароля в нижнем регистре
 define("SMSC_POST", 0);					// использовать метод POST
 define("SMSC_HTTPS", 0);				// использовать HTTPS протокол
-define("SMSC_CHARSET", "windows-1251");	// кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
+define("SMSC_CHARSET", "utf-8");	// кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
 define("SMSC_DEBUG", 0);				// флаг отладки
-define("SMTP_FROM", "api@smsc.ru");     // e-mail адрес отправителя
+define("SMTP_FROM", "notify@5ok.su");     // e-mail адрес отправителя
 
 // Функция отправки SMS
 //

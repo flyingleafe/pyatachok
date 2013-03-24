@@ -18,8 +18,10 @@
                         <td class='worker_phone'><span>{{ attributes.phone }}</span></td>
                         {{#if ../has_jobtype}}
                             <td class='worker_cost'>{{ attributes.cost }} руб./час</td>
+                            <td class='worker_choose'><input type='checkbox' value='{{ attributes.user_id }}' {{#if_chosen attributes.user_id}}checked{{/if_chosen}}></td>
+                        {{else}}
+                            <td class='worker_choose'><input type='checkbox' value='{{ attributes.id }}' {{#if_chosen attributes.id}}checked{{/if_chosen}}></td>
                         {{/if}}
-                        <td class='worker_choose'><input type='checkbox' value='{{ attributes.id }}' {{#if_chosen attributes.id}}checked{{/if_chosen}}></td>
                     </tr>
                 {{/each}}
             </tbody>
