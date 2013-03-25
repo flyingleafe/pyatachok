@@ -4,7 +4,9 @@ class Test_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		return View::make('test.index');
+
+       Sms::job_notifications(1);
+		//return View::make('test.index');
 	}
 
     public function action_env($value='')
