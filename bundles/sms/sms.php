@@ -7,10 +7,10 @@ class Sms{
 
     //Работадатель отказался от рабочего
     public static function employer_reject_worker($job_id, $worker_id){
-
+        $job = Job::find($job_id);
         $message = "Ваше приглашение на работу отменено: ".self::jobUrl($job_id);
-        echo $message;
-        return;
+        $phone = User::find($worker_id)->phone; //получаем тел. рабочего
+        send_sms($phone, $message);
     }
 
 
@@ -18,25 +18,21 @@ class Sms{
     public static function worker_reject_job($job_id){
         $job = Job::find($job_id);
         $message = "Работник отказался принять участие в Вашей работе: ".self::jobUrl($job_id);
-        echo $message;
-        return;
         send_sms($job->phone, $message);
     }
 
 
     //Рабочий  отказался от работ
     public static function new_worker_joined($job_id){
-
+        $job = Job::find($job_id);
         $message = "Новый отклик на Вашу работу: ".self::jobUrl($job_id);
-        echo $message;
-        return;
-
+        send_sms($job->phone, $message);
     }
 
     //Приглашение на закрытую работу после выбора всех рабочих
     public static function job_notifications($job_id){
 
-        $workers = DB::table('jobs as j')
+        $workers = DB::table('jobs as j') //получаем всех рабочих по id работы и их данные
             ->where('j.id', '=', $job_id)
             ->join('job_user as ju', 'j.id', '=', 'ju.job_id')
             ->join('users as u', 'u.id', '=', 'ju.user_id')
@@ -59,8 +55,7 @@ class Sms{
         $price = $job->price;
 
         $message = 'Вас приглашает на работу'.' '. $employer_name.' (+7'.$phone.'), '.$jobtype.', '. $place.', c '.$time_start.' по '.$time_end. ' ('.$price.' руб/час)';
-        echo $message;
-        //send_sms($phones, self::$message);
+        send_sms($phones, self::$message);
     }
 
     private static function jobUrl($job_id){
