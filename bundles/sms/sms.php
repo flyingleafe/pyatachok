@@ -13,6 +13,12 @@ class Sms{
         send_sms($phone, $message);
     }
 
+    //Подтверждение номера телефона
+    public static function phone_confirmation($user_id, $confirmation_code){
+        $phone = User::find($user_id)->phone;
+        $message = 'Введите пожалуйста код подтверждения: '.$confirmation_code;
+        send_sms($phone, $message);
+    }
 
     //Рабочий  отказался от работ
     public static function worker_reject_job($job_id){
