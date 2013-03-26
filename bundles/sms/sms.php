@@ -32,10 +32,6 @@ define("SMTP_FROM", "notify@5ok.su");     // e-mail адрес отправит�
 
 class Sms {
 
-    public function __construct(){
-        require_once(Bundle::path('sms').'scms.php');
-    }
-
     //Работадатель отказался от рабочего
     public static function employer_reject_worker($job_id, $worker_id){
         $job = Job::find($job_id);
