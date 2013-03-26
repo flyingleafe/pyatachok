@@ -6,7 +6,7 @@
                 <tr>
                     <th>Имя</th>
                     <th>Телефон</th>
-                    <th>Выбрать</th>
+                    <th>Убрать</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +19,11 @@
                 {{/each}}
             </tbody>
         </table>
-        <a href="workers/hire" class="employ-button">Нанять</a>
+        {{#if_not_hiring}}
+            <a href="workers/hire" class="employ-button">Нанять</a>
+        {{else}}
+            <a href="/workers" class="back-button">Вернуться к поиску</a>
+        {{/if_not_hiring}}
     {{else}}
         <span>Вы еще не выбрали ни одного рабочего</span>
     {{/if}}

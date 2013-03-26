@@ -38,6 +38,11 @@ Route::get('logout', function()
     return Redirect::to('/');
 });
 
+Route::get('find-workers', function()
+{
+    return render('home.find-workers');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

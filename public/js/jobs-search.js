@@ -25,7 +25,6 @@ $(function() {
         onClose: function( selectedDate ) {
             $( "#start_date" ).datepicker( "option", "maxDate", selectedDate );
         }
-
     });
 
     Jobs.form.on('change' ,function(){

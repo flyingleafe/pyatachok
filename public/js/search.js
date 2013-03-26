@@ -97,7 +97,6 @@ $(function() {
         allow_single_deselect: true
     });
 
-
     //Слайдер для выбора зарплаты
     var min_cost = 0;
     var max_cost = 10000;
@@ -143,7 +142,5 @@ $(function() {
         $( "#cost_slider" ).slider( "disable" );
         $("#select_job_types").val('').trigger("liszt:updated");
 
-        // search_workers_form.change();//submit form
-        search_jobs_form.change();//submit form
     });
 });

@@ -24,17 +24,18 @@ Employer.prototype.update = function(fetch) {
         console.log(data);
         self.data = data;
         self.display();
-        if(fetch)
-            self.rhandler.fetch();
-        else
-            self.rhandler.display();
+        if(self.rhandler) {
+            if(fetch)
+                self.rhandler.fetch();
+            else
+                self.rhandler.display();
+        }
     });
 };
 
 Employer.prototype.choose = function(id) {
     var self = this;
     $.post(self.url + '/' + id, function(data) {
-        console.log(data);
         self.update();
     }, 'json');
 };
@@ -42,7 +43,6 @@ Employer.prototype.choose = function(id) {
 Employer.prototype.remove = function(id) {
     var self = this;
     $.post(self.url + '/' + id, { _method: 'DELETE' }, function(data) {
-        console.log(data);
         self.update();
     }, 'json');
 };
@@ -51,23 +51,52 @@ Employer.prototype.hasChosen = function(id) {
     return $.inArray(id.toString(), this.data.ids) > -1;
 };
 
+Handlebars.registerHelper('if_not_hiring', function(options) {
+    if(location.href.indexOf("/hire") == -1) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 $(function() {
     var WorkerEmployer = new Employer(
             URLS.workers_chosen,
             $("#chosenWorkersContainer"),
             $("#chosen-template")
         ),
+        WorkersResult = null,
+        form = $('#search-workers');
+
+    if(form.length > 0) {
+        console.log(form);
         WorkersResult = new Result(
             null,
             URLS.workers_search,
-            $('#search-workers'),
+            form,
             $("#ajaxResponseSearch"),
             $("#result-template"),
             $(".workers-pagination")
         );
+
+        WorkersResult.form.on('change' ,function(){
+            var jobtype_id = $('#select_job_types').val();
+            if(jobtype_id.length != 0 ){
+                $( "#cost_slider" ).slider( "enable" );
+                WorkersResult.has_jobtype = true;
+            } else {
+                WorkersResult.has_jobtype = false;
+            }
+        });
+    }
+
     // fLf: соединяем Employer и Result в священный симбиоз
-    WorkerEmployer.rhandler = WorkersResult;
-    WorkerEmployer.update(true);
+    if(WorkersResult) {
+        WorkerEmployer.rhandler = WorkersResult;
+        WorkerEmployer.update(true);
+    } else {
+        WorkerEmployer.update();
+    }
 
     Handlebars.registerHelper('if_chosen', function(id, options) {
         if(WorkerEmployer.hasChosen(id)) {
@@ -104,7 +133,6 @@ $(function() {
     });
 
     $('body').on('click', '.worker_choose input', function(e) {
-        e.preventDefault();
         var id = $(this).val();
         if( ! this.checked ) {
             if( WorkerEmployer.hasChosen(id) )
@@ -118,13 +146,21 @@ $(function() {
         WorkerEmployer.remove($(this).data('id'));
     });
 
-    WorkersResult.form.on('change' ,function(){
-        var jobtype_id = $('#select_job_types').val();
-        if(jobtype_id.length != 0 ){
-            $( "#cost_slider" ).slider( "enable" );
-            WorkersResult.has_jobtype = true;
-        } else {
-            WorkersResult.has_jobtype = false;
+    var time_start = $("#time_start"),
+        time_end = $("#time_end");
+
+    time_start.datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm",
+        onClose: function( selectedDate ) {
+            time_end.datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    time_end.datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm",
+        onClose: function( selectedDate ) {
+            time_start.datepicker( "option", "maxDate", selectedDate );
         }
     });
 });

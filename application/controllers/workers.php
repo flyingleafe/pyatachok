@@ -6,9 +6,20 @@ class Workers_Controller extends Base_Controller {
 
     private static $per_page = 10;
 
+    private static $hire_validation = array(
+        'name'       => 'required',
+        'phone'      => 'required|valid_phone',
+        'place'      => 'required',
+        'time_start' => 'required',
+        'time_end'   => 'required',
+    );
+
     public function __construct(){
         Asset::add('jquery', 'js/jquery-1.9.1.js')
             ->add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js')
+            ->add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js')
+            ->add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js')
+            ->add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js')
             ->add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css')
             ->add('chosen', 'chosen/chosen.jquery.js', 'jquery')
             ->add('chosen_css', 'chosen/chosen.css')
@@ -34,6 +45,11 @@ class Workers_Controller extends Base_Controller {
     {
         Seovel::setTitle('Наем рабочих');
         return View::make('workers.hire');
+    }
+
+    public function get_finish()
+    {
+        return View::make('workers.finish');
     }
 
     // @TODO: фильтры для вводимых данных - не нужны, т. к. fluent фильтрует все автоматически.
@@ -82,6 +98,35 @@ class Workers_Controller extends Base_Controller {
 
         $workers = $query_users->paginate(self::$per_page);
         return Response::json($workers);
+    }
+
+    public function post_confirm()
+    {
+        $validation = Validator::make(Input::all(), self::$hire_validation);   
+        if($validation->fails()) {
+            return Redirect::to('workers/hire')->with_errors($validation->errors)->with_input();
+        }
+        $chosen_ids = Session::get('chosen_workers');
+        if(empty($chosen_ids)) {
+            return Redirect::to('workers')->with('no_chosen_error', 'Выберите хотя бы одного рабочего');
+        }
+        $job = new Job(array(
+            'name'          => Input::get('name'),
+            'phone'         => User::trim_phone(Input::get('phone')),
+            'jobtype_id'    => Input::get('jobtype_id'),
+            'place'         => Input::get('place'),
+            'time_start'    => Input::get('time_start'),
+            'time_end'      => Input::get('time_end'),
+            'price'         => Input::get('price'),
+        ));
+        if( Auth::check() ) {
+            Auth::user()->posted_jobs()->insert($job);
+        } else {
+            $job->save();
+        }
+        $job->workers()->sync($chosen_ids);
+        Session::forget('chosen_workers');
+        return Redirect::to('workers/finish');
     }
 
     public function get_chosen()
