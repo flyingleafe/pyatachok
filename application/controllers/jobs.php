@@ -20,56 +20,51 @@ class Jobs_Controller extends Base_Controller {
 
     public static $for_guest = array();
 
-    public function __construct()  {
-
+    public function __construct()
+    {
         Asset::add('jquery', 'js/jquery-1.9.1.js')
-       ->add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js')
-       ->add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css')
-       ->add('chosen_js', 'chosen/chosen.jquery.js')
-       ->add('chosen_css', 'chosen/chosen.css')
-       ->add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js')
-       ->add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js')
-       ->add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js')
-       ->add('handlebars', 'js/handlebars.js')
-       ->add('pagination', 'js/jquery.simplePagination.js')
-       ->add('pagination_css', 'css/simplePagination.css')
-       ->add('search', 'js/search.js', 'jquery-ui-timepicker')
-       ->add('jobs-search', 'js/jobs-search.js', 'search');
+            ->add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js')
+            ->add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css')
+            ->add('chosen_js', 'chosen/chosen.jquery.js')
+            ->add('chosen_css', 'chosen/chosen.css')
+            ->add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js')
+            ->add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js')
+            ->add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js')
+            ->add('handlebars', 'js/handlebars.js')
+            ->add('pagination', 'js/jquery.simplePagination.js')
+            ->add('pagination_css', 'css/simplePagination.css')
+            ->add('search', 'js/search.js', 'jquery-ui-timepicker')
+            ->add('jobs-search', 'js/jobs-search.js', 'search');
     }
 
-	public function get_index(){
+	public function get_index()
+    {
+        Seovel::setTitle('Поиск работ');
 		return View::make('jobs.index');
 	}
 
-    public function get_add(){
+    public function get_add()
+    {
         return View::make('jobs.type');
     }
 
-    public function get_view($id){
+    public function get_view($id)
+    {
         $job = Job::find($id);
-
-        if($job){
+        if($job) {
             return View::make('jobs.view', array('job'=>$job));
         }
-
         else  return Event::first('404');
     }
 
     //@TODO: фильтры для вводимых данных
-    public function post_search(){
+    public function post_search()
+    {
         extract(Input::all());
         $query_jobs = Job::query();
 
-        $jobs = $query_jobs->paginate(self::$per_page);
-
-        return Response::json($jobs);
-        /*if( !empty($name) )
-            $query_jobs->where('name' ,'LIKE', '%'.$name.'%');
-        */
-
         if( !empty($jobtype_id) ){
             $query_jobs->where('jobtype_id', '=', $jobtype_id );
-
 
             if(!empty($cost_min) )
                 $query_jobs->where('price', '>=', $cost_min);
@@ -84,15 +79,13 @@ class Jobs_Controller extends Base_Controller {
         if(!empty($end_date))
             $query_jobs->where('time_end', '<=',  self::return_timestamp($end_date));
 
-
-
-        return render('jobs.search', array( 'jobs' => $jobs));
+        $jobs = $query_jobs->paginate(self::$per_page);
+        return Response::json($jobs);
     }
 
-    public function post_add(){
-
-        $job_type    = Input::get('job_type');
-
+    public function post_add()
+    {
+        $job_type = Input::get('job_type');
         $job = new Job();
 
         if (Auth::check()){
@@ -106,12 +99,12 @@ class Jobs_Controller extends Base_Controller {
 
         Session::put('job', $job);
 
-        return View::make('jobs.create', array('model'=>$job) );
+        return View::make('jobs.create', array('model' => $job) );
 
     }
 
-    public function post_create(){
-
+    public function post_create()
+    {
         $job = Session::get('job');
 
         $validation = Validator::make(Input::all(), self::$for_register);
@@ -144,8 +137,8 @@ class Jobs_Controller extends Base_Controller {
         return Redirect::to('profile');
     }
 
-
-    private static function  return_timestamp($date){
+    private static function return_timestamp($date)
+    {
         $months =  array(
             'Январь'    => '01',
             'Февраль'   => '02',
@@ -169,5 +162,4 @@ class Jobs_Controller extends Base_Controller {
         }
         return false;
    }
-
 }

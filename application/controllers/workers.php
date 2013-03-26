@@ -6,9 +6,20 @@ class Workers_Controller extends Base_Controller {
 
     private static $per_page = 10;
 
+    private static $hire_validation = array(
+        'name'       => 'required',
+        'phone'      => 'required|valid_phone',
+        'place'      => 'required',
+        'time_start' => 'required',
+        'time_end'   => 'required',
+    );
+
     public function __construct(){
         Asset::add('jquery', 'js/jquery-1.9.1.js')
             ->add('jquery_ui', 'js/jquery-ui-1.10.1.custom.js')
+            ->add('jquery-ui-sliderAccess', 'js/jquery-ui-sliderAccess.js')
+            ->add('jquery-ui-timepicker', 'js/jquery-ui-timepicker-addon.js')
+            ->add('jquery-ui-timepicker-ru', 'js/jquery-ui-timepicker-ru.js')
             ->add('jquery_ui_css', 'css/ui-lightness/jquery-ui-1.10.1.custom.css')
             ->add('chosen', 'chosen/chosen.jquery.js', 'jquery')
             ->add('chosen_css', 'chosen/chosen.css')
@@ -30,6 +41,17 @@ class Workers_Controller extends Base_Controller {
 		return Redirect::to('workers');
 	}
 
+    public function get_hire()
+    {
+        Seovel::setTitle('Наем рабочих');
+        return View::make('workers.hire');
+    }
+
+    public function get_finish()
+    {
+        return View::make('workers.finish');
+    }
+
     // @TODO: фильтры для вводимых данных - не нужны, т. к. fluent фильтрует все автоматически.
     // разве что фильтры в смысле на корректность? ну дак их можно сделать на клиенте, а всякие 
     // экспериментаторы будут просто получать нулевой результат.
@@ -39,7 +61,7 @@ class Workers_Controller extends Base_Controller {
         extract(Input::all());
         $query_users = User::query();
 
-        if( !empty($rating)  )
+        if( isset($rating) && !empty($rating)  )
             $query_users->where('rating' ,'>=', $rating);
 
         if( $gender !== '' )
@@ -57,13 +79,12 @@ class Workers_Controller extends Base_Controller {
         if( !empty($name) )
             $query_users->where('name', 'ILIKE', '%'.$name.'%');
 
-        if( $team !== '' )
+        if( isset($team) && $team !== '' )
             $query_users->where('team' ,'=', $team);
 
         if( !empty($jobtype_id) ){
-            $query_users->join('jobtype_user', 'users.id','=', 'jobtype_user.user_id')
-                ->where('jobtype_user.jobtype_id', '=', $jobtype_id)
-                ->distinct();
+            $query_users->join('jobtype_user', 'users.id', '=', 'jobtype_user.user_id')
+                ->where('jobtype_user.jobtype_id', '=', $jobtype_id);
 
             if(!empty($cost_min) )
                 $query_users->where('jobtype_user.cost', '>=', $cost_min);
@@ -73,10 +94,76 @@ class Workers_Controller extends Base_Controller {
         }
 
         if(!empty($sort_criteria))
-            $query_users->order_by($sort_criteria, $sort_order);
+            $query_users->order_by('users.'.$sort_criteria, $sort_order);
 
         $workers = $query_users->paginate(self::$per_page);
-        // return render('workers.search', array( 'workers' => $workers, 'has_jobtype' => !empty($jobtype_id) ) );
         return Response::json($workers);
+    }
+
+    public function post_confirm()
+    {
+        $validation = Validator::make(Input::all(), self::$hire_validation);   
+        if($validation->fails()) {
+            return Redirect::to('workers/hire')->with_errors($validation->errors)->with_input();
+        }
+        $chosen_ids = Session::get('chosen_workers');
+        if(empty($chosen_ids)) {
+            return Redirect::to('workers')->with('no_chosen_error', 'Выберите хотя бы одного рабочего');
+        }
+        $job = new Job(array(
+            'name'          => Input::get('name'),
+            'phone'         => User::trim_phone(Input::get('phone')),
+            'jobtype_id'    => Input::get('jobtype_id'),
+            'place'         => Input::get('place'),
+            'time_start'    => Input::get('time_start'),
+            'time_end'      => Input::get('time_end'),
+            'price'         => Input::get('price'),
+        ));
+        if( Auth::check() ) {
+            Auth::user()->posted_jobs()->insert($job);
+        } else {
+            $job->save();
+        }
+        $job->workers()->sync($chosen_ids);
+        Session::forget('chosen_workers');
+        return Redirect::to('workers/finish');
+    }
+
+    public function get_chosen()
+    {
+        if(Session::has('chosen_workers')) {
+            $ids    = Session::get('chosen_workers');
+            $users  = User::where_in('id', $ids)->get();
+            return Response::json(array(
+                'ids'   => $ids,
+                'chosen' => $users,
+            ));
+        }
+        return Response::json(array());
+    }
+
+    public function post_chosen($id = '')
+    {
+        $user = User::find($id);
+        if($user) {
+            $arr = Session::get('chosen_workers');
+            $arr[] = $id;
+            Session::put('chosen_workers', array_unique($arr));
+            return Response::json(array('added' => true));
+        }
+        return Response::json(array('added' => false));
+    }
+
+    public function delete_chosen($id = '')
+    {
+        if($id == 'all') {
+            Session::put('chosen_workers', array());
+            return Response::json(array('flushed' => true));
+        }
+        $arr = Session::get('chosen_workers');
+        $pos = array_search($id, $arr);
+        array_splice($arr, $pos, 1);
+        Session::put('chosen_workers', $arr);
+        return Response::json(array('deleted' => true));
     }
 }

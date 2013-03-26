@@ -25,18 +25,21 @@ function Result(data, url, form, container, template, paginator) {
     };
     self.paginator = paginator.pagination(self.pg_settings);
 
-    self.sort_criteria = 'created_at';
+    self.sort_criteria = '';
     self.sort_order = 'asc';
     self.has_jobtype = false;
-    self.form.change();
 }
 
 Result.prototype.display = function() {
-    this.paginator.pagination($.extend({
-        items: this.data.total,
-        itemsOnPage: this.data.per_page,
-        currentPage: this.data.page
-    }, this.pg_settings));
+    if(this.data.results.length > 0) {
+        this.paginator.pagination($.extend({
+            items: this.data.total,
+            itemsOnPage: this.data.per_page,
+            currentPage: this.data.page
+        }, this.pg_settings)).show();
+    } else {
+        this.paginator.hide();
+    }
     this.container.html(this.template(this.data));
 };
 
@@ -48,18 +51,20 @@ Result.prototype.setData = function(data) {
 
 Result.prototype.fetch = function() {
     var self = this,
-        page_num = self.paginator.pagination('getCurrentPage');
+        page_num = self.paginator.pagination('getCurrentPage'),
+        params = self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order;
+
     $.ajax({
         // AJAX-specified URL
         url: self.fetch_url,
         dataType : "json",
         type: 'POST',
-        data: self.form.serialize() + '&page=' + page_num + '&sort_criteria=' + self.sort_criteria + '&sort_order=' + self.sort_order,
+        data: params,
         success: function (data) {
+            console.log(data);
             self.setData(data);
         }
     });
-    page_num = page_num || 1;
 };
 
 $.datepicker.regional['ru'] = {
@@ -91,7 +96,6 @@ $(function() {
         placeholder_text: 'Выберите типы работ',
         allow_single_deselect: true
     });
-
 
     //Слайдер для выбора зарплаты
     var min_cost = 0;
@@ -138,7 +142,5 @@ $(function() {
         $( "#cost_slider" ).slider( "disable" );
         $("#select_job_types").val('').trigger("liszt:updated");
 
-        // search_workers_form.change();//submit form
-        search_jobs_form.change();//submit form
     });
 });

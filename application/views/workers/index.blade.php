@@ -3,16 +3,16 @@
 @section('before_assets')
     <script>
     var URLS = {
-        workers_search : "{{ URL::to('workers/search') }}"
+        workers_search : "{{ URL::to('workers/search') }}",
+        workers_chosen : "{{ URL::to('workers/chosen') }}"
     }
     </script>
 @endsection
 
 @section('content')
+    @include('blocks.header')
 
-@include('blocks.header')
-
-<div class="container">
+    @include('blocks.worker-chosen-list-hb')
     <div class="b-content">
         <h1>Найти рабочих</h1>
 
@@ -22,19 +22,7 @@
 
         {{ Form::open('workers/search', 'POST', array('class' => 'b-form', 'id'=>'search-workers')) }}
 
-        <?php $jobtypes = Jobtype::All(); ?>
-
-        @if($jobtypes)
-        <div class="b-one-group">
-            <h3>Выберите тип работ:</h3>
-            <select id="select_job_types" name="jobtype_id" class="chzn-select">
-                <option></option>
-                @foreach($jobtypes as $job)
-                    <option value="{{ $job->id }}">{{ $job->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        @endif
+        @include('blocks.jobtypes')
 
         <div class="b-one__fieldset">
             {{ Form::label('name', 'Имя и Фамилия', array('class'=>''))    }}
@@ -46,10 +34,12 @@
             {{ Form::text('created_at', '', array('id'=>'created_at'))    }}
         </div>
 
+        <!--
         <div class="b-one__fieldset">
             {{ Form::label('rating', 'Рейтинг', array('class'=>''))    }}
             {{ Form::text('rating', '', array('id'=>'rating'))    }}
         </div>
+        -->
 
         <div class="b-one-group">
             <h3>Пол</h3>
@@ -68,6 +58,7 @@
             </div>
         </div>
 
+        <!--
         <div class="b-one-group">
             <h3>Бригада</h3>
 
@@ -86,7 +77,7 @@
                 {{ Form::radio('team', 1)    }}
             </div>
         </div>
-
+        -->
 
         <div class="b-one-group">
             <h3>Возраст</h3>
@@ -119,8 +110,8 @@
 
         <input type="button" value="Сбросить фильтр" id="reset_filter">
         @include('blocks.workers-results-hb')
+        <div class="workers-pagination"></div>
         <div id="ajaxResponseSearch"></div>
-        <div id="workers-pagination"></div>
+        <div class="workers-pagination"></div>
     </div>
-</div>
 @endsection

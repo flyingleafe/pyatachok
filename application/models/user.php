@@ -28,6 +28,16 @@ class User extends Eloquent {
 		return $this->has_many_and_belongs_to('Jobtype')->with('cost');
     }
 
+    public function jobs()
+    {
+        return $this->has_many_and_belongs_to('Job');
+    }
+
+    public function posted_jobs()
+    {
+        return $this->has_many('Job');
+    }
+
     /**
      * Хэширует устанавливаемый пароль
      * fLf: главное - не забыть об этом и не хэшировать его вручную
