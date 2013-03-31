@@ -2,6 +2,11 @@
 
 class User extends Eloquent {
 
+    public static $roles = array(
+        'user'  => 0,
+        'moderator' => 1,
+        'admin' => 1,
+    );
     public  static $stats_type = array(
         -1 => 'Заблокирован',
         0  => 'Подтверждение телефона',

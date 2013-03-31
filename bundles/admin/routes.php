@@ -5,6 +5,14 @@ Route::controller('admin::auth');
 Route::controller('admin::users');
 Route::controller('admin::jobtypes');
 
+
+
+Route::filter('is_admin', function(){
+    if(!Auth::check()  || !Auth::user()->role == User::$roles['admin'] )
+     return Redirect::to('admin/auth');
+
+});
+
 Asset::container('admin')
     ->add('bootstrap', 'bootstrap/css/bootstrap.min.css')
     ->add('bootstrap-responsive', 'bootstrap/css/bootstrap-responsive.css', 'bootstrap')

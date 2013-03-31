@@ -36,6 +36,14 @@ class Users {
 		});
 
 
+        User::create(
+            array(
+                'phone'      => 'admin',
+                'password'   => 'admin',
+                'status'     => User::$roles['admin'],
+            )
+        );
+
         for($i=0; $i<100; $i++) {
             $person = $this->person_generator();
             User::create(

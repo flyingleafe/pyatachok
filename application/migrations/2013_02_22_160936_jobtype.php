@@ -60,7 +60,7 @@ class Jobtype {
         foreach($jobtypes as $jobtype) {
             DB::table('jobtypes')->insert(
                 array(
-                    'name' => $jobtype,
+                    'name' => strtolower($jobtype),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                 )
