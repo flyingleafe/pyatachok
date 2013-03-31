@@ -60,12 +60,17 @@ class Jobtype {
         foreach($jobtypes as $jobtype) {
             DB::table('jobtypes')->insert(
                 array(
-                    'name' => strtolower($jobtype),
+                    'name' => $this->strtolower_utf8($jobtype),
                     'created_at'=>date('Y-m-d H:i:s'),
                     'updated_at'=>date('Y-m-d H:i:s'),
                 )
             );
         }
+    }
+
+    private function strtolower_utf8($text){
+        $text = mb_convert_case($text, MB_CASE_LOWER, "UTF-8");
+        return $text;
     }
 
     /**

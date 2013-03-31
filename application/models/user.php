@@ -65,6 +65,9 @@ class User extends Eloquent {
         // fLf: специально не отсекаю ситуацию, когда введен НЕ телефон
         // чтобы админам было комфортно
     }
+    public function get_phone(){
+        return '+7'.$this->get_attribute('phone');
+    }
 
     /**
      * Валидация переданного телефона
