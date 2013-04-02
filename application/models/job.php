@@ -16,6 +16,20 @@ class Job extends Eloquent {
 
     public function jobtype()
     {
-        return $this->has_one('Jobtype');
+        return $this->belongs_to('Jobtype');
+    }
+
+    public static function url($id)
+    {
+        return URL::to("jobs/id/$id");
+    }
+
+    public function get_phone()
+    {
+        $phone = $this->get_attribute('phone');
+        if(User::validate_phone($phone)) {
+            return '+7' . User::trim_phone($phone);
+        }
+        return $phone;
     }
 }

@@ -93,7 +93,6 @@ class Register_Controller extends Base_Controller {
 
     public function post_auth()
     {
-
         $phone    = Input::get('phone');
         $password = Input::get('password');
 

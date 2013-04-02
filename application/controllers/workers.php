@@ -125,6 +125,7 @@ class Workers_Controller extends Base_Controller {
             $job->save();
         }
         $job->workers()->sync($chosen_ids);
+        Sms::job_notifications($job->id);
         Session::forget('chosen_workers');
         return Redirect::to('workers/finish');
     }
@@ -133,11 +134,13 @@ class Workers_Controller extends Base_Controller {
     {
         if(Session::has('chosen_workers')) {
             $ids    = Session::get('chosen_workers');
-            $users  = User::where_in('id', $ids)->get();
-            return Response::json(array(
-                'ids'   => $ids,
-                'chosen' => $users,
-            ));
+            if($ids) {
+                $users  = User::where_in('id', $ids)->get();
+                return Response::json(array(
+                    'ids'   => $ids,
+                    'chosen' => $users,
+                ));
+            }
         }
         return Response::json(array());
     }
@@ -157,7 +160,7 @@ class Workers_Controller extends Base_Controller {
     public function delete_chosen($id = '')
     {
         if($id == 'all') {
-            Session::put('chosen_workers', array());
+            Session::forget('chosen_workers');
             return Response::json(array('flushed' => true));
         }
         $arr = Session::get('chosen_workers');

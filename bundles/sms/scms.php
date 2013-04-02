@@ -1,13 +1,15 @@
 <?php
 // SMSC.RU API (smsc.ru) версия 2.7 (07.06.2012)
 
-define("SMSC_LOGIN", "<login>");		// логин клиента
-define("SMSC_PASSWORD", "<password>");	// пароль или MD5-хеш пароля в нижнем регистре
-define("SMSC_POST", 0);					// использовать метод POST
-define("SMSC_HTTPS", 0);				// использовать HTTPS протокол
-define("SMSC_CHARSET", "windows-1251");	// кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
-define("SMSC_DEBUG", 0);				// флаг отладки
-define("SMTP_FROM", "api@smsc.ru");     // e-mail адрес отправителя
+define("SMSC_LOGIN", "5ok");        // логин клиента
+define("SMSC_PASSWORD", "eb83d6775d974c1c5daf887abbfdb858");    // пароль или MD5-хеш пароля в нижнем регистре
+define("SMSC_POST", 0);                 // использовать метод POST
+define("SMSC_HTTPS", 0);                // использовать HTTPS протокол
+define("SMSC_CHARSET", "utf-8");    // кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
+define("SMSC_DEBUG", 0);                // флаг отладки
+define("SMTP_FROM", "notify@5ok.su");     // e-mail адрес отправителя
+
+define("SMS_SENDER_NAME", false);
 
 // Функция отправки SMS
 //
@@ -29,7 +31,7 @@ define("SMTP_FROM", "api@smsc.ru");     // e-mail адрес отправите�
 // возвращает массив (<id>, <количество sms>, <стоимость>, <баланс>) в случае успешной отправки
 // либо массив (<id>, -<код ошибки>) в случае ошибки
 
-function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = false, $query = "")
+function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = SMS_SENDER_NAME, $query = "")
 {
     static $formats = array(1 => "flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1");
 
