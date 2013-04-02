@@ -21,6 +21,26 @@
         <br>
         <br>
 
+
+        @if(isset( Auth::user()->avatar_url))
+            {{ HTML::image('/storage/images/'.Auth::user()->avatar_url,''); }}
+        @endif
+        <br>
+        <br>
+        <label>Загрузка фотографий: </label>
+        {{Form::open_for_files('profile/upload', 'POST')}}
+            {{Form::file('photo')}}
+            {{Form::submit('загрузить')}}
+        {{Form::close()}}
+        <br>
+        <br>
+        @if(Session::has('errors'))
+        <?php $errors = Session::get('errors'); ?>
+        {{ $errors->first('image_type', '<p class="form__error">:message</p>') }}
+        @endif
+        <br>
+        <br>
+
         <div class="b-one__fieldset">
             <label>Номер телефона:</label>
             <span>{{ Auth::user()->phone;}}</span>
@@ -38,6 +58,9 @@
          </div>
 
         <?php $jobtypes = Jobtype::All(); ?>
+
+
+
 
         {{ Form::open('profile/update', 'POST', array('class' => '')) }}
         @if($jobtypes)

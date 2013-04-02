@@ -2,6 +2,10 @@
 
 class User extends Eloquent {
 
+    public static  $image_dir = 'public/storage/images/';
+    public static  $image_dir_mini = 'public/storage/images/mini/';
+    public static  $tmp_dir = 'public/storage/images/tmp/';
+
     public static $roles = array(
         'user'  => 0,
         'moderator' => 1,
@@ -112,3 +116,4 @@ class User extends Eloquent {
         return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$phone_nums );
     }
 }
+

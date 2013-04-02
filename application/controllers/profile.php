@@ -78,4 +78,39 @@ class Profile_Controller extends Base_Controller {
         }
     }
 
+    public function post_upload(){
+        $file = Input::file('photo');
+        $user = Auth::user();
+
+        $name = 'photo_300x400_'.$user->id.'.jpg';
+        $name_mini = 'photo_64x64_'.$user->id.'.jpg';
+        $tmp_name = 'tmp_'.$user->id.'.jpg';
+
+        Input::upload('photo', User::$tmp_dir, $tmp_name );
+
+        if (File::is('jpg', User::$tmp_dir . $tmp_name)) {
+            $user->avatar_url = $name;
+            $user->save();
+
+            //main photo
+            $main = new SimpleImage();
+            $main->load(User::$tmp_dir.$tmp_name);
+            $main->resize(300, 400);
+            $main->save(User::$image_dir.$name);
+
+            //mini
+            $mini = new SimpleImage();
+            $mini->load(User::$tmp_dir.$tmp_name);
+            $mini->resize(64, 64);
+            $mini->save(User::$image_dir_mini.$name_mini);
+
+            return Redirect::to('profile');
+        }
+        unlink(User::$tmp_dir.$tmp_name);
+
+        $errors = new Laravel\Messages();
+        $errors->add('image_type', 'Неверный тип файла: выберите .jpg файл');
+        return Redirect::to('profile')->with('errors', $errors);
+    }
+
 }
