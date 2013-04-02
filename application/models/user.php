@@ -7,21 +7,21 @@ class User extends Eloquent {
         'moderator' => 1,
         'admin' => 1,
     );
-    public  static $stats_type = array(
+    public static $stats_type = array(
         -1 => 'Заблокирован',
         0  => 'Подтверждение телефона',
         1  => 'Заполнение информации',
         2  => 'Активен',
     );
     public static $acc_type = array(
-        0=>'Работодатель',
-        1=>'Рабочий',
+        0 => 'Работодатель',
+        1 => 'Рабочий',
     );
 
     public static $gender = array(
-        ''=>'Любой',
-        '0'=>'Женский',
-        '1'=>'Мужской'
+        ''  => 'Любой',
+        '0' => 'Женский',
+        '1' => 'Мужской'
     );
 
 	public static $timestamps = true;
@@ -61,12 +61,10 @@ class User extends Eloquent {
     {
         if(self::validate_phone($phone)) {
             $this->set_attribute('phone', self::trim_phone($phone));
+        } else {
+            // если админ
+            $this->set_attribute('phone', $phone);
         }
-        // fLf: специально не отсекаю ситуацию, когда введен НЕ телефон
-        // чтобы админам было комфортно
-    }
-    public function get_phone(){
-        return '+7'.$this->get_attribute('phone');
     }
 
     public function get_phone()

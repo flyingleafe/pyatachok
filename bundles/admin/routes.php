@@ -7,10 +7,10 @@ Route::controller('admin::jobtypes');
 
 
 
-Route::filter('is_admin', function(){
-    if(!Auth::check()  || !Auth::user()->role == User::$roles['admin'] )
-     return Redirect::to('admin/auth');
-
+Route::filter('is_admin', function()
+{
+    if(!Auth::check()  || ! Auth::user()->role == User::$roles['admin'] )
+        return Redirect::to('admin/auth');
 });
 
 Asset::container('admin')
