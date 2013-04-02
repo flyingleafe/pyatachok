@@ -2,7 +2,9 @@
 
 @section('content')
 
-<a href="{{ URL::to('jobs') }}">Веннуться назад</a>
+@include('blocks.header')
+
+<a href="{{ URL::to('jobs') }}">Вернуться назад</a>
 <div class="job-cart">
     <table>
         <tr>

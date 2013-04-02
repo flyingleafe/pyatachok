@@ -39,32 +39,25 @@ class Jobs_Controller extends Base_Controller {
 
 	public function get_index($id = '')
     {
-        if( !empty($id) ) {
-            Seovel::setTitle('Просмотр работы');
-            $job = Job::find($id);
-            if($job && $job->status) {
-                return View::make('jobs.view', array('job' => $job));
-            }
-            return Response::error('404');
-        }
         Seovel::setTitle('Поиск работ');
 		return View::make('jobs.index');
 	}
 
-    /*public function get_view($id)
+    public function get_view($id)
     {
+        Seovel::setTitle('Просмотр работы');
         $job = Job::find($id);
-        if($job) {
+        if($job && $job->status) {
             return View::make('jobs.view', array('job' => $job));
         }
         return Response::error('404');
-    }*/
+    }
 
     //@TODO: фильтры для вводимых данных
     public function post_search()
     {
         extract(Input::all());
-        $query_jobs = Job::query();
+        $query_jobs = Job::with('jobtype')->query();
 
         $query_jobs->where('status', '=', 1); //ищем только открытые работы
         if( !empty($jobtype_id) ){
@@ -116,6 +109,9 @@ class Jobs_Controller extends Base_Controller {
             $job->phone = $user->phone;
         }
         $job->status = 1;
+
+        Session::put('job', $job);
+
         return View::make('jobs.create', array('model' => $job) );
     }
 
@@ -164,7 +160,7 @@ class Jobs_Controller extends Base_Controller {
             'Июнь'      => '06',
             'Июль'      => '07',
             'Август'    => '08',
-            'Сентябр'   => '09',
+            'Сентябрь'   => '09',
             'Октябрь'   => '10',
             'Ноябрь'    => '11',
             'Декабрь'   => '12',
