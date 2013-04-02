@@ -7,34 +7,25 @@
 <div class="container">
 
     @if( isset($errors))
-    {{ $errors->first('phone', '<p>:message</p>') }}
-    {{ $errors->first('jobtype_id', '<p>:message</p>') }}
-    {{ $errors->first('price', '<p>:message</p>') }}
-    {{ $errors->first('description', '<p>:message</p>') }}
-    {{ $errors->first('place', '<p>:message</p>') }}
-    {{ $errors->first('time_start', '<p>:message</p>') }}
-    {{ $errors->first('time_end', '<p>:message</p>') }}
-    {{ $errors->first('target_count', '<p>:message</p>') }}
+        {{ $errors->first('phone', '<p>:message</p>') }}
+        {{ $errors->first('jobtype_id', '<p>:message</p>') }}
+        {{ $errors->first('price', '<p>:message</p>') }}
+        {{ $errors->first('description', '<p>:message</p>') }}
+        {{ $errors->first('place', '<p>:message</p>') }}
+        {{ $errors->first('time_start', '<p>:message</p>') }}
+        {{ $errors->first('time_end', '<p>:message</p>') }}
+        {{ $errors->first('target_count', '<p>:message</p>') }}
     @endif
-
 
     {{ Form::open('jobs/create', 'POST', array('class' => '')) }}
 
-
     <div class="b-one__fieldset">
-        {{ Form::label('jobtype_id', 'Тип работ' )    }}
-        <?php  $jobtypes = Jobtype::All();  ?>
-        <select id="select_job_types"  name="jobtype_id" class="chzn-select">
-            <option value="">Тип работ</option>
-            <?foreach($jobtypes as $job){?>
-            <option value="{{$job->id}}">{{$job->name}}</option>
-            <?}?>
-        </select>
+        @include('blocks.jobtypes')
     </div>
 
     <div class="b-one__fieldset">
         {{ Form::label('name', 'Ваше имя', array('class'=>''))    }}
-        {{ Form::text('name', '',  array('id'=>'phone') )    }}
+        {{ Form::text('name', $model->name,  array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
@@ -44,14 +35,13 @@
 
     <div class="b-one__fieldset">
         {{ Form::label('phone', 'Телефон', array('class'=>''))    }}
-        {{ Form::text('phone', '',   array('id'=>'phone') )    }}
+        {{ Form::text('phone', $model->phone,   array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
         {{ Form::label('description', 'Описание', array('class'=>''))    }}
         {{ Form::textarea('description', '',  array('id'=>'description') )    }}
     </div>
-
 
     <div class="b-one__fieldset">
         {{ Form::label('place', 'Место проведения', array('class'=>''))    }}
@@ -74,7 +64,6 @@
         {{ Form::select('target_count', array(1,2,3,4,5,6,7))    }}
         <p>Большее количество участников доступно в платном режиме</p>
     </div>
-
 
     {{ Form::submit('Создать', array('class'=>''))    }}
 

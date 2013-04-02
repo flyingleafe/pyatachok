@@ -1,7 +1,7 @@
 <? $jobtypes = Jobtype::All(); ?>
 @if($jobtypes)
     <div class="b-jobtypes_inner">
-        <h3>Выберите типы работ:</h3>
+        <h3>Тип работы</h3>
         <select id="select_job_types" class="chzn-select" name="jobtype_id" required>
             <option></option>
             @foreach($jobtypes as $job)

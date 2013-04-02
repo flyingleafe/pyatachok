@@ -37,22 +37,28 @@ class Jobs_Controller extends Base_Controller {
             ->add('jobs-search', 'js/jobs-search.js', 'search');
     }
 
-	public function get_index()
+	public function get_index($id = '')
     {
+        if( !empty($id) ) {
+            Seovel::setTitle('Просмотр работы');
+            $job = Job::find($id);
+            if($job && $job->status) {
+                return View::make('jobs.view', array('job' => $job));
+            }
+            return Response::error('404');
+        }
         Seovel::setTitle('Поиск работ');
 		return View::make('jobs.index');
 	}
 
-
-
-    public function get_view($id)
+    /*public function get_view($id)
     {
         $job = Job::find($id);
         if($job) {
-            return View::make('jobs.view', array('job'=>$job));
+            return View::make('jobs.view', array('job' => $job));
         }
-        else  return Event::first('404');
-    }
+        return Response::error('404');
+    }*/
 
     //@TODO: фильтры для вводимых данных
     public function post_search()
@@ -98,11 +104,19 @@ class Jobs_Controller extends Base_Controller {
         Session::put('job', $job);
 
         return View::make('jobs.create', array('model' => $job) );
-
     }
 
-    public function get_create(){
-        return View::make('jobs.create');
+    public function get_create()
+    {
+        $job = new Job;
+        if (Auth::check()){
+            $user = Auth::user();
+            $job->user_id = $user->id;
+            $job->name = $user->name;
+            $job->phone = $user->phone;
+        }
+        $job->status = 1;
+        return View::make('jobs.create', array('model' => $job) );
     }
 
     public function post_create()
