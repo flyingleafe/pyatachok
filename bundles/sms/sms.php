@@ -69,7 +69,6 @@ class Sms {
             ->where('j.id', '=', $job_id)
             ->join('job_user as ju', 'j.id', '=', 'ju.job_id')
             ->join('users as u', 'u.id', '=', 'ju.user_id')
-            ->join('jobtypes as jt', 'jt.id', '=', 'j.id')
             ->get(array('u.id', 'u.phone', 'jt.name', 'j.phone'));
 
         $job = Job::find($job_id);

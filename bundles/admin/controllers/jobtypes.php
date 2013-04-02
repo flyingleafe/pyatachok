@@ -4,15 +4,9 @@ class Admin_Jobtypes_Controller extends Base_Controller {
     public $layout = 'admin::master';
     public $restful = true;
 
-    public static $jobtype_add_rules = array(
-        'name' => 'required|unique:jobtypes|max:64|min:6',
-    );
-
-    public static $jobtype_edit_rules = array(
-        'name' => 'required|max:64|min:6',
-    );
-
-    // fLf: ну вот опять хз зачем. ведь self::validate имеет почти такую же длину как и Validator::make =\
+    public function __construct(){
+        $this->filter('before', 'is_admin');
+    }
 
     public function get_index()
     {
@@ -25,19 +19,22 @@ class Admin_Jobtypes_Controller extends Base_Controller {
         return View::make('admin::jobtypes.add', array('model'=>$model));
     }
     
-    public function post_add()
-    {
-        $validation = Validator::make(Input::All(), static::$jobtype_add_rules);
+    public function post_add() {
+
+        $input = Input::All();
+        $input['name'] = Jobtype::strtolower_utf8(Input::get('name'));
+
+        $validation = Validator::make($input, Jobtype::$jobtype_add_rules);
 
         if($validation->fails()){
             return View::make('admin::jobtypes.add', array('model'=> new Jobtype()))->with_errors($validation->errors);
         }
 
-        Jobtype::create(array(
-            'name'=>Input::get('name'),
-        ));
-        return Redirect::to('admin/jobtypes/index');
+        $jobtype = new Jobtype();
+        $jobtype->set_name($input['name']);
+        $jobtype->save();
 
+        return Redirect::to('admin/jobtypes/index');
     }
 
     public function get_edit($id){
@@ -46,15 +43,14 @@ class Admin_Jobtypes_Controller extends Base_Controller {
     }
 
      public function post_edit(){
-         $validation = Validator::make(Input::All(), static::$jobtype_edit_rules);
+         $validation = Validator::make(Input::All(), Jobtype::$jobtype_edit_rules);
 
          if($validation->fails()){
              return View::make('admin::jobtypes.edit', array('model'=> new Jobtype()))->with_errors($validation->errors);
          }
-
-
          return Redirect::to('admin/jobtypes/index');
      }
+
 
     public function post_search(){
         $input = Input::all();

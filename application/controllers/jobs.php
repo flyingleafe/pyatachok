@@ -43,10 +43,7 @@ class Jobs_Controller extends Base_Controller {
 		return View::make('jobs.index');
 	}
 
-    public function get_add()
-    {
-        return View::make('jobs.type');
-    }
+
 
     public function get_view($id)
     {
@@ -63,6 +60,7 @@ class Jobs_Controller extends Base_Controller {
         extract(Input::all());
         $query_jobs = Job::query();
 
+        $query_jobs->where('status', '=', 1); //ищем только открытые работы
         if( !empty($jobtype_id) ){
             $query_jobs->where('jobtype_id', '=', $jobtype_id );
 
@@ -101,6 +99,10 @@ class Jobs_Controller extends Base_Controller {
 
         return View::make('jobs.create', array('model' => $job) );
 
+    }
+
+    public function get_create(){
+        return View::make('jobs.create');
     }
 
     public function post_create()

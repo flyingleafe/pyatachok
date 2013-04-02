@@ -5,12 +5,14 @@ class Admin_Users_Controller extends Base_Controller {
     public $layout = 'admin::master';
     public $restful = true;
 
+
     public  static $register_rules = array(
         'phone' => 'required|valid_phone|new_phone',
         'password' => 'required|max:64|min:6|confirmed',
     );
 
     public function __construct(){
+        $this->filter('before', 'is_admin');
         $this->filter('before', 'auth')->on('post');
     }
     public function get_index()
