@@ -4,9 +4,14 @@ class Admin_Jobs_Controller extends Base_Controller {
     public $layout = 'admin::master';
     public $restful = true;
 
+    public function __construct(){
+        $this->filter('before', 'is_admin');
+    }
+
     public static $jobs = array(
         //'name' => 'required|unique:jobs|max:64|min:6',
     );
+
 
 
     public function get_index()

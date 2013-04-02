@@ -4,6 +4,9 @@ class Admin_Home_Controller extends Base_Controller {
 
     public $restful = true;
 
+    public function __construct(){
+        $this->filter('before', 'is_admin');
+    }
     private static  $rules = array(
         'new_password' => 'required|max:64|min:6|confirmed',
     );

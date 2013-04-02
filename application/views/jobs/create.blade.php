@@ -34,7 +34,7 @@
 
     <div class="b-one__fieldset">
         {{ Form::label('name', 'Ваше имя', array('class'=>''))    }}
-        {{ Form::text('name', $model->name,  array('id'=>'phone') )    }}
+        {{ Form::text('name', '',  array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
@@ -44,7 +44,7 @@
 
     <div class="b-one__fieldset">
         {{ Form::label('phone', 'Телефон', array('class'=>''))    }}
-        {{ Form::text('phone', $model->phone,   array('id'=>'phone') )    }}
+        {{ Form::text('phone', '',   array('id'=>'phone') )    }}
     </div>
 
     <div class="b-one__fieldset">
