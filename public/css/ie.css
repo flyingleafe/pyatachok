@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700,800&subset=latin,cyrillic");
 /* Welcome to Compass. Use this file to write IE specific override styles.
  * Import this file using the following HTML or equivalent:
  * <!--[if IE]>
@@ -1707,8 +1708,8 @@ html, body {
 
 /* line 8, ../../application/sass/_layout.sass */
 body {
-  background: white url(/img/grid.png);
-  font: 1em normal Tahoma, Arial, Verdana, sans-serif;
+  background: white url(/img/concrete.png);
+  font-family: "Open Sans", sans-serif;
 }
 
 /* line 12, ../../application/sass/_layout.sass */
@@ -1725,17 +1726,17 @@ body {
 /*
  * Общие стили
  */
-/* line 4, ../../application/sass/_general.sass */
-.clearfix, header, .main {
+/* line 5, ../../application/sass/_general.sass */
+.clearfix, header, header nav.top ul, .main {
   *zoom: 1;
 }
-/* line 6, ../../application/sass/_general.sass */
-.clearfix:before, header:before, .main:before, .clearfix:after, header:after, .main:after {
+/* line 7, ../../application/sass/_general.sass */
+.clearfix:before, header:before, header nav.top ul:before, .main:before, .clearfix:after, header:after, header nav.top ul:after, .main:after {
   content: " ";
   display: table;
 }
-/* line 9, ../../application/sass/_general.sass */
-.clearfix:after, header:after, .main:after {
+/* line 10, ../../application/sass/_general.sass */
+.clearfix:after, header:after, header nav.top ul:after, .main:after {
   clear: both;
 }
 
@@ -1838,43 +1839,38 @@ header {
 /* line 10, ../../application/sass/_header.sass */
 header nav.top {
   float: left;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dd2121), color-stop(100%, #a81919));
+  background-image: -webkit-linear-gradient(top, #dd2121, #a81919);
+  background-image: -moz-linear-gradient(top, #dd2121, #a81919);
+  background-image: -o-linear-gradient(top, #dd2121, #a81919);
+  background-image: linear-gradient(top, #dd2121, #a81919);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 3px 3px 0;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 3px 3px 0;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 3px 3px 0;
 }
-/* line 12, ../../application/sass/_header.sass */
-header nav.top li {
-  color: black;
-  padding: 0.5em 0.5em 0.1em;
-  margin-right: 0.5em;
+/* line 16, ../../application/sass/_header.sass */
+header nav.top ul li {
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.3) 0 -1px 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
   text-align: center;
-  border: 7px solid transparent;
 }
-/* line 20, ../../application/sass/_header.sass */
-header nav.top li.active {
-  color: white;
-  width: 130px;
-  background: url(/img/menu-item-bg.png) -7px -2px no-repeat;
+/* line 23, ../../application/sass/_header.sass */
+header nav.top ul li:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
-/* line 24, ../../application/sass/_header.sass */
-header nav.top li.active:hover {
-  -webkit-border-image: none;
-  -moz-border-image: none;
-  border-image: none;
-}
-/* line 26, ../../application/sass/_header.sass */
-header nav.top li:hover {
-  -webkit-border-image: url("/img/understroke.png") 7 7 stretch;
-  -moz-border-image: url("/img/understroke.png") 7 7 stretch;
-  border-image: url("/img/understroke.png") 7 7 stretch;
-}
-/* line 29, ../../application/sass/_header.sass */
-header nav.top li a {
+/* line 25, ../../application/sass/_header.sass */
+header nav.top ul li a {
+  display: block;
+  padding: 0.7em 1em;
   color: inherit;
   text-decoration: none;
 }
-/* line 33, ../../application/sass/_header.sass */
+/* line 31, ../../application/sass/_header.sass */
 header .account {
   padding-top: 0.5em;
   float: right;
@@ -1886,29 +1882,35 @@ header .account {
 /* line 4, ../../application/sass/_home.sass */
 .main {
   border: 5px;
-  padding: 1em;
   -webkit-border-image: url("/img/border-main.png") 10 10 stretch;
   -moz-border-image: url("/img/border-main.png") 10 10 stretch;
   border-image: url("/img/border-main.png") 10 10 stretch;
 }
-/* line 10, ../../application/sass/_home.sass */
-.main .buttons {
-  text-align: center;
-  margin: 2em 0;
+/* line 9, ../../application/sass/_home.sass */
+.main section {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1em;
+  float: left;
+  width: 50%;
 }
 /* line 14, ../../application/sass/_home.sass */
-.main .buttons .big-button {
+.main section.for-worker {
+  border-right: 2px dashed gray;
+}
+/* line 17, ../../application/sass/_home.sass */
+.main .big-button {
   color: #ebebeb;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
   text-decoration: none;
-  font-weight: bold;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
   zoom: 1;
   *display: inline;
-  font-size: 1.5em;
+  font-size: 1.7em;
   margin-right: 1em;
   padding: 1.5em 1em;
   width: 9em;
@@ -1949,7 +1951,7 @@ header .account {
 .slogan {
   text-align: center;
   font-size: 1.3em;
-  margin-top: 0.5em;
+  margin: 0.5em 0 1em;
   font-family: "Segoe PR";
   font-weight: normal;
 }

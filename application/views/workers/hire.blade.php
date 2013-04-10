@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @include('blocks.header')
+
     <div class="b-content">
         <h1>Наем рабочих.</h1>
         <div class="workers-list">

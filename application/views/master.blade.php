@@ -13,6 +13,7 @@
 </head>
 <body>
     <div class="container">
+    @include('blocks.header')
         @if(Session::has('message'))
             <p>{{ Session::get('message') }}</p>
         @endif

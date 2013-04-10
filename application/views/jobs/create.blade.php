@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('blocks.header')
-
 <div class="container">
 
     @if( isset($errors))

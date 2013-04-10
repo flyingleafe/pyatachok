@@ -10,7 +10,6 @@
 @endsection
 
 @section('content')
-    @include('blocks.header')
 
     @include('blocks.worker-chosen-list-hb')
     <div class="b-content">
