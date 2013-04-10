@@ -9,26 +9,24 @@ header
 
   nav.top
     float: left
-    li
-      color: black
-      padding: 0.5em 0.5em 0.1em
-      margin-right: 0.5em
-      +box-sizing(border-box)
-      float: left
-      text-align: center
-      border: 7px solid transparent
-      &.active
+    +background-image(linear-gradient(top, $red, darken($red, 12%)))
+    +box-shadow(rgba(black, .5) 0 3px 3px 0)
+    ul
+      @extend .clearfix
+      li
         color: white
-        width: 130px
-        background: url(/img/menu-item-bg.png) -7px -2px no-repeat
+        text-shadow: rgba(black, .3) 0 -1px 0
+        border-right: 1px solid rgba(black, .2)
+        +box-sizing(border-box)
+        float: left
+        text-align: center
         &:hover
-          +border-image(none)
-      &:hover
-        +border-image("/img/understroke.png", 7 7, stretch)
-
-      a
-        color: inherit
-        text-decoration: none
+          background: rgba(white, .1)            
+        a
+          display: block
+          padding: 0.7em 1em
+          color: inherit
+          text-decoration: none
 
   .account
     padding-top: 0.5em

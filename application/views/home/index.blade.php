@@ -2,16 +2,14 @@
 
 @section('content')
     
-    @include('blocks.header-home')
 	<div class="main">
-		<div class="center">
-			<div class="logo"></div>
-            <div class="slogan">Работа у вас, рабочие у нас!</div>
-			<div class="buttons">
-				<a href="{{ URL::to('jobs') }}" class="big-button jobs">Найти работу</a>
-				<a href="{{ URL::to('find-workers') }}" class="big-button workers">Найти рабочих</a>
-			</div>
-		</div>
+        <div class="slogan">Работа у вас, рабочие у нас!</div>
+        <section class="for-worker">
+			<a href="{{ URL::to('jobs') }}" class="big-button jobs">Найти работу</a>
+		</section>
+		<section class="for-employer">
+			<a href="{{ URL::to('find-workers') }}" class="big-button workers">Найти рабочих</a>
+		</section>
 	</div>
 
 @endsection

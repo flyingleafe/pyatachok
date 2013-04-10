@@ -11,13 +11,31 @@
 @endsection
 
 @section('content')
-
-    @include('blocks.header')
     
     <a href="/">Назад</a>
     <div class="b-user-info">
         <h1>Личный кабинет</h1>
         <a href="{{URL::to('profile/edit') }}">Редактировать информацию</a>
+        <br>
+        <br>
+
+
+        @if(isset( Auth::user()->avatar_url))
+            {{ HTML::image('/storage/images/'.Auth::user()->avatar_url,''); }}
+        @endif
+        <br>
+        <br>
+        <label>Загрузка фотографий: </label>
+        {{Form::open_for_files('profile/upload', 'POST')}}
+            {{Form::file('photo')}}
+            {{Form::submit('загрузить')}}
+        {{Form::close()}}
+        <br>
+        <br>
+        @if(Session::has('errors'))
+        <?php $errors = Session::get('errors'); ?>
+        {{ $errors->first('image_type', '<p class="form__error">:message</p>') }}
+        @endif
         <br>
         <br>
 
@@ -38,6 +56,9 @@
          </div>
 
         <?php $jobtypes = Jobtype::All(); ?>
+
+
+
 
         {{ Form::open('profile/update', 'POST', array('class' => '')) }}
         @if($jobtypes)
