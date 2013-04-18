@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
     @yield('before_assets')
     {{ Asset::container('admin')->styles()  }}
     {{ Asset::container('admin')->scripts() }}

@@ -3,18 +3,25 @@
  */
 .link-to
   position: relative
-  color: $linkblue
-  border-bottom: 1px solid $linkblue
-  text-decoration: none
-  margin-left: 2em
+  color: black
+  font-size: 21px
+  text-decoration: underline
+  display: block
+  float: left
+  margin-left: 45px
+  text-decoration: underline
   &::before
     position: absolute
     left: -1.2em
     color: black
     font-family: FontAwesome
   &.profile::before
+
     content: "\f007"
   &.logout::before
     content: "\f08b"
   &.register::before
     content: "\f090"
+.link-to.logout
+  margin-left: 37px
+  float: right

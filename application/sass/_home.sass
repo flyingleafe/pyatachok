@@ -2,30 +2,98 @@
  * Элементы главной страницы
  */
 .main
-  border: 5px
-  +border-image("/img/border-main.png", 10 10, stretch)
+  width: 700px
+  margin: 0 auto
   @extend .clearfix
   
   section
     +box-sizing(border-box)
-    padding: 1em
     float: left
     width: 50%
     &.for-worker
       border-right: 2px dashed gray
+  .buttons
+    padding-top: 60px
 
   .big-button
-    color: $almost-white
     +text-shadow(0 -1px 0 rgba(black, .4))
     text-decoration: none
     // font-weight: bold
     +inline-block
-    font-size: 1.7em
-    margin-right: 1em
-    padding: 1.5em 1em
-    width: 9em
-    text-align: center
-    +border-radius(5px)
-    +background-image(linear-gradient(top, $red, darken($red, 10%)))
+    font-size: 33px
+    padding: 51px 15px
+    width: 280px
+    height: 43px
+    letter-spacing: 0.09em
+    background-image: linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(246,31,67) 85%)
+    background-image: -o-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(246,31,67) 85%)
+    background-image: -moz-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(246,31,67) 85%)
+    background-image: -webkit-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(246,31,67) 85%)
+    background-image: -ms-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(246,31,67) 85%)
+
+    background-image: -webkit-gradient(  linear,    left bottom,    left top,    color-stop(0.37, rgb(155,0,13)),    color-stop(0.69, rgb(236,2,37)),    color-stop(0.85, rgb(246,31,67))  )
     border: 2px solid
     border-color: rgba(white, .4) rgba(gray, .2) rgba(black, .3)
+    position: relative
+    a
+      color: #fff
+      text-decoration: none x
+
+    .man
+      position: absolute
+    .man.left-man
+      left: -167px
+      top: -28px
+    .man.right-man
+      right: -170px
+      top: -27px
+
+
+  .big-button.right
+    margin: 0 !important
+    float: right
+    a
+      padding-left: 20px
+
+  .columns
+    padding: 0
+    position: relative
+    padding-left: 40px
+    .vertical-line
+      +img-like("vertical_line")
+      background-repeat: repeat-y
+      height: 640px
+      float: left
+      position: absolute
+      right: 326px
+      top: -40px
+
+    .one-section
+      padding-top: 40px
+      padding-bottom: 58px
+      position: relative
+      .need-workers
+        right: -3px
+        top: 133px
+        position: absolute
+    h1
+      font-size: 22px
+      color: #474747
+      text-decoration: underline
+      padding-top: 2px
+    p
+      font-size: 18px
+      color: #474747
+      padding-top: 24px
+      line-height: 20px
+    .left-col
+      width: 310px
+      float: left
+    .right-col
+      width: 310px
+      float: right
+
+.banner
+  height: 120px
+  background: #fff
+  width: 100%

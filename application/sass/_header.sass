@@ -3,17 +3,23 @@
  */
 header
   position: relative
-  padding: 1em 0
-  margin-bottom: 30px
+  padding-top: 15px
   @extend .clearfix
-
   nav.top
     float: left
-    +background-image(linear-gradient(top, $red, darken($red, 12%)))
+    margin-top: 44px
+    margin-left: 5px
+    background-image: linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(251,79,107) 85%)
+    background-image: -o-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(251,79,107) 85%)
+    background-image: -moz-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(251,79,107) 85%)
+    background-image: -webkit-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(251,79,107) 85%)
+    background-image: -ms-linear-gradient(bottom, rgb(155,0,13) 37%, rgb(236,2,37) 69%, rgb(251,79,107) 85%)
+    background-image: -webkit-gradient(  linear,    left bottom,    left top,    color-stop(0.37, rgb(155,0,13)),    color-stop(0.69, rgb(236,2,37)),    color-stop(0.85, rgb(251,79,107))  )
     +box-shadow(rgba(black, .5) 0 3px 3px 0)
     ul
       @extend .clearfix
       li
+        height: 40px
         color: white
         text-shadow: rgba(black, .3) 0 -1px 0
         border-right: 1px solid rgba(black, .2)
@@ -21,13 +27,32 @@ header
         float: left
         text-align: center
         &:hover
-          background: rgba(white, .1)            
+          background: rgba(white, .1)
         a
-          display: block
-          padding: 0.7em 1em
-          color: inherit
           text-decoration: none
+          letter-spacing: 0.1em
+          color: #fff
+          ins#feedbacks
+            padding-left: 20px
+            padding-right: 12px
+          ins#contacts
+            padding-left: 18px
+            padding-right: 9px
+          ins#about_us
+            padding-left: 20px
+            padding-right: 22px
+          ins
+            text-decoration: none !important
+            letter-spacing: 0.1em
+            display: block
+            padding: 10px 9px 7px 27px
+            color: inherit
+            font-size: 21px
+            text-decoration: none
 
   .account
-    padding-top: 0.5em
-    float: right
+    float: left
+    width: 295px
+    padding-top: 55px
+    color: #000
+    padding-left: 22px
