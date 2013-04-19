@@ -1715,9 +1715,10 @@ body {
 /* line 13, ../../application/sass/_layout.sass */
 .container {
   width: 1230px;
+  min-height: 560px;
   margin: 0 auto;
 }
-/* line 16, ../../application/sass/_layout.sass */
+/* line 17, ../../application/sass/_layout.sass */
 .container .clear {
   clear: both;
   float: none;
@@ -1747,37 +1748,41 @@ body {
 .link-to {
   position: relative;
   color: black;
-  font-size: 21px;
-  text-decoration: underline;
+  font-size: 14px;
+  text-decoration: none;
   display: block;
   float: left;
   margin-left: 45px;
-  text-decoration: underline;
 }
-/* line 13, ../../application/sass/ui/_link-to.sass */
+/* line 12, ../../application/sass/ui/_link-to.sass */
 .link-to::before {
   position: absolute;
   left: -1.2em;
   color: black;
   font-family: FontAwesome;
 }
-/* line 18, ../../application/sass/ui/_link-to.sass */
+/* line 17, ../../application/sass/ui/_link-to.sass */
 .link-to.profile::before {
   content: "\f007";
 }
-/* line 21, ../../application/sass/ui/_link-to.sass */
+/* line 20, ../../application/sass/ui/_link-to.sass */
 .link-to.logout::before {
   content: "\f08b";
 }
-/* line 23, ../../application/sass/ui/_link-to.sass */
+/* line 22, ../../application/sass/ui/_link-to.sass */
 .link-to.register::before {
   content: "\f090";
 }
 
-/* line 25, ../../application/sass/ui/_link-to.sass */
+/* line 24, ../../application/sass/ui/_link-to.sass */
 .link-to.logout {
   margin-left: 37px;
   float: right;
+}
+
+/* line 27, ../../application/sass/ui/_link-to.sass */
+.link-to:hover {
+  text-decoration: underline;
 }
 
 /*
@@ -1909,7 +1914,7 @@ header nav.top ul li a ins {
 /* line 53, ../../application/sass/_header.sass */
 header .account {
   float: left;
-  width: 295px;
+  width: 230px;
   padding-top: 55px;
   color: black;
   padding-left: 22px;
@@ -1949,7 +1954,8 @@ header .account {
   *vertical-align: auto;
   zoom: 1;
   *display: inline;
-  font-size: 33px;
+  font-size: 23px;
+  text-align: center;
   padding: 51px 15px;
   width: 280px;
   height: 43px;
@@ -1964,90 +1970,90 @@ header .account {
   border-color: rgba(255, 255, 255, 0.4) rgba(128, 128, 128, 0.2) rgba(0, 0, 0, 0.3);
   position: relative;
 }
-/* line 38, ../../application/sass/_home.sass */
+/* line 39, ../../application/sass/_home.sass */
 .main .big-button a {
   color: white;
   text-decoration: none x;
 }
-/* line 42, ../../application/sass/_home.sass */
+/* line 43, ../../application/sass/_home.sass */
 .main .big-button .man {
   position: absolute;
 }
-/* line 44, ../../application/sass/_home.sass */
+/* line 45, ../../application/sass/_home.sass */
 .main .big-button .man.left-man {
   left: -167px;
   top: -28px;
 }
-/* line 47, ../../application/sass/_home.sass */
+/* line 48, ../../application/sass/_home.sass */
 .main .big-button .man.right-man {
   right: -170px;
   top: -27px;
 }
-/* line 52, ../../application/sass/_home.sass */
+/* line 53, ../../application/sass/_home.sass */
 .main .big-button.right {
   margin: 0 !important;
   float: right;
 }
-/* line 55, ../../application/sass/_home.sass */
+/* line 56, ../../application/sass/_home.sass */
 .main .big-button.right a {
   padding-left: 20px;
 }
-/* line 58, ../../application/sass/_home.sass */
+/* line 59, ../../application/sass/_home.sass */
 .main .columns {
   padding: 0;
   position: relative;
   padding-left: 40px;
 }
-/* line 62, ../../application/sass/_home.sass */
+/* line 63, ../../application/sass/_home.sass */
 .main .columns .vertical-line {
   background: url("/img/vertical_line.png") center center no-repeat;
   width: 2px;
   height: 23px;
   background-repeat: repeat-y;
-  height: 640px;
+  height: 625px;
   float: left;
   position: absolute;
   right: 326px;
   top: -40px;
 }
-/* line 71, ../../application/sass/_home.sass */
+/* line 72, ../../application/sass/_home.sass */
 .main .columns .one-section {
   padding-top: 40px;
   padding-bottom: 58px;
   position: relative;
 }
-/* line 75, ../../application/sass/_home.sass */
+/* line 76, ../../application/sass/_home.sass */
 .main .columns .one-section .need-workers {
   right: -3px;
   top: 133px;
   position: absolute;
 }
-/* line 79, ../../application/sass/_home.sass */
+/* line 80, ../../application/sass/_home.sass */
 .main .columns h1 {
   font-size: 22px;
   color: #474747;
   text-decoration: underline;
   padding-top: 2px;
 }
-/* line 84, ../../application/sass/_home.sass */
+/* line 85, ../../application/sass/_home.sass */
 .main .columns p {
   font-size: 18px;
   color: #474747;
   padding-top: 24px;
   line-height: 20px;
 }
-/* line 89, ../../application/sass/_home.sass */
+/* line 90, ../../application/sass/_home.sass */
 .main .columns .left-col {
   width: 310px;
   float: left;
 }
-/* line 92, ../../application/sass/_home.sass */
+/* line 93, ../../application/sass/_home.sass */
 .main .columns .right-col {
   width: 310px;
   float: right;
 }
 
-/* line 96, ../../application/sass/_home.sass */
+/* line 97, ../../application/sass/_home.sass */
 .banner {
   height: 120px;
   background: white;
@@ -2339,7 +2345,181 @@ header .account {
   text-decoration: underline;
 }
 
-/* line 32, ../../application/sass/screen.sass */
+/* line 1, ../../application/sass/_search-jobs.sass */
+.search-jobs {
+  width: 950px;
+  height: 300px;
+  background-image: linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+  background-image: -o-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+  background-image: -moz-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+  background-image: -webkit-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+  background-image: -ms-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.28, #95000a), color-stop(0.75, #ec0124), color-stop(0.88, #fb4f6b));
+}
+/* line 10, ../../application/sass/_search-jobs.sass */
+.search-jobs .b-form {
+  color: white;
+}
+/* line 13, ../../application/sass/_search-jobs.sass */
+.search-jobs .b-form .b-jobtypes_inner {
+  padding-top: 30px;
+  padding-left: 20px;
+  width: 200px;
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+}
+
+/* line 1, ../../application/sass/_search-workers.sass */
+.b-search {
+  padding-bottom: 30px;
+}
+
+/* line 3, ../../application/sass/_search-workers.sass */
+.search-workers {
+  width: 950px;
+  padding: 30px 0 20px;
+  color: white;
+}
+/* line 7, ../../application/sass/_search-workers.sass */
+.search-workers .b-filter {
+  background-image: linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -o-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -moz-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -webkit-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -ms-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.34, #97000a), color-stop(0.73, #ca0018), color-stop(0.87, #ec0225), color-stop(0.94, #fb4f6b));
+}
+/* line 14, ../../application/sass/_search-workers.sass */
+.search-workers .b-filter .b-one__line {
+  border-bottom: 3px solid white;
+}
+/* line 16, ../../application/sass/_search-workers.sass */
+.search-workers .b-filter .b-one__line .b-one-col {
+  float: left;
+}
+/* line 18, ../../application/sass/_search-workers.sass */
+.search-workers .b-jobtypes_inner {
+  border-right: 3px solid white;
+}
+/* line 20, ../../application/sass/_search-workers.sass */
+.search-workers .b-jobtypes_inner h3 {
+  color: white;
+  font-size: 17px;
+  padding-bottom: 30px;
+}
+/* line 24, ../../application/sass/_search-workers.sass */
+.search-workers .b-jobtypes_inner .b-jobtypes_inner__padder {
+  padding: 30px 20px;
+}
+/* line 26, ../../application/sass/_search-workers.sass */
+.search-workers .b-jobtypes_inner .b-jobtypes_inner__padder #select_job_types_chzn {
+  width: 235px !important;
+}
+/* line 29, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col .b-one-group {
+  padding-bottom: 0 !important;
+}
+/* line 31, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col .b-one-group h3 {
+  padding-right: 20px;
+}
+/* line 33, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col.names {
+  width: 325px;
+  padding: 18px 20px 0;
+  border-right: 3px solid;
+  height: 115px;
+}
+/* line 38, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col.gender {
+  padding: 14px 20px 0;
+}
+/* line 40, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col.gender label {
+  font-size: 13px;
+}
+/* line 42, ../../application/sass/_search-workers.sass */
+.search-workers .b-one__fieldset {
+  padding-bottom: 16px;
+}
+/* line 44, ../../application/sass/_search-workers.sass */
+.search-workers .b-one__fieldset input {
+  margin-top: 4px;
+  height: 24px;
+}
+/* line 47, ../../application/sass/_search-workers.sass */
+.search-workers label {
+  color: white;
+  width: 110px;
+  display: block;
+  padding-top: 6px;
+  float: left;
+  font-size: 17px;
+}
+/* line 56, ../../application/sass/_search-workers.sass */
+.search-workers .b-one-col .b-one-group .b-one__fieldset {
+  padding-bottom: 18px;
+}
+/* line 58, ../../application/sass/_search-workers.sass */
+.search-workers #reset_filter {
+  border: none;
+  color: white;
+  background: #e80021;
+}
+/* line 63, ../../application/sass/_search-workers.sass */
+.search-workers #reset_filter:active, .search-workers #reset_filter:hover {
+  background: #666666;
+  cursor: pointer;
+}
+/* line 67, ../../application/sass/_search-workers.sass */
+.search-workers #age_slider, .search-workers #cost_slider {
+  margin-bottom: 20px;
+  height: 4px;
+  margin-top: 7px;
+  border: none;
+}
+/* line 72, ../../application/sass/_search-workers.sass */
+.search-workers #age_slider .ui-slider-range, .search-workers #cost_slider .ui-slider-range {
+  background: #b8b8b8;
+}
+/* line 74, ../../application/sass/_search-workers.sass */
+.search-workers #age_slider .ui-slider-handle, .search-workers #cost_slider .ui-slider-handle {
+  top: -0.2em;
+  height: 12px;
+  width: 12px;
+  background: #b8b8b8;
+  border: none;
+  border-radius: 0;
+}
+
+/* line 82, ../../application/sass/_search-workers.sass */
+.b-one-col.gender .b-one__fieldset {
+  padding-bottom: 0 !important;
+}
+
+/* line 85, ../../application/sass/_search-workers.sass */
+.b-one__line.sliders {
+  border: none;
+}
+/* line 87, ../../application/sass/_search-workers.sass */
+.b-one__line.sliders .b-one-group {
+  padding: 20px;
+}
+
+/* line 92, ../../application/sass/_search-workers.sass */
+.b-search .workers-pagination .current {
+  background: #b8b8b8;
+  color: white;
+  border-radius: nine;
+  border: none;
+}
+/* line 97, ../../application/sass/_search-workers.sass */
+.b-search .workers-pagination .page-link {
+  border: none;
+  border-radius: none !important;
+}
+
+/* line 34, ../../application/sass/screen.sass */
 .clear {
   clear: both;
   float: none;

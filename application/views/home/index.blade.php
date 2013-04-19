@@ -1,7 +1,11 @@
 @layout('master')
 
+@section('after_assets')
+    <script src="js/jquery.slides.min.js"></script>
+    <link href="/css/slider.css" media="all" type="text/css" rel="stylesheet">
+@endsection
+
 @section('content')
-    
 	<div class="main">
         <div class="slogan">Работа у вас, рабочие у нас!</div>
         <div class="buttons">

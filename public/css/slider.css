@@ -1,0 +1,208 @@
+.slidesjs-container{
+    height: 448px;
+    width: 885px !important;
+    margin: 0 auto;
+
+}
+.slider_inner{
+    background: #e3dec5;
+    border-top: 3px solid #c3bdbd;
+    border-bottom: 3px solid #c3bdbd;
+    width: 100%;
+}
+#slides {
+    display: none;
+    width: 885px;
+    margin: 0 auto;
+}
+
+#slides .slidesjs-navigation {
+    margin-top:5px;
+}
+
+#slides {
+    position: relative;
+}
+a.slidesjs-next,
+a.slidesjs-previous {
+    background-image: url(/img/slider_arrows.png);
+    background-repeat: no-repeat;
+    display:block;
+    width:60px;
+    height:60px;
+    overflow: hidden;
+    text-indent: -9999px;
+    float: left;
+    position: absolute;
+    z-index: 99999999;
+}
+
+a.slidesjs-play,
+a.slidesjs-stop{
+    text-indent: 99999;
+    display: none !important;
+}
+
+a.slidesjs-next {
+    background-position: -60px 0;
+    top: 197px;
+    right: 0px;
+}
+
+
+a.slidesjs-previous {
+    background-position: 0 0;
+    top: 197px;
+    left: 27px;
+}
+
+
+a.slidesjs-play {
+    display: none;
+}
+
+a:hover.slidesjs-play {
+    display: none;
+}
+
+a.slidesjs-stop {
+    display: none;
+}
+
+a:hover.slidesjs-stop {
+    display: none;
+}
+
+.slidesjs-pagination {
+    width: 60px;
+    margin: 0 auto;
+    list-style: none;
+    position: relative;
+    top: -10px;
+    z-index: 999999999;
+}
+
+.slidesjs-pagination li {
+    float: left;
+    margin: 0 4px;
+}
+
+.slidesjs-pagination li a {
+    display: block;
+    width: 13px;
+    height: 0px;
+    padding-top: 15px;
+    background-image: url(/img/slider_pagination.png);
+    background-position: 0 0;
+    float: left;
+    overflow: hidden;
+}
+
+.slidesjs-pagination li a.active,
+.slidesjs-pagination li a:hover.active {
+    background-position: -23px 0
+}
+
+.slidesjs-pagination li a:hover {
+    background-position: -23px 0
+}
+
+#slides a:link,
+#slides a:visited {
+    color: #333
+}
+
+#slides a:hover,
+#slides a:active {
+    color: #9e2020
+}
+
+.navbar {
+    overflow: hidden
+}
+
+/*End SlidesJS Optional*/
+
+/*SlidesJS Required: These styles are required if you'd like a responsive slideshow */
+
+#slides {
+    display: none
+}
+
+.container {
+    margin: 0 auto
+}
+
+/* For tablets & smart phones */
+@media (max-width: 767px) {
+    body {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .container {
+        width: auto
+    }
+}
+
+/* For smartphones */
+@media (max-width: 480px) {
+    .container {
+        width: auto
+    }
+}
+
+/* For smaller displays like laptops */
+@media (min-width: 768px) and (max-width: 979px) {
+    .container {
+        width: 724px
+    }
+}
+
+/* For larger displays */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px
+    }
+}
+
+
+#slide-why-5ok h1 {
+    color: #3d3d3d;
+    font-weight: bold;
+    font-size: 34px;
+    padding-left: 267px;
+    padding-top: 16px;
+    letter-spacing: -0.05em;
+}
+#slide-why-5ok h2 {
+    color: #3d3d3d;
+    font-weight: bold;
+    font-size: 43px;
+    padding-top: 15px;
+    padding-left: 100px;
+}
+#slide-why-5ok h3 {
+    color: #cf001a;
+    font-weight: bold;
+    font-size: 56px;
+    padding-left: 259px;
+    padding-top: 12px;
+}
+#slide-why-5ok p {
+    color: #0b0b0b;
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: -61px;
+    margin-left: 126px;
+    line-height: 31px;
+    letter-spacing: -0.04em;
+    text-align: center;
+}
+
+#slide-why-5ok .clock {
+    top: -69px;
+    left: 93px;
+    position: relative;
+}
+
+

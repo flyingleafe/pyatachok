@@ -24,11 +24,11 @@
 
         @yield('content')
     </div>
-    <div class="slider">
-        <div class="slider-content">
-            <img src="/img/slide1.png"/>
-        </div>
-    </div>
+
+    <?php if(URL::current() == URL::base().'/'){?>
+        @include('blocks.slider')
+    <?}?>
+
     <div class="footer">
         <div class="footer-content">
            <div class="left-col">
