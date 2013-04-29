@@ -45,7 +45,7 @@
                 </div>
 
                 {{ Form::submit('Искать', array('class'=>''))    }}
-                <input type="button" value="Сбросить фильтр" id="reset_filter">
+                <input type="button" value="Сбросить фильтр" id="reset_filter" class="red-button">
             {{ Form::close();}}
         </div>
         @include('blocks.jobs-results-hb')

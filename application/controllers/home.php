@@ -36,8 +36,5 @@ class Home_Controller extends Base_Controller {
 		return view('home.index');
 	}
 
-	public function action_about()
-	{
-		return view('home.about');
-	}
+
 }

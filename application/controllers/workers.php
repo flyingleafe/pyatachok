@@ -169,4 +169,13 @@ class Workers_Controller extends Base_Controller {
         Session::put('chosen_workers', $arr);
         return Response::json(array('deleted' => true));
     }
+
+
+    public function  get_profile($id){
+        $user = User::find($id);
+        $avatar = $user->getAvatar();
+        $jobtypes =  $user->jobtypes()->pivot()->get();
+
+        return View::make('workers.view')->with( array('user' => $user, 'avatar'=>$avatar,'jobtypes'=>$jobtypes) );
+    }
 }

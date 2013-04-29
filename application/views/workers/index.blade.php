@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="main">
-        @include('blocks.worker-chosen-list-hb')
+
         <div class="b-content">
             <div class="slogan">Найти рабочих: </div>
             @if($errors->has())
@@ -20,10 +20,10 @@
 
 
             <div class="search-workers">
-                {{ Form::open('workers/search', 'POST', array('id'=>'search-workers')) }}
+                {{ Form::open('workers/search', 'POST', array('id'=>'search-workers', 'search-workers__form')) }}
                 <div class="b-filter">
                     <div class="b-one__line">
-                        <div class="b-one-col" style="width: 310px">
+                        <div class="b-one-col" style="width: 310px; border-right: 3px solid #fff; height: 133px">
                             <div class="b-jobtypes_inner">
                                 <div class="b-jobtypes_inner__padder">
                                     @include('blocks.jobtypes')
@@ -105,10 +105,12 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <input type="button" value="Сбросить фильтр" id="reset_filter">
+                <input type="button" value="Сбросить фильтр" id="reset_filter" class="red-button">
                 {{ Form::close() }}
                 <div class="clear"></div>
-            </div> <div class="clear"></div>
+
+
+
                 <!--
                 <div class="b-one__fieldset">
                     {{ Form::label('rating', 'Рейтинг', array('class'=>''))    }}
@@ -137,13 +139,20 @@
                     </div>
                 </div>
                 -->
-
-            <div class="b-search">
-                @include('blocks.workers-results-hb')
-                <div class="workers-pagination"></div>
-                <div id="ajaxResponseSearch"></div>
-                <div class="workers-pagination"></div>
+                <div class="left-col">
+                    <div class="b-search">
+                        @include('blocks.workers-results-hb')
+                        <div class="workers-pagination"></div>
+                        <div id="ajaxResponseSearch"></div>
+                        <div class="workers-pagination"></div>
+                    </div>
+                </div>
+                <div class="right-col">
+                    @include('blocks.worker-chosen-list-hb')
+                    <div class="clear"></div>
+                </div>
             </div>
+
         </div>
     </div>
 @endsection

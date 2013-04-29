@@ -2,9 +2,9 @@
 
 class User extends Eloquent {
 
-    public static  $image_dir = 'public/storage/images/';
-    public static  $image_dir_mini = 'public/storage/images/mini/';
-    public static  $tmp_dir = 'public/storage/images/tmp/';
+    public static  $image_dir =       '/public/storage/images/';
+    public static  $image_dir_mini =  '/public/storage/images/mini/';
+    public static  $tmp_dir =         '/public/storage/images/tmp/';
 
     public static $roles = array(
         'user'  => 0,
@@ -115,5 +115,32 @@ class User extends Eloquent {
     {
         return substr(preg_replace( '/[^0-9]+/', '', $phone), -self::$phone_nums );
     }
+
+    public static function getSmallAvatar(){
+        return self::$image_dir_mini."photo_64x64_";
+    }
+
+    public  function getAvatar(){
+        if(!is_null($this->get_attribute('avatar_url')))
+               return HTML::image(self::$image_dir.$this->get_attribute('avatar_url'),'');
+        else
+            return HTML::image(self::$image_dir.'anon.jpg','');
+
+    }
+    public static function getAnon(){
+        return HTML::image(self::$image_dir.'anon.jpg','');
+    }
+
+    public function getCreatedAt(){
+       return date('d-m-Y', strtotime($this->get_attribute('created_at')));
+    }
+
+
+    public function getGender(){
+        $gender = array(0=>'Женский', 1=>'Мужской');
+        $val = $this->get_attribute('gender');
+        return $gender[$val];
+    }
 }
+
 

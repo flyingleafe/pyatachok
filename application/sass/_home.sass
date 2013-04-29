@@ -1,6 +1,12 @@
 /**
  * Элементы главной страницы
  */
+
+
+.inner
+  width: 940px
+  margin: 0 auto
+  @extend .clearfix
 .main
   width: 700px
   margin: 0 auto
@@ -15,6 +21,9 @@
   .buttons
     padding-top: 60px
 
+  .big-button:hover
+    background-image: -moz-linear-gradient(bottom, rgb(155,0,13) 22%, rgb(236,2,37) 69%, rgb(246,31,67) 66%)
+    background-image: -webkit-linear-gradient(bottom, rgb(155,0,13) 22%, rgb(236,2,37) 69%, rgb(246,31,67) 66%)
   .big-button
     +text-shadow(0 -1px 0 rgba(black, .4))
     text-decoration: none
@@ -36,10 +45,12 @@
     border: 2px solid
     border-color: rgba(white, .4) rgba(gray, .2) rgba(black, .3)
     position: relative
+
     a
       color: #fff
-      text-decoration: none x
-
+      text-decoration: none !important
+    .a:hover
+      text-decoration: none !important
     .man
       position: absolute
     .man.left-man
@@ -53,9 +64,6 @@
   .big-button.right
     margin: 0 !important
     float: right
-    a
-      padding-left: 20px
-
   .columns
     padding: 0
     position: relative

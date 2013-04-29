@@ -1,7 +1,7 @@
 @layout('master')
 
 @section('before_assets')
-    <script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     var URLS = {
         job_delete: '{{ URL::to("profile/delete_job") }}'
     }
@@ -11,25 +11,22 @@
 
 @section('content')
     <div class="main">
-        </br>
-        </br>
-        <a href="/">Назад</a>
-        <div class="b-user-info">
-            <h1>Личный кабинет</h1>
-            <a href="{{URL::to('profile/edit') }}">Редактировать информацию</a>
-            <br>
-            <br>
+        <div class="user-info">
+
+            <div class="slogan">Личный кабинет </div>
+            <a href="/">← Назад</a></br>
+
+            <!--a class="edit-info" href="{{URL::to('profile/edit') }}">Редактировать информацию</a--></br>
 
 
-            @if(isset( Auth::user()->avatar_url))
-                {{ HTML::image('/storage/images/'.Auth::user()->avatar_url,''); }}
-            @endif
-            <br>
-            <br>
+            <div class="avatar">
+                {{ Auth::user()->getAvatar(); }}
+            </div>
+
             <label>Загрузка фотографий: </label>
             {{Form::open_for_files('profile/upload', 'POST')}}
                 {{Form::file('photo')}}
-                {{Form::submit('загрузить')}}
+                {{Form::submit('загрузить' ,array('class'=>'red-button'))}}
             {{Form::close()}}
             <br>
             <br>
@@ -40,28 +37,13 @@
             <br>
             <br>
 
-            <div class="b-one__fieldset">
-                <label>Номер телефона:</label>
-                <span>{{ Auth::user()->phone;}}</span>
-            </div>
+            {{ View::make('blocks.user-profile', array('user'=>Auth::user()))}}
 
-            <div class="b-one__fieldset">
-                <label>Имя и фамилия:</label>
-                <span>{{ Auth::user()->name }}</span>
-            </div>
-
-             <div class="b-one__fieldset">
-                <label>Пол: </label>
-                <? $gender = array(0=>'Женский', 1=>'Мужской' ) ?>
-                <span>{{ $gender[Auth::user()->gender] }}</span>
-             </div>
 
             <?php $jobtypes = Jobtype::All(); ?>
 
 
-
-
-            {{ Form::open('profile/update', 'POST', array('class' => '')) }}
+            {{ Form::open('profile/update', 'POST', array('class' => 'add-jobtype')) }}
             @if($jobtypes)
 
                 <div class="b-jobtypes_inner">
@@ -72,35 +54,37 @@
                             <option <?php if(array_key_exists($job->id, $user_jobtypes)) echo 'selected' ?> value="{{$job->id}}">{{$job->name}}</option>
                         <?php endforeach; ?>
                     </select>
+                    </br>
+                    <input id="add_job_types"  class='red-button' type="button" value="Добавить" >
                 </div>
-                <input id="add_job_types" type="button" value="Добавить" style="float: left">
+
 
             <div class="clear"></div>
-            <div class="b-selected-job">
-                <div class="b-user-job head">
-                    <span class="b-jobtype__label">Тип работ:</span>
-                    <span class="b-jobcost__label">Стоимость</span>
-                    <div class="clear"></div>
-                </div>
 
-                @if( $errors->has())
-                    {{ $errors->first('cost', '<p class="form__error">:message</p>') }}
-                @endif
+            @if( $errors->has())
+                {{ $errors->first('cost', '<p class="form__error">:message</p>') }}
+            @endif
 
+            <table class="info b-selected-job">
+             <tr>
+                 <th>Тип работ:</th>
+                 <th>Стоимость:
+             </tr>
                 <?php foreach ($user_jobtypes as $user_job=>$const) : ?>
-                    <div class="b-user-job" id="jobtype_{{$user_job}}">
-                         <span class="b-jobtype__label"><?echo Jobtype::find($user_job)->name ?></span>
-                         <span class="b-jobcost__label"><input type="text" name="cost[]" value="{{$const}}"> <ins>руб/час</ins></span>
+                <tr id="jobtype_{{$user_job}}">
+                     <td><?echo Jobtype::find($user_job)->name ?></td>
+                     <td>
+                         <input type="text" class="cost-input" name="cost[]" value="{{$const}}"> <ins>руб. / час</ins>
                          <input type="hidden"  name="job_ids[]" value="{{$user_job}}">
-                         <div class="clear"></div>
-                    </div>
+                     </td>
+                 </tr>
                 <?php endforeach; ?>
-            </div>
-            {{ Form::submit('Сохранить', array('class'=>'')) }}
-
+            </table>
+            {{ Form::submit('Сохранить', array('class'=>'red-button save-jobtypes')) }}
             @endif
 
             {{ Form::close();}}
         </div>
     </div>
 @endsection
+

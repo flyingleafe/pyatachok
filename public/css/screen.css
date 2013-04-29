@@ -2,7 +2,7 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700,800&subset=latin,cyrillic");
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
+ * Import this file using the following HTML or equivalent  :  
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 17, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
@@ -1723,16 +1723,16 @@ body {
  * Общие стили
  */
 /* line 5, ../../application/sass/_general.sass */
-.clearfix, header, header nav.top ul, .main {
+.clearfix, header, header nav.top ul, .inner, .main {
   *zoom: 1;
 }
 /* line 7, ../../application/sass/_general.sass */
-.clearfix:before, header:before, header nav.top ul:before, .main:before, .clearfix:after, header:after, header nav.top ul:after, .main:after {
+.clearfix:before, header:before, header nav.top ul:before, .inner:before, .main:before, .clearfix:after, header:after, header nav.top ul:after, .inner:after, .main:after {
   content: " ";
   display: table;
 }
 /* line 10, ../../application/sass/_general.sass */
-.clearfix:after, header:after, header nav.top ul:after, .main:after {
+.clearfix:after, header:after, header nav.top ul:after, .inner:after, .main:after {
   clear: both;
 }
 
@@ -1918,12 +1918,18 @@ header .account {
 /*
  * Элементы главной страницы
  */
-/* line 4, ../../application/sass/_home.sass */
+/* line 6, ../../application/sass/_home.sass */
+.inner {
+  width: 940px;
+  margin: 0 auto;
+}
+
+/* line 10, ../../application/sass/_home.sass */
 .main {
   width: 700px;
   margin: 0 auto;
 }
-/* line 9, ../../application/sass/_home.sass */
+/* line 15, ../../application/sass/_home.sass */
 .main section {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1931,15 +1937,20 @@ header .account {
   float: left;
   width: 50%;
 }
-/* line 13, ../../application/sass/_home.sass */
+/* line 19, ../../application/sass/_home.sass */
 .main section.for-worker {
   border-right: 2px dashed gray;
 }
-/* line 15, ../../application/sass/_home.sass */
+/* line 21, ../../application/sass/_home.sass */
 .main .buttons {
   padding-top: 60px;
 }
-/* line 18, ../../application/sass/_home.sass */
+/* line 24, ../../application/sass/_home.sass */
+.main .big-button:hover {
+  background-image: -moz-linear-gradient(bottom, #9b000d 22%, #ec0225 69%, #f61f43 66%);
+  background-image: -webkit-linear-gradient(bottom, #9b000d 22%, #ec0225 69%, #f61f43 66%);
+}
+/* line 27, ../../application/sass/_home.sass */
 .main .big-button {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
   text-decoration: none;
@@ -1965,41 +1976,41 @@ header .account {
   border-color: rgba(255, 255, 255, 0.4) rgba(128, 128, 128, 0.2) rgba(0, 0, 0, 0.3);
   position: relative;
 }
-/* line 39, ../../application/sass/_home.sass */
+/* line 49, ../../application/sass/_home.sass */
 .main .big-button a {
   color: white;
-  text-decoration: none x;
+  text-decoration: none !important;
 }
-/* line 43, ../../application/sass/_home.sass */
+/* line 52, ../../application/sass/_home.sass */
+.main .big-button .a:hover {
+  text-decoration: none !important;
+}
+/* line 54, ../../application/sass/_home.sass */
 .main .big-button .man {
   position: absolute;
 }
-/* line 45, ../../application/sass/_home.sass */
+/* line 56, ../../application/sass/_home.sass */
 .main .big-button .man.left-man {
   left: -167px;
   top: -28px;
 }
-/* line 48, ../../application/sass/_home.sass */
+/* line 59, ../../application/sass/_home.sass */
 .main .big-button .man.right-man {
   right: -170px;
   top: -27px;
 }
-/* line 53, ../../application/sass/_home.sass */
+/* line 64, ../../application/sass/_home.sass */
 .main .big-button.right {
   margin: 0 !important;
   float: right;
 }
-/* line 56, ../../application/sass/_home.sass */
-.main .big-button.right a {
-  padding-left: 20px;
-}
-/* line 59, ../../application/sass/_home.sass */
+/* line 67, ../../application/sass/_home.sass */
 .main .columns {
   padding: 0;
   position: relative;
   padding-left: 40px;
 }
-/* line 63, ../../application/sass/_home.sass */
+/* line 71, ../../application/sass/_home.sass */
 .main .columns .vertical-line {
   background: url("/img/vertical_line.png") center center no-repeat;
   width: 2px;
@@ -2011,44 +2022,44 @@ header .account {
   right: 326px;
   top: -40px;
 }
-/* line 72, ../../application/sass/_home.sass */
+/* line 80, ../../application/sass/_home.sass */
 .main .columns .one-section {
   padding-top: 40px;
   padding-bottom: 58px;
   position: relative;
 }
-/* line 76, ../../application/sass/_home.sass */
+/* line 84, ../../application/sass/_home.sass */
 .main .columns .one-section .need-workers {
   right: -3px;
   top: 133px;
   position: absolute;
 }
-/* line 80, ../../application/sass/_home.sass */
+/* line 88, ../../application/sass/_home.sass */
 .main .columns h1 {
   font-size: 22px;
   color: #474747;
   text-decoration: underline;
   padding-top: 2px;
 }
-/* line 85, ../../application/sass/_home.sass */
+/* line 93, ../../application/sass/_home.sass */
 .main .columns p {
   font-size: 18px;
   color: #474747;
   padding-top: 24px;
   line-height: 20px;
 }
-/* line 90, ../../application/sass/_home.sass */
+/* line 98, ../../application/sass/_home.sass */
 .main .columns .left-col {
   width: 310px;
   float: left;
 }
-/* line 93, ../../application/sass/_home.sass */
+/* line 101, ../../application/sass/_home.sass */
 .main .columns .right-col {
   width: 310px;
   float: right;
 }
 
-/* line 97, ../../application/sass/_home.sass */
+/* line 105, ../../application/sass/_home.sass */
 .banner {
   height: 120px;
   background: white;
@@ -2077,74 +2088,11 @@ header .account {
 
 /* line 14, ../../application/sass/_logo.sass */
 .slogan {
-  padding-left: 190px;
+  width: 500px;
+  margin: 0 auto;
   font-size: 23px;
   font-family: "Segoe PR";
   font-weight: normal;
-}
-
-/* line 1, ../../application/sass/_b-user-info.sass */
-.b-user-info {
-  padding-top: 30px;
-}
-/* line 3, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-jobtypes_inner {
-  padding-top: 30px;
-}
-/* line 5, ../../application/sass/_b-user-info.sass */
-.b-user-info h1 {
-  font-size: 24px;
-  padding-bottom: 10px;
-}
-/* line 8, ../../application/sass/_b-user-info.sass */
-.b-user-info h3 {
-  font-size: 18px;
-  padding-bottom: 5px;
-}
-/* line 11, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-one__fieldset {
-  font-size: 16px;
-  padding-bottom: 5px;
-}
-/* line 14, ../../application/sass/_b-user-info.sass */
-.b-user-info .chzn-select {
-  width: 300px;
-}
-/* line 17, ../../application/sass/_b-user-info.sass */
-.b-user-info .chzn-container {
-  float: left;
-  padding-right: 20px;
-}
-/* line 20, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-selected-job {
-  padding-top: 20px;
-}
-/* line 21, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-selected-job .form__error {
-  color: orangered;
-  padding-bottom: 5px;
-}
-/* line 25, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-selected-job .b-user-job {
-  padding-bottom: 10px;
-}
-/* line 27, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-selected-job .b-user-job input {
-  width: 50px;
-}
-/* line 30, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-user-job .b-jobtype__label, .b-user-info .b-user-job .b-jobcost__label {
-  width: 200px;
-  display: block;
-  float: left;
-}
-/* line 34, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-user-job .b-jobcost__label {
-  width: 100px;
-}
-/* line 36, ../../application/sass/_b-user-info.sass */
-.b-user-info .b-user-job .b-jobcost__label ins {
-  padding-left: 5px;
 }
 
 /* line 1, ../../application/sass/_b-form.sass */
@@ -2207,30 +2155,85 @@ header .account {
   font-weight: bold;
 }
 
+/* line 40, ../../application/sass/_b-form.sass */
+.job-info {
+  border: 2px dashed #525252;
+  border-radius: 10px;
+  float: left;
+  width: 360px;
+  padding: 10px;
+  margin-right: 20px;
+}
+/* line 47, ../../application/sass/_b-form.sass */
+.job-info h1 {
+  padding-bottom: 30px;
+  font-size: 23px;
+}
+/* line 50, ../../application/sass/_b-form.sass */
+.job-info .b-one__fieldset {
+  padding-bottom: 10px;
+}
+/* line 52, ../../application/sass/_b-form.sass */
+.job-info .b-one__fieldset label {
+  display: block;
+  float: left;
+  width: 170px;
+}
+/* line 56, ../../application/sass/_b-form.sass */
+.job-info .job-info__form {
+  background: #e4e4e4;
+}
+
 /*
  * Результаты поиска рабочих
  */
-/* line 4, ../../application/sass/_results.sass */
-.results {
-  padding-top: 30px;
+/* line 5, ../../application/sass/_results.sass */
+.results td {
+  color: #494949;
 }
-/* line 6, ../../application/sass/_results.sass */
+/* line 7, ../../application/sass/_results.sass */
 .results th, .results td {
-  padding: 1.5em;
+  padding: 10px;
+  background: #e4e4e4;
+  border-left: 1px solid #eeeeee;
 }
-/* line 8, ../../application/sass/_results.sass */
+/* line 11, ../../application/sass/_results.sass */
+.results .worker_choose {
+  text-align: center;
+}
+/* line 13, ../../application/sass/_results.sass */
 .results th {
   font-weight: bold;
+  color: white;
+  border-left: 1px solid #eeeeee;
+  background-image: linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -o-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -moz-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -webkit-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -ms-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.34, #97000a), color-stop(0.73, #ca0018), color-stop(0.87, #ec0225), color-stop(0.94, #fb4f6b));
 }
-/* line 10, ../../application/sass/_results.sass */
+/* line 23, ../../application/sass/_results.sass */
 .results .worker {
   padding-bottom: 20px;
 }
-/* line 12, ../../application/sass/_results.sass */
+/* line 25, ../../application/sass/_results.sass */
 .results .worker label {
   width: 100px;
   float: left;
   font-weight: bold;
+}
+
+/* line 31, ../../application/sass/_results.sass */
+.b-search .workers-pagination {
+  padding: 10px 0;
+  width: 600px;
+  margin: 0 auto;
+}
+
+/* line 35, ../../application/sass/_results.sass */
+.left-col {
+  float: left;
 }
 
 /* line 1, ../../application/sass/_slider.sass */
@@ -2360,8 +2363,6 @@ header .account {
   padding-top: 30px;
   padding-left: 20px;
   width: 200px;
-  border-bottom: 2px solid white;
-  border-right: 2px solid white;
 }
 
 /* line 1, ../../application/sass/_search-workers.sass */
@@ -2376,6 +2377,10 @@ header .account {
   color: white;
 }
 /* line 7, ../../application/sass/_search-workers.sass */
+.search-workers .search-workers__form {
+  margin-bottom: 30px;
+}
+/* line 9, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter {
   background-image: linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -o-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
@@ -2384,65 +2389,61 @@ header .account {
   background-image: -ms-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.34, #97000a), color-stop(0.73, #ca0018), color-stop(0.87, #ec0225), color-stop(0.94, #fb4f6b));
 }
-/* line 14, ../../application/sass/_search-workers.sass */
+/* line 16, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line {
   border-bottom: 3px solid white;
 }
-/* line 16, ../../application/sass/_search-workers.sass */
+/* line 18, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line .b-one-col {
   float: left;
 }
-/* line 18, ../../application/sass/_search-workers.sass */
-.search-workers .b-jobtypes_inner {
-  border-right: 3px solid white;
-}
-/* line 20, ../../application/sass/_search-workers.sass */
+/* line 21, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner h3 {
   color: white;
   font-size: 17px;
   padding-bottom: 30px;
 }
-/* line 24, ../../application/sass/_search-workers.sass */
+/* line 25, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder {
   padding: 30px 20px;
 }
-/* line 26, ../../application/sass/_search-workers.sass */
+/* line 27, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder #select_job_types_chzn {
   width: 235px !important;
 }
-/* line 29, ../../application/sass/_search-workers.sass */
+/* line 30, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group {
   padding-bottom: 0 !important;
 }
-/* line 31, ../../application/sass/_search-workers.sass */
+/* line 32, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group h3 {
   padding-right: 20px;
 }
-/* line 33, ../../application/sass/_search-workers.sass */
+/* line 34, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.names {
   width: 325px;
   padding: 18px 20px 0;
   border-right: 3px solid;
   height: 115px;
 }
-/* line 38, ../../application/sass/_search-workers.sass */
+/* line 39, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender {
   padding: 14px 20px 0;
 }
-/* line 40, ../../application/sass/_search-workers.sass */
+/* line 41, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender label {
   font-size: 13px;
 }
-/* line 42, ../../application/sass/_search-workers.sass */
+/* line 43, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset {
   padding-bottom: 16px;
 }
-/* line 44, ../../application/sass/_search-workers.sass */
+/* line 45, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset input {
   margin-top: 4px;
   height: 24px;
 }
-/* line 47, ../../application/sass/_search-workers.sass */
+/* line 48, ../../application/sass/_search-workers.sass */
 .search-workers label {
   color: white;
   width: 110px;
@@ -2451,33 +2452,22 @@ header .account {
   float: left;
   font-size: 17px;
 }
-/* line 56, ../../application/sass/_search-workers.sass */
+/* line 57, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group .b-one__fieldset {
   padding-bottom: 18px;
 }
-/* line 58, ../../application/sass/_search-workers.sass */
-.search-workers #reset_filter {
-  border: none;
-  color: white;
-  background: #e80021;
-}
-/* line 63, ../../application/sass/_search-workers.sass */
-.search-workers #reset_filter:active, .search-workers #reset_filter:hover {
-  background: #666666;
-  cursor: pointer;
-}
-/* line 67, ../../application/sass/_search-workers.sass */
+/* line 59, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider, .search-workers #cost_slider {
   margin-bottom: 20px;
   height: 4px;
   margin-top: 7px;
   border: none;
 }
-/* line 72, ../../application/sass/_search-workers.sass */
+/* line 64, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-range, .search-workers #cost_slider .ui-slider-range {
   background: #b8b8b8;
 }
-/* line 74, ../../application/sass/_search-workers.sass */
+/* line 66, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-handle, .search-workers #cost_slider .ui-slider-handle {
   top: -0.2em;
   height: 12px;
@@ -2487,35 +2477,271 @@ header .account {
   border-radius: 0;
 }
 
-/* line 82, ../../application/sass/_search-workers.sass */
+/* line 74, ../../application/sass/_search-workers.sass */
 .b-one-col.gender .b-one__fieldset {
   padding-bottom: 0 !important;
 }
 
-/* line 85, ../../application/sass/_search-workers.sass */
+/* line 77, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders {
   border: none;
 }
-/* line 87, ../../application/sass/_search-workers.sass */
+/* line 79, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders .b-one-group {
   padding: 20px;
 }
 
-/* line 92, ../../application/sass/_search-workers.sass */
+/* line 84, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .current {
   background: #b8b8b8;
   color: white;
   border-radius: nine;
   border: none;
 }
-/* line 97, ../../application/sass/_search-workers.sass */
+/* line 89, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .page-link {
   border: none;
   border-radius: none !important;
 }
 
-/* line 34, ../../application/sass/screen.sass */
+/* line 2, ../../application/sass/_user-info.sass */
+.user-info .avatar {
+  padding-bottom: 20px;
+  width: 300px;
+  padding-right: 30px;
+  float: left;
+}
+/* line 8, ../../application/sass/_user-info.sass */
+.user-info .back-to-workers, .user-info .back-to-workers:visited, .user-info back-to-workers:active {
+  color: black;
+  text-decoration: none;
+}
+/* line 12, ../../application/sass/_user-info.sass */
+.user-info .back-to-workers:hover {
+  text-decoration: underline;
+}
+/* line 15, ../../application/sass/_user-info.sass */
+.user-info .edit-info {
+  display: block;
+  padding-top: 10px;
+}
+/* line 18, ../../application/sass/_user-info.sass */
+.user-info .add-jobtype {
+  float: left;
+  padding-top: 20px;
+}
+/* line 21, ../../application/sass/_user-info.sass */
+.user-info .add-jobtype .b-jobtypes_inner {
+  padding-bottom: 30px;
+}
+/* line 23, ../../application/sass/_user-info.sass */
+.user-info .add-jobtype .b-jobtypes_inner h3 {
+  padding-bottom: 10px;
+}
+/* line 25, ../../application/sass/_user-info.sass */
+.user-info .save-jobtypes {
+  margin-right: 240px;
+  margin-top: 10px;
+  float: right;
+}
+
+/* line 30, ../../application/sass/_user-info.sass */
+.info, .table-red {
+  background: white;
+  width: 360px;
+  margin-bottom: 30px;
+}
+/* line 34, ../../application/sass/_user-info.sass */
+.info tr td, .info tr th, .table-red tr td, .table-red tr th {
+  padding: 10px;
+}
+/* line 36, ../../application/sass/_user-info.sass */
+.info tr td .cost-input, .info tr th .cost-input, .table-red tr td .cost-input, .table-red tr th .cost-input {
+  width: 40px;
+  margin-right: 10px;
+}
+/* line 39, ../../application/sass/_user-info.sass */
+.info tr td ins, .info tr th ins, .table-red tr td ins, .table-red tr th ins {
+  text-decoration: none;
+  font-size: 13px;
+}
+/* line 42, ../../application/sass/_user-info.sass */
+.info tr th, .table-red tr th {
+  color: white;
+  font-weight: bold;
+  background-image: linear-gradient(bottom, #9b000d 37%, #ec0225 69%, #fb4f6b 85%);
+  background-image: -o-linear-gradient(bottom, #9b000d 37%, #ec0225 69%, #fb4f6b 85%);
+  background-image: -moz-linear-gradient(bottom, #9b000d 37%, #ec0225 69%, #fb4f6b 85%);
+  background-image: -webkit-linear-gradient(bottom, #9b000d 37%, #ec0225 69%, #fb4f6b 85%);
+  background-image: -ms-linear-gradient(bottom, #9b000d 37%, #ec0225 69%, #fb4f6b 85%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.37, #9b000d), color-stop(0.69, #ec0225), color-stop(0.85, #fb4f6b));
+}
+
+/* line 1, ../../application/sass/_red_button.sass */
+.red-button {
+  border: none !important;
+  -moz-box-shadow: inset 4px 1px 0px -8px white;
+  -webkit-box-shadow: inset 4px 1px 0px -8px white;
+  box-shadow: inset 4px 1px 0px -8px white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fb4c69), color-stop(1, #9a000a));
+  background: -moz-linear-gradient(center top, #fb4c69 5%, #9a000a 100%);
+  background-color: #fb4c69;
+  display: inline-block;
+  color: white;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 6px 24px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 16, ../../application/sass/_red_button.sass */
+.red-button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #9a000a), color-stop(1, #fb4c69));
+  background: -moz-linear-gradient(center top, #9a000a 5%, #fb4c69 100%);
+  background-color: #9a000a;
+}
+
+/* line 21, ../../application/sass/_red_button.sass */
+.red-button:active {
+  position: relative;
+  top: 1px;
+}
+
+/* line 26, ../../application/sass/_red_button.sass */
 .clear {
   clear: both;
   float: none;
+}
+
+/* line 30, ../../application/sass/_red_button.sass */
+.main {
+  padding-top: 30px;
+}
+/* line 32, ../../application/sass/_red_button.sass */
+.main a {
+  color: black;
+  text-decoration: none;
+}
+/* line 35, ../../application/sass/_red_button.sass */
+.main a:hover {
+  text-decoration: underline;
+}
+
+/* line 37, ../../application/sass/_red_button.sass */
+.footer {
+  margin-top: 30px;
+}
+
+/* line 39, ../../application/sass/_red_button.sass */
+.footer.main-page {
+  margin-top: 0;
+}
+
+/* line 1, ../../application/sass/_content.sass */
+.content {
+  padding-top: 30px;
+}
+/* line 3, ../../application/sass/_content.sass */
+.content h1, .content h2, .content h3, .content h4, .content h5 {
+  padding-bottom: 8px;
+  line-height: 1;
+}
+/* line 6, ../../application/sass/_content.sass */
+.content h1 {
+  font-size: 30px;
+}
+/* line 8, ../../application/sass/_content.sass */
+.content h2 {
+  font-size: 24px;
+}
+/* line 10, ../../application/sass/_content.sass */
+.content h3 {
+  font-size: 18px;
+}
+/* line 12, ../../application/sass/_content.sass */
+.content h4 {
+  font-size: 14px;
+}
+/* line 14, ../../application/sass/_content.sass */
+.content p {
+  line-height: 24px;
+  padding-bottom: 12px;
+}
+/* line 17, ../../application/sass/_content.sass */
+.content ul {
+  padding: 15px 0 15px 20px;
+  display: block;
+}
+/* line 20, ../../application/sass/_content.sass */
+.content ul li {
+  list-style: disc;
+  padding-bottom: 10px;
+}
+
+/* line 2, ../../application/sass/_choose-workers.sass */
+.choose_workers {
+  float: left;
+  border: 2px dashed #525252;
+  border-radius: 10px;
+  padding: 10px;
+}
+/* line 7, ../../application/sass/_choose-workers.sass */
+.choose_workers h1 {
+  color: #525252;
+  text-align: center;
+  font-size: 23px;
+  padding: 10px 0 20px 0;
+}
+/* line 13, ../../application/sass/_choose-workers.sass */
+.choose_workers table td {
+  padding: 8px;
+  background: #e4e4e4;
+  padding: 8px 20px 8px 2px;
+}
+/* line 17, ../../application/sass/_choose-workers.sass */
+.choose_workers table td span {
+  color: #525252;
+}
+/* line 20, ../../application/sass/_choose-workers.sass */
+.choose_workers table th {
+  color: #525252;
+  text-align: center;
+  padding-top: 15px;
+  background: #e4e4e4;
+}
+/* line 25, ../../application/sass/_choose-workers.sass */
+.choose_workers .red-button {
+  color: white;
+  margin-top: 20px;
+}
+
+/* line 30, ../../application/sass/_choose-workers.sass */
+.right-col .choose_workers {
+  margin-top: 45px;
+}
+
+/* line 38, ../../application/sass/screen.sass */
+.slogan {
+  padding: 30px 0;
+}
+
+/* line 41, ../../application/sass/screen.sass */
+.error-list {
+  padding: 8px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 3px;
+  background: white;
+  margin-bottom: 20px;
+}
+/* line 47, ../../application/sass/screen.sass */
+.error-list h3 {
+  padding-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+/* line 51, ../../application/sass/screen.sass */
+.error-list .error {
+  color: black;
+  padding-bottom: 14px;
 }

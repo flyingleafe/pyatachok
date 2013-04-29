@@ -20,8 +20,9 @@ $(function () {
         var q_ids = ids_array.length;
 
         for(i= 0; i<q_ids; i++) {
-
+            console.log(126);
             if($('#jobtype_'+ids_array[i]).length == 0) {
+
                 var job_name = $('#select_job_types  option[value='+ids_array[i]+']').text();
 
                 var job_type = $('<input>')
@@ -33,21 +34,23 @@ $(function () {
                 var cost = $('<input>')
                         .attr('name', 'cost[]')
                         .attr('type', 'text')
+                        .attr('class', 'cost-input')
                         .attr('value', 1)
 
-                var jtl = $('<span>').attr('class', 'b-jobtype__label');
-                var jcl = $('<span>').attr('class', 'b-jobcost__label');
-                var ru = $('<ins>').text('руб.');
-                var clear = $('<div>').attr('class', 'clear');
+                var label_td = $('<td></td>');
+                var cost_td = $('<td></td>');
+                var ru = $('<ins>').text('руб. / час');
 
-                var job = $('<div>')
-                        .attr('class', 'b-user-job')
+
+                var job = $('<tr></tr>')
                         .attr('id', 'jobtype_'+ids_array[i])
-                        .append(jtl.append(job_name))
-                        .append(jcl.append(cost))
-                        .append(jcl.append(ru))
-                        .append(job_type)
-                        .append(clear);
+                        .append(label_td.append(job_name))
+                        .append(cost_td.append(cost))
+                        .append(cost_td.append(ru))
+                        .append(job_type);
+
+                console.log(job);
+
 
                 $('.b-selected-job').append(job);
             }

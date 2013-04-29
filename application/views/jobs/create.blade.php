@@ -2,68 +2,80 @@
 
 @section('content')
 
-<div class="container">
+<div class="main">
+    <div class="slogan" style="padding-bottom: 20px;">Создать предложение о работе: </div>
 
-    @if( isset($errors))
-        {{ $errors->first('phone', '<p>:message</p>') }}
-        {{ $errors->first('jobtype_id', '<p>:message</p>') }}
-        {{ $errors->first('price', '<p>:message</p>') }}
-        {{ $errors->first('description', '<p>:message</p>') }}
-        {{ $errors->first('place', '<p>:message</p>') }}
-        {{ $errors->first('time_start', '<p>:message</p>') }}
-        {{ $errors->first('time_end', '<p>:message</p>') }}
-        {{ $errors->first('target_count', '<p>:message</p>') }}
+    @if( isset($errors) AND !empty($errors->messages))
+    <div class="error-list">
+        <h3>Исправьте пожалуйста следующие ошибки: </h3>
+        {{ $errors->first('phone',        '<p class="error">:message</p>') }}
+        {{ $errors->first('jobtype_id', '  <p class="error">:message</p>') }}
+        {{ $errors->first('price',        '<p class="error">:message</p>') }}
+        {{ $errors->first('description',  '<p class="error">:message</p>') }}
+        {{ $errors->first('place',        '<p class="error">:message</p>') }}
+        {{ $errors->first('time_start',   '<p class="error">:message</p>') }}
+        {{ $errors->first('time_end',     '<p class="error">:message</p>') }}
+        {{ $errors->first('target_count', '<p class="error">:message</p>') }}
+    </div>
     @endif
 
+
     {{ Form::open('jobs/create', 'POST', array('class' => '')) }}
+        <table class="table-red">
+            <tr>
+                <th colspan="2">
+                    Создать работу
+                </th>
+            </tr>
+            <tr>
+               <td>Тип работ: </td>
+               <td> @include('blocks.jobtypes')</td>
+            </tr>
 
-    <div class="b-one__fieldset">
-        @include('blocks.jobtypes')
-    </div>
+            <tr>
+               <td>Ваше имя: </td>
+               <td>{{ Form::text('name', $model->name,  array('id'=>'name') )    }} </td>
+            </tr>
+            <tr>
+               <td>Размер оплаты </td>
+                <td> {{ Form::text('price', '',  array('id'=>'price') )    }} </td>
+            </tr>
 
-    <div class="b-one__fieldset">
-        {{ Form::label('name', 'Ваше имя', array('class'=>''))    }}
-        {{ Form::text('name', $model->name,  array('id'=>'phone') )    }}
-    </div>
+            <tr>
+               <td>Телефон</td>
+                <td> {{ Form::text('phone', $model->phone,   array('id'=>'phone') )    }} </td>
+             </tr>
 
-    <div class="b-one__fieldset">
-        {{ Form::label('price', 'Размер оплаты', array('class'=>''))    }}
-        {{ Form::text('price', '',  array('id'=>'price') )    }}
-    </div>
+            <tr>
+               <td>Описание</td>
+                <td> {{ Form::textarea('description', '',  array('id'=>'description') )    }} </td>
+            </tr>
 
-    <div class="b-one__fieldset">
-        {{ Form::label('phone', 'Телефон', array('class'=>''))    }}
-        {{ Form::text('phone', $model->phone,   array('id'=>'phone') )    }}
-    </div>
+            <tr>
+               <td>Место проведения</td>
+                <td> {{ Form::text('place', '',  array('id'=>'place') )    }} </td>
+            </tr>
+            <tr>
+               <td>Дата начала</td>
+                <td> {{ Form::text('time_start', '',  array('id'=>'time_start') )    }} </td>
+            </tr>
 
-    <div class="b-one__fieldset">
-        {{ Form::label('description', 'Описание', array('class'=>''))    }}
-        {{ Form::textarea('description', '',  array('id'=>'description') )    }}
-    </div>
+            <tr>
+               <td>Дата окончания</td>
+                <td> {{ Form::text('time_end', '',  array('id'=>'time_end') )    }} </td>
+            </tr>
 
-    <div class="b-one__fieldset">
-        {{ Form::label('place', 'Место проведения', array('class'=>''))    }}
-        {{ Form::text('place', '',  array('id'=>'place') )    }}
-    </div>
+            <tr>
+               <td>Количество человек</td>
+                <td>
+                    {{ Form::select('target_count', array(1,2,3,4,5,6,7))    }}
+                    <p>Большее количество участников доступно в платном режиме</p>
+                </td>
+            </tr>
+        </table>
+        </br>
 
-
-    <div class="b-one__fieldset">
-        {{ Form::label('time_start', 'Дата начала', array('class'=>''))    }}
-        {{ Form::text('time_start', '', array('id'=>'time_start', ))    }}
-    </div>
-
-    <div class="b-one__fieldset">
-        {{ Form::label('time_end', 'Дата окончания', array('class'=>''))    }}
-        {{ Form::text('time_end', '', array('id'=>'time_end', ))    }}
-    </div>
-
-    <div class="b-one__fieldset">
-        {{ Form::label('target_count', 'Количество человек', array('class'=>''))    }}
-        {{ Form::select('target_count', array(1,2,3,4,5,6,7))    }}
-        <p>Большее количество участников доступно в платном режиме</p>
-    </div>
-
-    {{ Form::submit('Создать', array('class'=>''))    }}
+        {{ Form::submit('Создать', array('class'=>'red-button'))    }}
 
     {{ Form::close();}}
     <script>

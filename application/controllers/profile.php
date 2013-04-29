@@ -73,7 +73,7 @@ class Profile_Controller extends Base_Controller {
     {
         if (Request::ajax())
         {
-            $id = $_GET['id'];
+            $id = $_POST['id'];
             Auth::user()->jobtypes()->detach($id);
         }
     }
@@ -112,5 +112,6 @@ class Profile_Controller extends Base_Controller {
         $errors->add('image_type', 'Неверный тип файла: выберите .jpg файл');
         return Redirect::to('profile')->with('errors', $errors);
     }
+
 
 }

@@ -25,11 +25,11 @@
         @yield('content')
     </div>
 
-    <?php if(URL::current() == URL::base().'/'){?>
+    @if(Helpers::isMainPage())
         @include('blocks.slider')
-    <?}?>
+    @endif
 
-    <div class="footer">
+    <div class="footer <?if(Helpers::isMainPage()) echo 'main-page'; ?>">
         <div class="footer-content">
            <div class="left-col">
                <ul class="menu">

@@ -21,7 +21,6 @@ Employer.prototype.display = function() {
 Employer.prototype.update = function(fetch) {
     var self = this;
     $.getJSON(self.url, function(data) {
-        console.log(data);
         self.data = data;
         self.display();
         if(self.rhandler) {
@@ -69,7 +68,6 @@ $(function() {
         form = $('#search-workers');
 
     if(form.length > 0) {
-        console.log(form);
         WorkersResult = new Result(
             null,
             URLS.workers_search,

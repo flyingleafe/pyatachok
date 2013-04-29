@@ -43,6 +43,22 @@ Route::get('find-workers', function()
     return render('home.find-workers');
 });
 
+
+Route::get('about', function()
+{
+    return render('home.about');
+});
+
+Route::get('contacts', function()
+{
+    return render('home.contacts');
+});
+
+Route::get('feedback', function()
+{
+    return render('home.feedback');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

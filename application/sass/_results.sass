@@ -2,14 +2,35 @@
  * Результаты поиска рабочих
  */
 .results
-  padding-top: 30px
+  td
+    color: #494949
   th, td
-    padding: 1.5em
+    padding: 10px
+    background: #e4e4e4
+    border-left: 1px solid #eeeeee
+  .worker_choose
+    text-align: center
   th
     font-weight: bold
+    color: #fff
+    border-left: 1px solid #eeeeee
+    background-image: linear-gradient(bottom, rgb(151,0,10) 34%, rgb(202,0,24) 73%, rgb(236,2,37) 87%, rgb(251,79,107) 94%)
+    background-image: -o-linear-gradient(bottom, rgb(151,0,10) 34%, rgb(202,0,24) 73%, rgb(236,2,37) 87%, rgb(251,79,107) 94%)
+    background-image: -moz-linear-gradient(bottom, rgb(151,0,10) 34%, rgb(202,0,24) 73%, rgb(236,2,37) 87%, rgb(251,79,107) 94%)
+    background-image: -webkit-linear-gradient(bottom, rgb(151,0,10) 34%, rgb(202,0,24) 73%, rgb(236,2,37) 87%, rgb(251,79,107) 94%)
+    background-image: -ms-linear-gradient(bottom, rgb(151,0,10) 34%, rgb(202,0,24) 73%, rgb(236,2,37) 87%, rgb(251,79,107) 94%)
+    background-image: -webkit-gradient(  linear,    left bottom,    left top,    color-stop(0.34, rgb(151,0,10)),    color-stop(0.73, rgb(202,0,24)),    color-stop(0.87, rgb(236,2,37)),    color-stop(0.94, rgb(251,79,107))  )
   .worker
     padding-bottom: 20px
     label
       width: 100px
       float: left
       font-weight: bold
+
+.b-search
+  .workers-pagination
+    padding: 10px 0
+    width: 600px
+    margin: 0 auto
+.left-col
+  float: left
