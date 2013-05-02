@@ -2449,23 +2449,26 @@ header .account {
 .search-workers {
   width: 950px;
   padding: 30px 0 20px;
+}
+/* line 6, ../../application/sass/_search-workers.sass */
+.search-workers h3 {
   color: white;
 }
-/* line 7, ../../application/sass/_search-workers.sass */
+/* line 8, ../../application/sass/_search-workers.sass */
 .search-workers p {
   padding: 10px 0;
   color: #525252;
   padding-top: 10px;
 }
-/* line 11, ../../application/sass/_search-workers.sass */
+/* line 12, ../../application/sass/_search-workers.sass */
 .search-workers p a {
   font-weight: bold;
 }
-/* line 13, ../../application/sass/_search-workers.sass */
+/* line 14, ../../application/sass/_search-workers.sass */
 .search-workers .search-workers__form {
   margin-bottom: 30px;
 }
-/* line 15, ../../application/sass/_search-workers.sass */
+/* line 16, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter {
   background-image: linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -o-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
@@ -2474,61 +2477,61 @@ header .account {
   background-image: -ms-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.34, #97000a), color-stop(0.73, #ca0018), color-stop(0.87, #ec0225), color-stop(0.94, #fb4f6b));
 }
-/* line 22, ../../application/sass/_search-workers.sass */
+/* line 23, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line {
   border-bottom: 3px solid white;
 }
-/* line 24, ../../application/sass/_search-workers.sass */
+/* line 25, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line .b-one-col {
   float: left;
 }
-/* line 27, ../../application/sass/_search-workers.sass */
+/* line 28, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner h3 {
   color: white;
   font-size: 17px;
   padding-bottom: 30px;
 }
-/* line 31, ../../application/sass/_search-workers.sass */
+/* line 32, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder {
   padding: 30px 20px;
 }
-/* line 33, ../../application/sass/_search-workers.sass */
+/* line 34, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder #select_job_types_chzn {
   width: 235px !important;
 }
-/* line 36, ../../application/sass/_search-workers.sass */
+/* line 37, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group {
   padding-bottom: 0 !important;
 }
-/* line 38, ../../application/sass/_search-workers.sass */
+/* line 39, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group h3 {
   padding-right: 20px;
 }
-/* line 40, ../../application/sass/_search-workers.sass */
+/* line 41, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.names {
   width: 325px;
   padding: 18px 20px 0;
-  border-right: 3px solid;
+  border-right: 3px solid white;
   height: 115px;
 }
-/* line 45, ../../application/sass/_search-workers.sass */
+/* line 46, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender {
   padding: 14px 20px 0;
 }
-/* line 47, ../../application/sass/_search-workers.sass */
+/* line 48, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender label {
   font-size: 13px;
 }
-/* line 49, ../../application/sass/_search-workers.sass */
+/* line 50, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset {
   padding-bottom: 16px;
 }
-/* line 51, ../../application/sass/_search-workers.sass */
+/* line 52, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset input {
   margin-top: 4px;
   height: 24px;
 }
-/* line 54, ../../application/sass/_search-workers.sass */
+/* line 55, ../../application/sass/_search-workers.sass */
 .search-workers label {
   color: white;
   width: 110px;
@@ -2537,22 +2540,22 @@ header .account {
   float: left;
   font-size: 17px;
 }
-/* line 63, ../../application/sass/_search-workers.sass */
+/* line 64, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group .b-one__fieldset {
   padding-bottom: 18px;
 }
-/* line 65, ../../application/sass/_search-workers.sass */
+/* line 66, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider, .search-workers #cost_slider {
   margin-bottom: 20px;
   height: 4px;
   margin-top: 7px;
   border: none;
 }
-/* line 70, ../../application/sass/_search-workers.sass */
+/* line 71, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-range, .search-workers #cost_slider .ui-slider-range {
   background: #b8b8b8;
 }
-/* line 72, ../../application/sass/_search-workers.sass */
+/* line 73, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-handle, .search-workers #cost_slider .ui-slider-handle {
   top: -0.2em;
   height: 12px;
@@ -2562,28 +2565,28 @@ header .account {
   border-radius: 0;
 }
 
-/* line 80, ../../application/sass/_search-workers.sass */
+/* line 81, ../../application/sass/_search-workers.sass */
 .b-one-col.gender .b-one__fieldset {
   padding-bottom: 0 !important;
 }
 
-/* line 83, ../../application/sass/_search-workers.sass */
+/* line 84, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders {
   border: none;
 }
-/* line 85, ../../application/sass/_search-workers.sass */
+/* line 86, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders .b-one-group {
   padding: 20px;
 }
 
-/* line 90, ../../application/sass/_search-workers.sass */
+/* line 91, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .current {
   background: #b8b8b8;
   color: white;
   border-radius: nine;
   border: none;
 }
-/* line 95, ../../application/sass/_search-workers.sass */
+/* line 96, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .page-link {
   border: none;
   border-radius: none !important;

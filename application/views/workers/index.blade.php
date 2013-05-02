@@ -20,7 +20,7 @@
 
 
             <div class="search-workers">
-                {{ Form::open('workers/search', 'POST', array('id'=>'search-workers', 'search-workers__form')) }}
+                {{ Form::open('workers/search', 'POST', array('id'=>'search-workers', 'class'=>'search-workers__form')) }}
                 <div class="b-filter">
                     <div class="b-one__line">
                         <div class="b-one-col" style="width: 310px; border-right: 3px solid #fff; height: 133px">
