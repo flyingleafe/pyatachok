@@ -85,28 +85,33 @@ class Profile_Controller extends Base_Controller {
         $name = 'photo_300x400_'.$user->id.'.jpg';
         $name_mini = 'photo_64x64_'.$user->id.'.jpg';
         $tmp_name = 'tmp_'.$user->id.'.jpg';
+        $temp_dir = User::getPathWithoutSlash(User::$tmp_dir);
+        $image_dir  = User::getPathWithoutSlash(User::$image_dir);
+        $image_dir_mini  = User::getPathWithoutSlash(User::$image_dir_mini);
 
-        Input::upload('photo', User::$tmp_dir, $tmp_name );
 
-        if (File::is('jpg', User::$tmp_dir . $tmp_name)) {
+
+        Input::upload('photo', $temp_dir, $tmp_name );
+
+        if (File::is('jpg',$temp_dir . $tmp_name)) {
             $user->avatar_url = $name;
             $user->save();
 
             //main photo
             $main = new SimpleImage();
-            $main->load(User::$tmp_dir.$tmp_name);
+            $main->load($temp_dir.$tmp_name);
             $main->resize(300, 400);
-            $main->save(User::$image_dir.$name);
+            $main->save($image_dir.$name);
 
             //mini
             $mini = new SimpleImage();
-            $mini->load(User::$tmp_dir.$tmp_name);
+            $mini->load($temp_dir.$tmp_name);
             $mini->resize(64, 64);
-            $mini->save(User::$image_dir_mini.$name_mini);
+            $mini->save($image_dir_mini.$name_mini);
 
             return Redirect::to('profile');
         }
-        unlink(User::$tmp_dir.$tmp_name);
+        unlink($temp_dir.$tmp_name);
 
         $errors = new Laravel\Messages();
         $errors->add('image_type', 'Неверный тип файла: выберите .jpg файл');

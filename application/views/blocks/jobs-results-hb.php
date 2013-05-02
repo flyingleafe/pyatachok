@@ -23,6 +23,6 @@
             </tbody>
         </table>
     {{else}}
-        No results found...
+        По вашему запросу ничего не найдено.
     {{/if}}
 </script>

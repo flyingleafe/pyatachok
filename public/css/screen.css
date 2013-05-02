@@ -1,10 +1,9 @@
-@charset "IBM866";
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700,800&subset=latin,cyrillic");
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent  :  
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 17, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -26,45 +25,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../Ruby187/lib/ruby/gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -1723,7 +1722,7 @@ body {
  * Общие стили
  */
 /* line 5, ../../application/sass/_general.sass */
-.clearfix, header, header nav.top ul, .inner, .main {
+.clearfix, header, header nav.top ul, .inner, .main.inner, .main {
   *zoom: 1;
 }
 /* line 7, ../../application/sass/_general.sass */
@@ -1919,8 +1918,8 @@ header .account {
  * Элементы главной страницы
  */
 /* line 6, ../../application/sass/_home.sass */
-.inner {
-  width: 940px;
+.inner, .main.inner {
+  width: 940px !important;
   margin: 0 auto;
 }
 
@@ -2157,6 +2156,7 @@ header .account {
 
 /* line 40, ../../application/sass/_b-form.sass */
 .job-info {
+  background: #e4e4e4;
   border: 2px dashed #525252;
   border-radius: 10px;
   float: left;
@@ -2164,23 +2164,24 @@ header .account {
   padding: 10px;
   margin-right: 20px;
 }
-/* line 47, ../../application/sass/_b-form.sass */
+/* line 48, ../../application/sass/_b-form.sass */
 .job-info h1 {
   padding-bottom: 30px;
   font-size: 23px;
 }
-/* line 50, ../../application/sass/_b-form.sass */
+/* line 51, ../../application/sass/_b-form.sass */
 .job-info .b-one__fieldset {
   padding-bottom: 10px;
 }
-/* line 52, ../../application/sass/_b-form.sass */
+/* line 53, ../../application/sass/_b-form.sass */
 .job-info .b-one__fieldset label {
   display: block;
   float: left;
   width: 170px;
 }
-/* line 56, ../../application/sass/_b-form.sass */
+/* line 57, ../../application/sass/_b-form.sass */
 .job-info .job-info__form {
+  padding: 10px 0;
   background: #e4e4e4;
 }
 
@@ -2345,7 +2346,7 @@ header .account {
 
 /* line 1, ../../application/sass/_search-jobs.sass */
 .search-jobs {
-  width: 950px;
+  width: 620px;
   height: 300px;
   background-image: linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
   background-image: -o-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
@@ -2355,16 +2356,85 @@ header .account {
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.28, #95000a), color-stop(0.75, #ec0124), color-stop(0.88, #fb4f6b));
 }
 /* line 10, ../../application/sass/_search-jobs.sass */
-.search-jobs .b-form {
+.search-jobs .search-jobs__padder {
+  padding: 20px;
+}
+/* line 12, ../../application/sass/_search-jobs.sass */
+.search-jobs .search-jobs__padder .b-form {
   color: white;
 }
-/* line 13, ../../application/sass/_search-jobs.sass */
-.search-jobs .b-form .b-jobtypes_inner {
+/* line 14, ../../application/sass/_search-jobs.sass */
+.search-jobs .search-jobs__padder .b-form .b-jobtypes_inner {
   padding-top: 30px;
   padding-left: 20px;
   width: 200px;
 }
+/* line 18, ../../application/sass/_search-jobs.sass */
+.search-jobs .b-one__fieldset {
+  padding-bottom: 16px;
+}
+/* line 20, ../../application/sass/_search-jobs.sass */
+.search-jobs .b-one__fieldset input {
+  margin-top: 4px;
+  height: 24px;
+}
+/* line 23, ../../application/sass/_search-jobs.sass */
+.search-jobs .b-one__fieldset label {
+  color: white;
+  width: 110px;
+  display: block;
+  padding-top: 6px;
+  float: left;
+  font-size: 17px;
+}
+/* line 30, ../../application/sass/_search-jobs.sass */
+.search-jobs h3 {
+  color: white;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  font-weight: bold;
+}
+/* line 36, ../../application/sass/_search-jobs.sass */
+.search-jobs .col {
+  float: left;
+  padding-top: 10px;
+}
+/* line 39, ../../application/sass/_search-jobs.sass */
+.search-jobs .col.left-col {
+  margin-right: 20px;
+}
+/* line 41, ../../application/sass/_search-jobs.sass */
+.search-jobs #cost_slider {
+  margin-bottom: 20px;
+  height: 4px;
+  margin-top: 7px;
+  border: none;
+}
+/* line 46, ../../application/sass/_search-jobs.sass */
+.search-jobs #cost_slider .ui-slider-range {
+  background: #b8b8b8;
+}
+/* line 48, ../../application/sass/_search-jobs.sass */
+.search-jobs #cost_slider .ui-slider-handle {
+  top: -0.2em;
+  height: 12px;
+  width: 12px;
+  background: #b8b8b8;
+  border: none;
+  border-radius: 0;
+}
 
+/* line 55, ../../application/sass/_search-jobs.sass */
+.responce {
+  padding-top: 10px;
+}
+/* line 57, ../../application/sass/_search-jobs.sass */
+.responce span {
+  color: #525252;
+}
+
+/*datepicker */
 /* line 1, ../../application/sass/_search-workers.sass */
 .b-search {
   padding-bottom: 30px;
@@ -2377,10 +2447,20 @@ header .account {
   color: white;
 }
 /* line 7, ../../application/sass/_search-workers.sass */
+.search-workers p {
+  padding: 10px 0;
+  color: #525252;
+  padding-top: 10px;
+}
+/* line 11, ../../application/sass/_search-workers.sass */
+.search-workers p a {
+  font-weight: bold;
+}
+/* line 13, ../../application/sass/_search-workers.sass */
 .search-workers .search-workers__form {
   margin-bottom: 30px;
 }
-/* line 9, ../../application/sass/_search-workers.sass */
+/* line 15, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter {
   background-image: linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -o-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
@@ -2389,61 +2469,61 @@ header .account {
   background-image: -ms-linear-gradient(bottom, #97000a 34%, #ca0018 73%, #ec0225 87%, #fb4f6b 94%);
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.34, #97000a), color-stop(0.73, #ca0018), color-stop(0.87, #ec0225), color-stop(0.94, #fb4f6b));
 }
-/* line 16, ../../application/sass/_search-workers.sass */
+/* line 22, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line {
   border-bottom: 3px solid white;
 }
-/* line 18, ../../application/sass/_search-workers.sass */
+/* line 24, ../../application/sass/_search-workers.sass */
 .search-workers .b-filter .b-one__line .b-one-col {
   float: left;
 }
-/* line 21, ../../application/sass/_search-workers.sass */
+/* line 27, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner h3 {
   color: white;
   font-size: 17px;
   padding-bottom: 30px;
 }
-/* line 25, ../../application/sass/_search-workers.sass */
+/* line 31, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder {
   padding: 30px 20px;
 }
-/* line 27, ../../application/sass/_search-workers.sass */
+/* line 33, ../../application/sass/_search-workers.sass */
 .search-workers .b-jobtypes_inner .b-jobtypes_inner__padder #select_job_types_chzn {
   width: 235px !important;
 }
-/* line 30, ../../application/sass/_search-workers.sass */
+/* line 36, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group {
   padding-bottom: 0 !important;
 }
-/* line 32, ../../application/sass/_search-workers.sass */
+/* line 38, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group h3 {
   padding-right: 20px;
 }
-/* line 34, ../../application/sass/_search-workers.sass */
+/* line 40, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.names {
   width: 325px;
   padding: 18px 20px 0;
   border-right: 3px solid;
   height: 115px;
 }
-/* line 39, ../../application/sass/_search-workers.sass */
+/* line 45, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender {
   padding: 14px 20px 0;
 }
-/* line 41, ../../application/sass/_search-workers.sass */
+/* line 47, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col.gender label {
   font-size: 13px;
 }
-/* line 43, ../../application/sass/_search-workers.sass */
+/* line 49, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset {
   padding-bottom: 16px;
 }
-/* line 45, ../../application/sass/_search-workers.sass */
+/* line 51, ../../application/sass/_search-workers.sass */
 .search-workers .b-one__fieldset input {
   margin-top: 4px;
   height: 24px;
 }
-/* line 48, ../../application/sass/_search-workers.sass */
+/* line 54, ../../application/sass/_search-workers.sass */
 .search-workers label {
   color: white;
   width: 110px;
@@ -2452,22 +2532,22 @@ header .account {
   float: left;
   font-size: 17px;
 }
-/* line 57, ../../application/sass/_search-workers.sass */
+/* line 63, ../../application/sass/_search-workers.sass */
 .search-workers .b-one-col .b-one-group .b-one__fieldset {
   padding-bottom: 18px;
 }
-/* line 59, ../../application/sass/_search-workers.sass */
+/* line 65, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider, .search-workers #cost_slider {
   margin-bottom: 20px;
   height: 4px;
   margin-top: 7px;
   border: none;
 }
-/* line 64, ../../application/sass/_search-workers.sass */
+/* line 70, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-range, .search-workers #cost_slider .ui-slider-range {
   background: #b8b8b8;
 }
-/* line 66, ../../application/sass/_search-workers.sass */
+/* line 72, ../../application/sass/_search-workers.sass */
 .search-workers #age_slider .ui-slider-handle, .search-workers #cost_slider .ui-slider-handle {
   top: -0.2em;
   height: 12px;
@@ -2477,28 +2557,28 @@ header .account {
   border-radius: 0;
 }
 
-/* line 74, ../../application/sass/_search-workers.sass */
+/* line 80, ../../application/sass/_search-workers.sass */
 .b-one-col.gender .b-one__fieldset {
   padding-bottom: 0 !important;
 }
 
-/* line 77, ../../application/sass/_search-workers.sass */
+/* line 83, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders {
   border: none;
 }
-/* line 79, ../../application/sass/_search-workers.sass */
+/* line 85, ../../application/sass/_search-workers.sass */
 .b-one__line.sliders .b-one-group {
   padding: 20px;
 }
 
-/* line 84, ../../application/sass/_search-workers.sass */
+/* line 90, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .current {
   background: #b8b8b8;
   color: white;
   border-radius: nine;
   border: none;
 }
-/* line 89, ../../application/sass/_search-workers.sass */
+/* line 95, ../../application/sass/_search-workers.sass */
 .b-search .workers-pagination .page-link {
   border: none;
   border-radius: none !important;
@@ -2687,46 +2767,55 @@ header .account {
   padding: 10px;
 }
 /* line 7, ../../application/sass/_choose-workers.sass */
+.choose_workers span {
+  color: #525252;
+}
+/* line 9, ../../application/sass/_choose-workers.sass */
 .choose_workers h1 {
   color: #525252;
   text-align: center;
   font-size: 23px;
   padding: 10px 0 20px 0;
 }
-/* line 13, ../../application/sass/_choose-workers.sass */
+/* line 15, ../../application/sass/_choose-workers.sass */
 .choose_workers table td {
   padding: 8px;
   background: #e4e4e4;
   padding: 8px 20px 8px 2px;
 }
-/* line 17, ../../application/sass/_choose-workers.sass */
+/* line 19, ../../application/sass/_choose-workers.sass */
 .choose_workers table td span {
   color: #525252;
 }
-/* line 20, ../../application/sass/_choose-workers.sass */
+/* line 22, ../../application/sass/_choose-workers.sass */
 .choose_workers table th {
   color: #525252;
   text-align: center;
   padding-top: 15px;
   background: #e4e4e4;
 }
-/* line 25, ../../application/sass/_choose-workers.sass */
+/* line 27, ../../application/sass/_choose-workers.sass */
 .choose_workers .red-button {
   color: white;
   margin-top: 20px;
 }
 
-/* line 30, ../../application/sass/_choose-workers.sass */
+/* line 32, ../../application/sass/_choose-workers.sass */
 .right-col .choose_workers {
   margin-top: 45px;
 }
 
-/* line 38, ../../application/sass/screen.sass */
+/* line 1, ../../application/sass/_workers-list.sass */
+.workers-list {
+  background: #e4e4e4;
+}
+
+/* line 39, ../../application/sass/screen.sass */
 .slogan {
   padding: 30px 0;
 }
 
-/* line 41, ../../application/sass/screen.sass */
+/* line 42, ../../application/sass/screen.sass */
 .error-list {
   padding: 8px;
   border: 1px solid #f0f0f0;
@@ -2734,13 +2823,13 @@ header .account {
   background: white;
   margin-bottom: 20px;
 }
-/* line 47, ../../application/sass/screen.sass */
+/* line 48, ../../application/sass/screen.sass */
 .error-list h3 {
   padding-bottom: 10px;
   font-size: 16px;
   font-weight: bold;
 }
-/* line 51, ../../application/sass/screen.sass */
+/* line 52, ../../application/sass/screen.sass */
 .error-list .error {
   color: black;
   padding-bottom: 14px;

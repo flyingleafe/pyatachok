@@ -5,7 +5,11 @@ class User extends Eloquent {
     public static  $image_dir =       '/public/storage/images/';
     public static  $image_dir_mini =  '/public/storage/images/mini/';
     public static  $tmp_dir =         '/public/storage/images/tmp/';
+    public static  $choosen_counter = 6; //ограничение на выбор рабочих
 
+    public static function  getPathWithoutSlash($path){
+       return  substr($path, 1);
+    }
     public static $roles = array(
         'user'  => 0,
         'moderator' => 1,

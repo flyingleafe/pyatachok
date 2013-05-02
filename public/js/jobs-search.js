@@ -13,7 +13,7 @@ $(function() {
     $('#start_date').datetimepicker({
         dateFormat: "dd-MM-yy",
         timeFormat: "HH:mm",
-        numberOfMonths: 3,
+        numberOfMonths: 2,
         onClose: function( selectedDate ) {
             $( "#end_date" ).datepicker( "option", "minDate", selectedDate );
         }

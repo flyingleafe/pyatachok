@@ -137,8 +137,10 @@ class Workers_Controller extends Base_Controller {
             if($ids) {
                 $users  = User::where_in('id', $ids)->get();
                 return Response::json(array(
+                    'count'=>count($ids),
                     'ids'   => $ids,
                     'chosen' => $users,
+
                 ));
             }
         }
@@ -150,9 +152,11 @@ class Workers_Controller extends Base_Controller {
         $user = User::find($id);
         if($user) {
             $arr = Session::get('chosen_workers');
-            $arr[] = $id;
-            Session::put('chosen_workers', array_unique($arr));
-            return Response::json(array('added' => true));
+            if(count($arr)< User::$choosen_counter){
+                $arr[] = $id;
+                Session::put('chosen_workers', array_unique($arr));
+                return Response::json(array('added' => true));
+            }
         }
         return Response::json(array('added' => false));
     }

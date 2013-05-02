@@ -139,11 +139,14 @@
                     </div>
                 </div>
                 -->
+                <p>В бесплатном режиме можно выбрать максимум 6 рабочих, Хотите больше? <a href="#">Улучшите</a> ваш аккаунт прямо сейчас!</p>
                 <div class="left-col">
+
                     <div class="b-search">
+
                         @include('blocks.workers-results-hb')
                         <div class="workers-pagination"></div>
-                        <div id="ajaxResponseSearch"></div>
+                        <div id="ajaxResponseSearch" class="responce"></div>
                         <div class="workers-pagination"></div>
                     </div>
                 </div>

@@ -304,7 +304,6 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-datepicker .ui-datepicker-header {
 	position: relative;
-	padding: .2em 0;
 }
 .ui-datepicker .ui-datepicker-prev,
 .ui-datepicker .ui-datepicker-next {
@@ -612,6 +611,10 @@ button.ui-button::-moz-focus-inner {
 .ui-slider {
 	position: relative;
 	text-align: left;
+    margin-top: 7px;
+    border: none;
+    height: 4px !important;
+
 }
 .ui-slider .ui-slider-handle {
 	position: absolute;
@@ -639,9 +642,13 @@ button.ui-button::-moz-focus-inner {
 	height: .8em;
 }
 .ui-slider-horizontal .ui-slider-handle {
-	top: -.3em;
-	margin-left: -.6em;
-}
+    top: -.2em;
+    height: 9px;
+    width: 10px;
+    background: #b8b8b8;
+    border: none;
+    border-radius: 0;
+ }
 .ui-slider-horizontal .ui-slider-range {
 	top: 0;
 	height: 100%;
@@ -807,7 +814,12 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: 1px solid #e78f08;
-	background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+    background-image: linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -o-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -moz-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -webkit-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -ms-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.28, #95000a), color-stop(0.75, #ec0124), color-stop(0.88, #fb4f6b));
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -815,6 +827,21 @@ body .ui-tooltip {
 	color: #ffffff;
 }
 
+.ui-timepicker-div dt, .ui-timepicker-div dd {
+    font-size: 16px;
+    padding-left: 10px;
+}
+.ui-timepicker-div .ui_tpicker_time_label{
+    float: left;
+    width: 50px;
+    display: block;
+}
+.ui-timepicker-div .ui_tpicker_minute_label{
+   padding-top: 10px;
+}
+.ui-timepicker-div .ui_tpicker_hour_label{
+    padding-top: 10px;
+}
 /* Interaction states
 ----------------------------------*/
 .ui-state-default,
@@ -823,7 +850,7 @@ body .ui-tooltip {
 	border: 1px solid #cccccc;
 	background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: #1c94c4;
+	color: #000;
 }
 .ui-state-default a,
 .ui-state-default a:link,
@@ -836,11 +863,16 @@ body .ui-tooltip {
 .ui-widget-header .ui-state-hover,
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
+.ui-widget-header .u    i-state-focus {
+	border: 1px solid #fff;
+    background-image: linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -o-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -moz-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -webkit-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -ms-linear-gradient(bottom, #95000a 28%, #ec0124 75%, #fb4f6b 88%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.28, #95000a), color-stop(0.75, #ec0124), color-stop(0.88, #fb4f6b));
 	font-weight: bold;
-	color: #c77405;
+	color: #fff;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -852,10 +884,10 @@ body .ui-tooltip {
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
-	border: 1px solid #fbd850;
-	background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+	border: 1px solid #000;
+	background: #b8b8b8;
 	font-weight: bold;
-	color: #eb8f00;
+
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -939,7 +971,7 @@ body .ui-tooltip {
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url(images/ui-icons_ef8c08_256x240.png);
+
 }
 .ui-state-active .ui-icon {
 	background-image: url(images/ui-icons_ef8c08_256x240.png);
